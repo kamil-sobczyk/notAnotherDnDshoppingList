@@ -10,11 +10,6 @@ import CommentIcon from "@material-ui/icons/Comment";
 
 import { connect } from "react-redux";
 
-// import reducer from '../reducers/openInfo';
-import list from "./data/list";
-
-
-
 const styles = theme => ({
   root: {
     listStyleType: "none",
@@ -27,12 +22,15 @@ const styles = theme => ({
   }
 });
 
-
 class List extends React.Component {
   state = {
     checked: [0],
     openInfo: false
   };
+
+  componentWillReceiveProps() {
+    this.forceUpdate();
+  }
 
   handleOpenInfo = () => {
     this.props.handleOpenInfo();
@@ -53,10 +51,7 @@ class List extends React.Component {
     });
   };
   render() {
-    const {
-      classes,
-      handleOpenInfo
-    } = this.props;
+    const { list, classes, handleOpenInfo } = this.props;
 
     const shoppingList = list.map((item, index) => (
       <ListItem
@@ -91,14 +86,16 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { openInfo: state.openInfo };
+  return { list: state.list };
 };
-
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: () => dispatch({ type: 'INFO' }),
-  }
+    handleOpenInfo: () => dispatch({ type: "INFO_DIALOG" })
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(List));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(List));

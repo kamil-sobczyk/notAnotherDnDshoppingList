@@ -4,16 +4,36 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import reducer from './reducers/reducer';
+import reducer from "./reducers/reducer";
 
 import App from "./App";
 
 const store = createStore(reducer, {
-  checked: "",
+  list: [
+    {
+      name: "bread",
+      info: "",
+      checked: false
+    },
+    {
+      name: "milk",
+      info: "",
+      checked: false
+    },
+    {
+      name: "potatoes",
+      info: "",
+      checked: false
+    },
+    {
+      name: "beer",
+      info: "",
+      checked: false
+    }
+  ],
+  checked: [],
   openInfo: false,
   openAdd: false,
-  newItem: "",
-  newItemInfo: ""
 });
 
 ReactDOM.render(

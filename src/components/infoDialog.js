@@ -10,16 +10,17 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 
 class InfoDialog extends Component {
+
   render() {
-      const { openInfo } = this.props;
+      const { openInfo, handleOpenInfo } = this.props;
     return (
-      <Dialog open={openInfo} onClose={null}>
+      <Dialog open={openInfo} onClose={handleOpenInfo}>
         <DialogTitle>More info</DialogTitle>
         <DialogContent>
           <DialogContentText>Buy in Lidl</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={this.handle}>
+          <Button color="primary" onClick={handleOpenInfo}>
             Close
           </Button>
         </DialogActions>
@@ -34,7 +35,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: () => dispatch({ type: "INFO" })
+    handleOpenInfo: () => dispatch({ type: "INFO_DIALOG", })
   };
 };
 

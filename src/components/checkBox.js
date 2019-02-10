@@ -25,16 +25,14 @@ const styles = theme => ({
 
 class Checkbox extends Component {
   render() {
-    const { classes } = this.props;
-
-    console.log(this.props.openInfo);
+    const { classes, handleOpenAdd } = this.props;
 
     return (
       <div className={classes.checkList}>
         <List />
         <InfoDialog />
         <AddDialog />
-        <Button color="primary" onClick={this.handleOpenAddItem}>
+        <Button color="primary" onClick={handleOpenAdd}>
           Add new item
         </Button>
       </div>
@@ -44,11 +42,8 @@ class Checkbox extends Component {
 
 Checkbox.propTypes = {
   classes: PropTypes.object.isRequired,
-  // checked: PropTypes.boolean,
   openInfo: PropTypes.bool,
   openAdd: PropTypes.bool,
-  newItem: PropTypes.object,
-  newItemInfo: PropTypes.string
 };
 
 const mapStateToProps = state => {
@@ -57,7 +52,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: () => dispatch({ type: "INFO" })
+    handleOpenAdd: () => dispatch({ type: "ADD_DIALOG" })
   };
 };
 
