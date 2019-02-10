@@ -4,17 +4,10 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
+import reducer from './reducers/openInfo';
+
 import App from "./App";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "INFO":
-    console.log(action.type)
-      return { ...state, openInfo: (state.openInfo = false ? true : false) };
-    default:
-      return state;
-  }
-};
 
 const store = createStore(reducer, {
   checked: "",
@@ -23,8 +16,6 @@ const store = createStore(reducer, {
   newItem: "",
   newItemInfo: ""
 });
-
-
 
 ReactDOM.render(
   <Provider store={store}>

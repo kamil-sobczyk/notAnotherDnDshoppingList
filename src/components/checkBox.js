@@ -33,14 +33,14 @@ class CheckboxList extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     // checked: PropTypes.boolean,
-    openInfo: PropTypes.func,
+    openInfo: PropTypes.boolean
     // openAdd: PropTypes.boolean,
     // newItem: PropTypes.object,
     // newItemInfo: PropTypes.string
   };
   state = {
     checked: [],
-    openInfo: false,
+    // openInfo: false,
     openAdd: false,
     newItem: "",
     newItemInfo: ""
@@ -90,12 +90,12 @@ class CheckboxList extends React.Component {
       newItemInfo
     } = this.props;
 
-    console.log(this.props);
+    console.log(this.props.openInfo);
 
     return (
       <div className={classes.checkList}>
         <List openInfo={this.handleOpenInfo} />
-        <Dialog open={openInfo.openInfo} onClose={this.handleCloseInfo}>
+        <Dialog open={openInfo} onClose={this.handleCloseInfo}>
           <DialogTitle>More info</DialogTitle>
           <DialogContent>
             <DialogContentText>Buy in Lidl</DialogContentText>
@@ -142,11 +142,14 @@ class CheckboxList extends React.Component {
 }
 
 const mapStateToProps = state => {
+  // console.log(state.openInfo)
   return { openInfo: state.openInfo };
 };
+
+
 const mapDispatchToProps = dispatch => {
   return {
-    openInfo: () => dispatch({ type: 'INFO' }),
+    handleOpenInfo: () => dispatch({ type: 'INFO' }),
   }
 };
 
