@@ -6,7 +6,7 @@ const reducer = (state, action) => {
     case "ADD_DIALOG":
       return { ...state, openAdd: state.openAdd ? false : true };
     case "ADD_ITEM": 
-    console.log('ADDDDD')
+    console.log('ADD_ITEM in reducer fired')
     const newList = state.list;
     newList.push(action.newItem);
     return { ...state, list: newList };

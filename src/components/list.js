@@ -24,14 +24,13 @@ const styles = theme => ({
 
 class List extends React.Component {
   state = {
-    checked: [0],
-    openInfo: false
+    checked: [0]
   };
 
   componentWillReceiveProps() {
     this.forceUpdate();
   }
-
+  
   handleOpenInfo = () => {
     this.props.handleOpenInfo();
   };
@@ -52,6 +51,8 @@ class List extends React.Component {
   };
   render() {
     const { list, classes, handleOpenInfo } = this.props;
+
+    console.log('list in render: ', list);
 
     const shoppingList = list.map((item, index) => (
       <ListItem
@@ -86,6 +87,7 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
+  console.log('list in mapStateToProps: ', state.list)
   return { list: state.list };
 };
 

@@ -9,8 +9,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
-import list from "./data/list";
-
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
@@ -20,24 +18,20 @@ const styles = theme => ({
 
 class AddDialog extends Component {
   state = {
-    newItem: "",
-    newItemInfo: ""
+    name: "",
+    info: ""
   };
   handleCloseAdd = () => {
     this.props.handleOpenAdd();
     this.props.handleAddItem(this.state);
-    // list.push({
-    //   name: this.state.newItem,
-    //   info: this.state.newItemInfo
-    // });
   };
 
   changeNewItem = e => {
-    this.setState({ newItem: e.target.value });
+    this.setState({ name: e.target.value });
   };
 
   changeNewItemInfo = e => {
-    this.setState({ newItemInfo: e.target.value });
+    this.setState({ info: e.target.value });
   };
   render() {
     const { classes, openAdd } = this.props;
