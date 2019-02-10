@@ -10,7 +10,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 
 import { connect } from "react-redux";
 
-import reducer from '../reducers/openInfo';
+// import reducer from '../reducers/openInfo';
 import list from "./data/list";
 
 
@@ -55,11 +55,7 @@ class List extends React.Component {
   render() {
     const {
       classes,
-      checked,
-      openInfo,
-      openAdd,
-      newItem,
-      newItemInfo
+      handleOpenInfo
     } = this.props;
 
     const shoppingList = list.map((item, index) => (
@@ -77,7 +73,7 @@ class List extends React.Component {
         />
         <ListItemText primary={item.name} />
         <ListItemSecondaryAction>
-          <IconButton aria-label="Info" onClick={this.props.handleOpenInfo}>
+          <IconButton aria-label="Info" onClick={handleOpenInfo}>
             <CommentIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -89,7 +85,9 @@ class List extends React.Component {
 }
 
 List.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  openInfo: PropTypes.bool,
+  handleOpenInfo: PropTypes.func
 };
 
 const mapStateToProps = state => {

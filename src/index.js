@@ -8,7 +8,6 @@ import reducer from './reducers/openInfo';
 
 import App from "./App";
 
-
 const store = createStore(reducer, {
   checked: "",
   openInfo: false,

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+
 import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
 import CheckBox from "./components/checkBox";
@@ -17,10 +18,9 @@ const styles = theme => ({
   }
 });
 
-class Index extends React.Component {
+class App extends Component {
   render() {
     const { classes } = this.props;
-
     return (
       <div className={classes.root}>
         <NavBar />
@@ -35,8 +35,8 @@ class Index extends React.Component {
   }
 }
 
-Index.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRoot(withStyles(styles)(Index));
+export default withRoot(withStyles(styles)(App));
