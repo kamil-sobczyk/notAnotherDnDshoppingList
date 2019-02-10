@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import store from '../store';
-import showInfo from '../actions/showInfo';
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -14,12 +12,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
-import List from './list';
+import List from "./list";
 
 import list from "./data/list";
-
-const state = store.getState();
-console.log(state);
 
 const styles = theme => ({
   root: {
@@ -35,19 +30,27 @@ const styles = theme => ({
 });
 
 class CheckboxList extends React.Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    // checked: PropTypes.boolean,
+    openInfo: PropTypes.func,
+    // openAdd: PropTypes.boolean,
+    // newItem: PropTypes.object,
+    // newItemInfo: PropTypes.string
+  };
   state = {
     checked: [],
     openInfo: false,
     openAdd: false,
     newItem: "",
-    newItemInfo: ''
-  };
-  handleOpenInfo = () => {
-    showInfo();
-    console.log(state.openInfo);
+    newItemInfo: ""
   };
 
-    handleCloseInfo = () => {
+  handleOpenInfo = () => {
+
+  };
+
+  handleCloseInfo = () => {
     this.setState({
       openInfo: false
     });
@@ -78,12 +81,21 @@ class CheckboxList extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      checked,
+      openInfo,
+      openAdd,
+      newItem,
+      newItemInfo
+    } = this.props;
+
+    console.log(this.props);
 
     return (
       <div className={classes.checkList}>
-        <List openInfo={this.handleOpenInfo}/>
-        <Dialog open={state.openInfo} onClose={this.handleCloseInfo}>
+        <List openInfo={this.handleOpenInfo} />
+        <Dialog open={openInfo.openInfo} onClose={this.handleCloseInfo}>
           <DialogTitle>More info</DialogTitle>
           <DialogContent>
             <DialogContentText>Buy in Lidl</DialogContentText>
@@ -106,7 +118,7 @@ class CheckboxList extends React.Component {
             variant="outlined"
             onChange={this.changeNewItem}
           />
-           <TextField
+          <TextField
             id="outlined"
             label="Additional info"
             defaultValue=""
@@ -129,8 +141,13 @@ class CheckboxList extends React.Component {
   }
 }
 
-CheckboxList.propTypes = {
-  classes: PropTypes.object.isRequired
+const mapStateToProps = state => {
+  return { openInfo: state.openInfo };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    openInfo: () => dispatch({ type: 'INFO' }),
+  }
 };
 
-export default connect()(withStyles(styles)(CheckboxList));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckboxList));

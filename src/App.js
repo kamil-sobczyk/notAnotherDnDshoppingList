@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
@@ -40,8 +39,4 @@ Index.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return state;
-}
-
-export default connect(mapStateToProps)(withRoot(withStyles(styles)(Index)));
+export default withRoot(withStyles(styles)(Index));

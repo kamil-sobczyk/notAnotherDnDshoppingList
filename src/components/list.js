@@ -8,6 +8,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import CommentIcon from "@material-ui/icons/Comment";
 
+import { connect } from "react-redux";
+
 import list from "./data/list";
 
 const styles = theme => ({
@@ -29,9 +31,7 @@ class List extends React.Component {
   };
 
   handleOpenInfo = () => {
-    this.setState({
-      openInfo: true
-    });
+
   };
   handleToggle = value => () => {
     const { checked } = this.state;
@@ -66,7 +66,7 @@ class List extends React.Component {
         />
         <ListItemText primary={item.name} />
         <ListItemSecondaryAction>
-          <IconButton aria-label="Info" onClick={this.props.openInfo}>
+          <IconButton aria-label="Info" onClick={this.openInfo}>
             <CommentIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -81,4 +81,13 @@ List.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(List);
+const mapStateToProps = state => {
+  return { openInfo: state.openInfo };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    openInfo: () => dispatch({ type: 'INFO' }),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(List));

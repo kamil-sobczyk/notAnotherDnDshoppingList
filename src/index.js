@@ -1,17 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 import App from "./App";
-import store from './store';
 
-function reducer(state, action) {
-  if (action.type === "changeState") {
-    return action.payload.newState;
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "INFO":
+    console.log(action.type)
+      return { ...state, openInfo: (state.openInfo = false ? true : false) };
+    default:
+      return state;
   }
-  return "State";
-}
+};
+
+const store = createStore(reducer, {
+  checked: "",
+  openInfo: false,
+  openAdd: false,
+  newItem: "",
+  newItemInfo: ""
+});
+
+
 
 ReactDOM.render(
   <Provider store={store}>
