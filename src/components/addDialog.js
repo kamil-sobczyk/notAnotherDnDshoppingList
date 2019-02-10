@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -11,17 +10,17 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit
-    }
-  });
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  }
+});
 
 class AddDialog extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, openAdd, handleAddInfo } = this.props;
     return (
-      <Dialog open={false} onClose={null}>
+      <Dialog open={openAdd} onClose={handleAddInfo}>
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
           required
@@ -43,7 +42,7 @@ class AddDialog extends Component {
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
-          <Button color="primary" onClick={this.handleCloseAdd}>
+          <Button color="primary" onClick={handleAddInfo}>
             Add
           </Button>
         </DialogActions>
@@ -53,17 +52,19 @@ class AddDialog extends Component {
 }
 
 const mapStateToProps = state => {
-    return { openInfo: state.openInfo };
+  return { openAdd: state.openAdd };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleAddInfo: () => {
+        dispatch({ type: "ADD" })
+        console.log('Add in addDialog.js')
+    }
   };
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      handleOpenInfo: () => dispatch({ type: "INFO" })
-    };
-  };
+};
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withStyles(styles)(AddDialog));
-  
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(AddDialog));

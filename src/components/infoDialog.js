@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -11,33 +10,35 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 
 class InfoDialog extends Component {
-    render() {
-        return (<Dialog open={false} onClose={null}>
-            <DialogTitle>More info</DialogTitle>
-            <DialogContent>
-              <DialogContentText>Buy in Lidl</DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button color="primary" onClick={this.handle}>
-                Close
-              </Button>
-            </DialogActions>
-          </Dialog>)
-    }
+  render() {
+      const { openInfo } = this.props;
+    return (
+      <Dialog open={openInfo} onClose={null}>
+        <DialogTitle>More info</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Buy in Lidl</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={this.handle}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-    return { openInfo: state.openInfo };
+  return { openInfo: state.openInfo };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleOpenInfo: () => dispatch({ type: "INFO" })
   };
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      handleOpenInfo: () => dispatch({ type: "INFO" })
-    };
-  };
+};
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(InfoDialog);
-  
+  mapStateToProps,
+  mapDispatchToProps
+)(InfoDialog);
