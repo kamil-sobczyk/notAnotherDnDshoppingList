@@ -24,6 +24,7 @@ class AddDialog extends Component {
   handleCloseAdd = () => {
     this.props.handleAddItem(this.state);
     this.props.handleOpenAdd();
+    this.setState({ name: "", info: "" });
   };
 
   changeNewItem = e => {

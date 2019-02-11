@@ -32,6 +32,16 @@ const styles = theme => ({
         ? theme.palette.grey[200]
         : theme.palette.grey[900]
     }`
+  },
+  deleteHover: {
+    "&:hover": {
+      color: "red"
+    }
+  },
+  infoHover: {
+    "&:hover": {
+      color: "black"
+    }
   }
 });
 
@@ -56,7 +66,7 @@ class List extends React.Component {
   };
   render() {
     const { list, classes, checked } = this.props;
-   
+
     const shoppingList = list.map((item, index) => (
       <ListItem
         key={index}
@@ -82,14 +92,14 @@ class List extends React.Component {
               variant="dot"
               invisible={item.info ? false : true}
             >
-              <InfoIcon />
+              <InfoIcon className={classes.infoHover}/>
             </Badge>
           </IconButton>
           <IconButton
             aria-label="Delete"
             onClick={() => this.handleDeleteItem(index)}
           >
-            <DeleteIcon />
+            <DeleteIcon className={classes.deleteHover} />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
