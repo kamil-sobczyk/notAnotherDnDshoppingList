@@ -31,7 +31,7 @@ const store = createStore(reducer, {
       checked: false
     }
   ],
-  checked: [],
+  checked: [0],
   openInfo: false,
   openAdd: false,
 });

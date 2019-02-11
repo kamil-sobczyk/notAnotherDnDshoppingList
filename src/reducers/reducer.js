@@ -8,6 +8,9 @@ const reducer = (state, action) => {
     case "ADD_ITEM":
       console.log("ADD_ITEM in reducer fired");
       return { ...state, list: [...state.list, action.newItem ] };
+      case "HANDLE_CHECK":
+      console.log("CHECK");
+      return { ...state, checked: action.newChecked };
     default:
       return state;
   }
