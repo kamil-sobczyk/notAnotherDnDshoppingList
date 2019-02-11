@@ -7,7 +7,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-import DeleteIcon from '@material-ui/icons/DeleteForever';
+import Badge from "@material-ui/core/Badge";
+import DeleteIcon from "@material-ui/icons/DeleteForever";
 
 import { connect } from "react-redux";
 
@@ -20,6 +21,17 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     flexDirection: "column"
+  },
+  badge: {
+    top: "15%",
+    right: "15%",
+    width: "40%",
+    height: "40%",
+    border: `2px solid ${
+      theme.palette.type === "light"
+        ? theme.palette.grey[200]
+        : theme.palette.grey[900]
+    }`
   }
 });
 
@@ -29,7 +41,7 @@ class List extends React.Component {
   };
   handleDeleteItem = i => {
     this.props.handleDeleteItem(i);
-  }
+  };
   handleToggle = value => () => {
     const { checked, handleCheckItem } = this.props;
     const currentIndex = checked.indexOf(value);
@@ -44,7 +56,7 @@ class List extends React.Component {
   };
   render() {
     const { list, classes, checked } = this.props;
-
+   
     const shoppingList = list.map((item, index) => (
       <ListItem
         key={index}
@@ -64,7 +76,14 @@ class List extends React.Component {
             aria-label="Info"
             onClick={() => this.handleOpenInfo(index)}
           >
-            <InfoIcon />
+            <Badge
+              classes={{ badge: classes.badge }}
+              color="primary"
+              variant="dot"
+              invisible={item.info ? false : true}
+            >
+              <InfoIcon />
+            </Badge>
           </IconButton>
           <IconButton
             aria-label="Delete"
@@ -95,7 +114,7 @@ const mapDispatchToProps = dispatch => {
     handleOpenInfo: i => dispatch({ type: "INFO_DIALOG", index: i }),
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
-      handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i })
+    handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i })
   };
 };
 

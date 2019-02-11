@@ -12,19 +12,19 @@ const store = createStore(reducer, {
   list: [
     {
       name: "bread",
-      info: "000"
+      info: "bread"
     },
     {
       name: "milk",
-      info: "11111"
+      info: ""
     },
     {
       name: "potatoes",
-      info: "22222"
+      info: "pota"
     },
     {
       name: "beer",
-      info: "333333"
+      info: ""
     }
   ],
   activeInfo: 0,
