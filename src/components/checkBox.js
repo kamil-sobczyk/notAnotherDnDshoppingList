@@ -7,8 +7,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 import List from "./list";
-import InfoDialog from "./infoDialog";
-import AddDialog from "./addDialog";
+import InfoDialog from "./dialogs/infoDialog";
+import AddDialog from "./dialogs/addDialog";
 
 const styles = theme => ({
   root: {
