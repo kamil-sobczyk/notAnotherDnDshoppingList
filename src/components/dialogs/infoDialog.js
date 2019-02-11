@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -29,6 +30,15 @@ class InfoDialog extends Component {
     );
   }
 }
+
+
+InfoDialog.propTypes = {
+  openInfo: PropTypes.bool,
+  list: PropTypes.array,
+  activeInfo: PropTypes.number,
+  handleOpenInfo: PropTypes.func,
+};
+
 
 const mapStateToProps = state => {
   return {

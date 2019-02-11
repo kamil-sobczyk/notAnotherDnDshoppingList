@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -10,7 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 
-import { connect } from "react-redux";
+
 
 const styles = theme => ({
   root: {
@@ -34,14 +37,14 @@ const styles = theme => ({
     }`
   },
   deleteHover: {
-    color: "black",
+    color: theme.palette.primary.dark,
     "&:hover": {
       color: "red"
     }
   },
   infoHover: {
     "&:hover": {
-      color: "black"
+      color: theme.palette.primary.main
     }
   }
 });
@@ -113,7 +116,8 @@ class List extends React.Component {
 List.propTypes = {
   classes: PropTypes.object.isRequired,
   openInfo: PropTypes.bool,
-  handleOpenInfo: PropTypes.func
+  handleOpenInfo: PropTypes.func,
+  handleCheckItem: PropTypes.func
 };
 
 const mapStateToProps = state => {

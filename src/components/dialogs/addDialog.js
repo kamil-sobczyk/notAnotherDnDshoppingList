@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -67,6 +68,13 @@ class AddDialog extends Component {
     );
   }
 }
+
+AddDialog.propTypes = {
+  classes: PropTypes.object.isRequired,
+  openAdd: PropTypes.bool,
+  handleOpenAdd: PropTypes.func,
+  handleAddItem: PropTypes.func
+};
 
 const mapStateToProps = state => {
   return { openAdd: state.openAdd };
