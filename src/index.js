@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-
 import reducer from "./reducers/reducer";
 
 import App from "./App";
+
+// import Server from './server/index';
 
 const store = createStore(reducer, {
   list: [

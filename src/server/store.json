@@ -1,0 +1,25 @@
+{
+  "list": [
+    {
+      "name": "bread",
+      "info": "Buy in Lidl"
+    },
+    {
+      "name": "milk",
+      "info": ""
+    },
+    {
+      "name": "potatoes",
+      "info": "Buy in Tesco"
+    },
+    {
+      "name": "beer",
+      "info": ""
+    }
+  ],
+  "activeInfo": 0,
+  "checked": [],
+  "openInfo": "false",
+  "openAdd": "false"
+}
+
