@@ -6,7 +6,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
-import CommentIcon from "@material-ui/icons/Comment";
+import InfoIcon from "@material-ui/icons/Info";
+import DeleteIcon from '@material-ui/icons/DeleteForever';
 
 import { connect } from "react-redux";
 
@@ -14,7 +15,7 @@ const styles = theme => ({
   root: {
     listStyleType: "none",
     width: "100%",
-    maxWidth: 360,
+    maxWidth: 500,
     minWidth: 300,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
@@ -26,6 +27,9 @@ class List extends React.Component {
   handleOpenInfo = i => {
     this.props.handleOpenInfo(i);
   };
+  handleDeleteItem = i => {
+    this.props.handleDeleteItem(i);
+  }
   handleToggle = value => () => {
     const { checked, handleCheckItem } = this.props;
     const currentIndex = checked.indexOf(value);
@@ -62,7 +66,13 @@ class List extends React.Component {
             aria-label="Info"
             onClick={() => this.handleOpenInfo(index)}
           >
-            <CommentIcon />
+            <InfoIcon />
+          </IconButton>
+          <IconButton
+            aria-label="Delete"
+            onClick={() => this.handleDeleteItem(index)}
+          >
+            <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
@@ -87,7 +97,8 @@ const mapDispatchToProps = dispatch => {
   return {
     handleOpenInfo: i => dispatch({ type: "INFO_DIALOG", index: i }),
     handleCheckItem: newChecked =>
-      dispatch({ type: "HANDLE_CHECK", newChecked: newChecked })
+      dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
+      handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i })
   };
 };
 

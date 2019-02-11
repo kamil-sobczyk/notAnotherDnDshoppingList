@@ -13,7 +13,7 @@ import AddDialog from "./dialogs/addDialog";
 const styles = theme => ({
   root: {
     width: "100%",
-    maxWidth: 360,
+    maxWidth: 500,
     minWidth: 300,
     backgroundColor: theme.palette.background.paper
   },

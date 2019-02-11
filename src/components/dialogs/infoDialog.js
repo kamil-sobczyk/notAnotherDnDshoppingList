@@ -11,12 +11,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 
 class InfoDialog extends Component {
   render() {
+    let info;
     const { openInfo, handleOpenInfo, list, activeInfo } = this.props;
+    !list[activeInfo] ? info = null : info = list[activeInfo].info;
     return (
       <Dialog open={openInfo} onClose={handleOpenInfo}>
         <DialogTitle>More info</DialogTitle>
         <DialogContent>
-          <DialogContentText>{list[activeInfo].info}</DialogContentText>
+          <DialogContentText>{info}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={handleOpenInfo}>
