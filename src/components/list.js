@@ -34,6 +34,7 @@ const styles = theme => ({
     }`
   },
   deleteHover: {
+    color: "black",
     "&:hover": {
       color: "red"
     }
@@ -92,7 +93,7 @@ class List extends React.Component {
               variant="dot"
               invisible={item.info ? false : true}
             >
-              <InfoIcon className={classes.infoHover}/>
+              <InfoIcon className={classes.infoHover} />
             </Badge>
           </IconButton>
           <IconButton
