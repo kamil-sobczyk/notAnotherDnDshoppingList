@@ -12,7 +12,7 @@ const store = createStore(reducer, {
   list: [
     {
       name: "bread",
-      info: "bread"
+      info: "Buy in Lidl"
     },
     {
       name: "milk",
@@ -20,7 +20,7 @@ const store = createStore(reducer, {
     },
     {
       name: "potatoes",
-      info: "pota"
+      info: "Buy in Tesco"
     },
     {
       name: "beer",
@@ -28,7 +28,7 @@ const store = createStore(reducer, {
     }
   ],
   activeInfo: 0,
-  checked: [0],
+  checked: [],
   openInfo: false,
   openAdd: false
 });

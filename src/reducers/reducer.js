@@ -1,6 +1,6 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "INFO_DIALOG":
+    case "SHOW_INFO_DIALOG":
       let index;
       action.index === undefined ? index = 0 : index = action.index;
       return {
@@ -8,7 +8,7 @@ const reducer = (state, action) => {
         openInfo: state.openInfo ? false : true,
         activeInfo: index
       };
-    case "ADD_DIALOG":
+    case "SHOW_ADD_DIALOG":
       return { ...state, openAdd: state.openAdd ? false : true };
     case "ADD_ITEM":
       return { ...state, list: [...state.list, action.newItem] };

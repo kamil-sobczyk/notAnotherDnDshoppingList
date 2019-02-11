@@ -37,12 +37,13 @@ const styles = theme => ({
     }`
   },
   deleteHover: {
-    color: theme.palette.primary.dark,
+    color: theme.palette.primary.main,
     "&:hover": {
       color: "red"
     }
   },
   infoHover: {
+    color: theme.palette.primary.light,
     "&:hover": {
       color: theme.palette.primary.main
     }
@@ -126,7 +127,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: i => dispatch({ type: "INFO_DIALOG", index: i }),
+    handleOpenInfo: i => dispatch({ type: "SHOW_INFO_DIALOG", index: i }),
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
     handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i })

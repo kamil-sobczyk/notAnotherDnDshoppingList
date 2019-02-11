@@ -31,14 +31,12 @@ class InfoDialog extends Component {
   }
 }
 
-
 InfoDialog.propTypes = {
   openInfo: PropTypes.bool,
   list: PropTypes.array,
   activeInfo: PropTypes.number,
   handleOpenInfo: PropTypes.func,
 };
-
 
 const mapStateToProps = state => {
   return {
@@ -50,7 +48,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: () => dispatch({ type: "INFO_DIALOG" })
+    handleOpenInfo: () => dispatch({ type: "SHOW_INFO_DIALOG" })
   };
 };
 

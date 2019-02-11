@@ -52,7 +52,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenAdd: () => dispatch({ type: "ADD_DIALOG" })
+    handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" })
   };
 };
 
