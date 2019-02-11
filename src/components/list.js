@@ -23,12 +23,8 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
-  componentWillReceiveProps() {
-    this.forceUpdate();
-  }
-  
-  handleOpenInfo = () => {
-    this.props.handleOpenInfo();
+  handleOpenInfo = i => {
+    this.props.handleOpenInfo(i);
   };
   handleToggle = value => () => {
     const { checked, handleCheckItem } = this.props;
@@ -40,13 +36,12 @@ class List extends React.Component {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     handleCheckItem(newChecked);
-};
+  };
   render() {
-    const { list, classes, handleOpenInfo, checked } = this.props;
+    const { list, classes, checked } = this.props;
 
-    console.log('list in render: ', list);
+    console.log("list in render: ", list);
 
     const shoppingList = list.map((item, index) => (
       <ListItem
@@ -63,7 +58,10 @@ class List extends React.Component {
         />
         <ListItemText primary={item.name} />
         <ListItemSecondaryAction>
-          <IconButton aria-label="Info" onClick={handleOpenInfo}>
+          <IconButton
+            aria-label="Info"
+            onClick={() => this.handleOpenInfo(index)}
+          >
             <CommentIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -81,14 +79,15 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log('list in mapStateToProps: ', state.list)
+  console.log("list in mapStateToProps: ", state.list);
   return { list: state.list, checked: state.checked };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: () => dispatch({ type: "INFO_DIALOG" }),
-    handleCheckItem: (newChecked) => dispatch({type: "HANDLE_CHECK", newChecked: newChecked})
+    handleOpenInfo: i => dispatch({ type: "INFO_DIALOG", index: i }),
+    handleCheckItem: newChecked =>
+      dispatch({ type: "HANDLE_CHECK", newChecked: newChecked })
   };
 };
 

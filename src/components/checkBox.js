@@ -43,7 +43,7 @@ class Checkbox extends Component {
 Checkbox.propTypes = {
   classes: PropTypes.object.isRequired,
   openInfo: PropTypes.bool,
-  openAdd: PropTypes.bool,
+  openAdd: PropTypes.bool
 };
 
 const mapStateToProps = state => {

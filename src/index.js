@@ -12,28 +12,25 @@ const store = createStore(reducer, {
   list: [
     {
       name: "bread",
-      info: "",
-      checked: false
+      info: "000"
     },
     {
       name: "milk",
-      info: "",
-      checked: false
+      info: "11111"
     },
     {
       name: "potatoes",
-      info: "",
-      checked: false
+      info: "22222"
     },
     {
       name: "beer",
-      info: "",
-      checked: false
+      info: "333333"
     }
   ],
+  activeInfo: 0,
   checked: [0],
   openInfo: false,
-  openAdd: false,
+  openAdd: false
 });
 
 ReactDOM.render(

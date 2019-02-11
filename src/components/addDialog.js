@@ -22,8 +22,8 @@ class AddDialog extends Component {
     info: ""
   };
   handleCloseAdd = () => {
-    this.props.handleOpenAdd();
     this.props.handleAddItem(this.state);
+    this.props.handleOpenAdd();
   };
 
   changeNewItem = e => {
@@ -74,7 +74,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleOpenAdd: () => dispatch({ type: "ADD_DIALOG" }),
-    handleAddItem: (newItem) => dispatch({type: "ADD_ITEM", newItem: newItem})
+    handleAddItem: newItem => dispatch({ type: "ADD_ITEM", newItem: newItem })
   };
 };
 
