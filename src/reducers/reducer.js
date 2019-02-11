@@ -11,7 +11,6 @@ const reducer = (state, action) => {
     case "ADD_DIALOG":
       return { ...state, openAdd: state.openAdd ? false : true };
     case "ADD_ITEM":
-      console.log("ADD_ITEM in reducer fired");
       return { ...state, list: [...state.list, action.newItem] };
     case "DELETE_ITEM":
     const newList = [...state.list.slice(0, action.index), ...state.list.slice(action.index + 1)];
@@ -20,7 +19,6 @@ const reducer = (state, action) => {
         list: newList
       };
     case "HANDLE_CHECK":
-      console.log("CHECK");
       return { ...state, checked: action.newChecked };
     default:
       return state;

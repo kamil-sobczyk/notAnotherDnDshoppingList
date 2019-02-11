@@ -45,8 +45,6 @@ class List extends React.Component {
   render() {
     const { list, classes, checked } = this.props;
 
-    console.log("list in render: ", list);
-
     const shoppingList = list.map((item, index) => (
       <ListItem
         key={index}
@@ -89,7 +87,6 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log("list in mapStateToProps: ", state.list);
   return { list: state.list, checked: state.checked };
 };
 
