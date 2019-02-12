@@ -10,7 +10,7 @@
 3. npm install
 4. cd ..
 5. npm install
-6. npm start
+6. npm run start
 
 Preview: 
 http://kamilsobczyk.slask.pl/
