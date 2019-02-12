@@ -1,22 +1,16 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
-const routes = require('./routes/index');
-
+const express = require("express");
+const bodyParser = require("body-parser");
+const routes = require("./routes/index.js");
 const app = express();
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, 'public')));
+const cors = require('cors')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
-app.use(flash());
+routes(app);
 
-app.use('/', routes);
+app.use(cors())
 
-module.exports = app;
+var server = app.listen(3001, function () {
+    console.log("app running on port.", server.address().port);
+});

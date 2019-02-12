@@ -7,7 +7,22 @@ import reducer from "./reducers/reducer";
 
 import App from "./App";
 
-// import Server from './server/index';
+let state;
+
+const getStore = () => {
+  fetch('/store/')
+    .then(response => {
+      return response.json();
+      
+    })
+    .then(store => {
+      console.log(store);
+    })
+};
+getStore();
+
+console.log('state', state);
+
 
 const store = createStore(reducer, {
   list: [
