@@ -18,6 +18,5 @@ app.use(cookieParser());
 app.use(flash());
 
 app.use('/', routes);
-app.use('/new', routes);
 
 module.exports = app;
