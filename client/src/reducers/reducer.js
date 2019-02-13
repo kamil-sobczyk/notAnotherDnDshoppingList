@@ -21,6 +21,9 @@ const reducer = (state, action) => {
         ...state,
         list: newList
       };
+    case "PRODS_ARRIVED":
+      console.log("PRODS_ARRIVED", action.prods);
+      return { ...state, list: action.prods };
     case "HANDLE_CHECK":
       return { ...state, checked: action.newChecked };
     case "GET_LIST":

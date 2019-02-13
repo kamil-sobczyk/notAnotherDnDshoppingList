@@ -50,17 +50,9 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
-  state = {
-    store: []
-  };
-  componentDidMount = () => {
-    this.getStore().then(result => this.setState({
-      store: result
-    }))
-  };
 
-  getStore = () => {
-    return fetch("/store/", {
+  componentDidMount = () => {
+    fetch("/store/", {
       method: "GET",
       mode: "cors",
       headers: {
@@ -71,9 +63,9 @@ class List extends React.Component {
         return response.json();
       })
       .then(store => {
-        return store.list;
+        return this.props.prodsFromApiArrived(store.list);
       }) 
-  }
+  };
 
   handleOpenInfo = i => {
     this.props.handleOpenInfo(i);
@@ -94,11 +86,12 @@ class List extends React.Component {
     handleCheckItem(newChecked);
   };
   render() {
-    const { list, classes, checked } = this.props;
+    const { list, classes, checked, store } = this.props;
 
-    console.log('llll', list.value);
+    console.log("ACHTUNG");
+    console.log(store);
 
-    const shoppingList = this.state.store.map((item, index) => (
+    const shoppingList = store.list.map((item, index) => (
       <ListItem
         key={index}
         role={undefined}
@@ -153,7 +146,8 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { list: state.list, checked: state.checked };
+  console.log(state);
+  return { list: state.list, store: state, checked: state.checked };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -162,7 +156,8 @@ const mapDispatchToProps = dispatch => {
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
     handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i }),
-    getList: () => dispatch({ type: 'GET_LIST'})
+    getList: () => dispatch({ type: 'GET_LIST'}),
+    prodsFromApiArrived: items => dispatch({type: 'PRODS_ARRIVED', prods: items})
   };
 };
 

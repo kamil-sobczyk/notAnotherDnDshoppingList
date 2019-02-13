@@ -15,7 +15,11 @@ const store = {
      {
        "name": "beerAPI",
        "info": ""
-     }
+     },
+     {
+      "name": "newBeerAPI",
+      "info": "damian"
+    }
    ],
    "activeInfo": 666,
    "checked": [],
