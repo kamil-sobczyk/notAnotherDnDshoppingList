@@ -12,6 +12,7 @@
 3. npm install
 4. npm start
 5. cd ..
+6. cd routes
 6. npm install
 7. npm start
 
