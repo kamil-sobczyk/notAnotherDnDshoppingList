@@ -10,9 +10,10 @@
 1. git clone https://github.com/Ogar616/shoppingList.git
 2. cd shoppingList/client
 3. npm install
-4. cd ..
-5. npm install
-6. npm run start
+4. npm start
+5. cd ..
+6. npm install
+7. npm start
 
 Preview: 
 http://kamilsobczyk.slask.pl/
