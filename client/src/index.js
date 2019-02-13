@@ -9,39 +9,30 @@ import App from "./App";
 
 let state;
 
-const getStore = () => {
-  fetch('/store/')
-    .then(response => {
-      return response.json();
-      
-    })
-    .then(store => {
-      console.log(store);
-    })
-};
-getStore();
 
-console.log('state', state);
+// getStore();
+
+// console.log('state', state);
 
 
 const store = createStore(reducer, {
   list: [
-    {
-      name: "bread",
-      info: "Buy in Lidl"
-    },
-    {
-      name: "milk",
-      info: ""
-    },
-    {
-      name: "potatoes",
-      info: "Buy in Tesco"
-    },
-    {
-      name: "beer",
-      info: ""
-    }
+    // {
+    //   name: "bread",
+    //   info: "Buy in Lidl"
+    // },
+    // {
+    //   name: "milk",
+    //   info: ""
+    // },
+    // {
+    //   name: "potatoes",
+    //   info: "Buy in Tesco"
+    // },
+    // {
+    //   name: "beer",
+    //   info: ""
+    // }
   ],
   activeInfo: 0,
   checked: [],

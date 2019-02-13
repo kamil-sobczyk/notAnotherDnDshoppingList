@@ -1,23 +1,23 @@
 const store = {
    "list": [
      {
-       "name": "bread",
+       "name": "breadAPI",
        "info": "Buy in Lidl"
      },
      {
-       "name": "milk",
+       "name": "milkAPI",
        "info": ""
      },
      {
-       "name": "potatoes",
+       "name": "potatoesAPI",
        "info": "Buy in Tesco"
      },
      {
-       "name": "beer",
+       "name": "beerAPI",
        "info": ""
      }
    ],
-   "activeInfo": 0,
+   "activeInfo": 666,
    "checked": [],
    "openInfo": "false",
    "openAdd": "false"

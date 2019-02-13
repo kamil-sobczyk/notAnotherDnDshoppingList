@@ -12,8 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
-
-
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
@@ -51,6 +50,31 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
+  state = {
+    store: []
+  };
+  componentDidMount = () => {
+    this.getStore().then(result => this.setState({
+      store: result
+    }))
+  };
+
+  getStore = () => {
+    return fetch("/store/", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(store => {
+        return store.list;
+      }) 
+  }
+
   handleOpenInfo = i => {
     this.props.handleOpenInfo(i);
   };
@@ -72,7 +96,9 @@ class List extends React.Component {
   render() {
     const { list, classes, checked } = this.props;
 
-    const shoppingList = list.map((item, index) => (
+    console.log('llll', list.value);
+
+    const shoppingList = this.state.store.map((item, index) => (
       <ListItem
         key={index}
         role={undefined}
@@ -110,7 +136,12 @@ class List extends React.Component {
       </ListItem>
     ));
 
-    return <div className={classes.root}>{shoppingList}</div>;
+    return (
+      <div className={classes.root}>
+        {shoppingList}
+        <Button onClick={this.props.getList}>GET NEW LIST</Button>
+      </div>
+    );
   }
 }
 
@@ -130,7 +161,8 @@ const mapDispatchToProps = dispatch => {
     handleOpenInfo: i => dispatch({ type: "SHOW_INFO_DIALOG", index: i }),
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
-    handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i })
+    handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i }),
+    getList: () => dispatch({ type: 'GET_LIST'})
   };
 };
 
