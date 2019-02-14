@@ -1,4 +1,4 @@
-const store = {
+let store = {
    "list": [
      {
        "name": "breadAPI",
@@ -22,8 +22,8 @@ const store = {
     }
    ],
    "checked": [{
-    "name": "breadAPI",
-    "info": "Buy in Lidl"
+    "name": "newBeerAPI",
+    "info": "damian"
   }],
  };
  
@@ -34,21 +34,15 @@ const store = {
    app.get("/store", (req, res) => {
      res.status(200).send(store);
    });
-   app.get("/store/list", (req, res) => {
-     res.status(200).send(store.list);
-   });
-   app.get("/store/openinfo", (req, res) => {
-     res.status(200).send(store.openInfo);
-   });
-   app.get("/store/activeinfo", (req, res) => {
-     res.status(200).send(store.activeInfo);
-   });
    app.get("/store/checked", (req, res) => {
      res.status(200).send(store.checked);
    });
-   app.get("/store/openadd", (req, res) => {
-     res.status(200).send(store.openAdd);
-   });
+   app.put("/store/checked", (req, res) => {
+    //  console.log('req', req)
+     console.log('res', res)
+
+    res.status(200).json(store.checked);
+   })
  };
  
  module.exports = appRouter;
