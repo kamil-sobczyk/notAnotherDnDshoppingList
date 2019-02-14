@@ -13,6 +13,8 @@ import InfoIcon from "@material-ui/icons/Info";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 
+import Button from "@material-ui/core/Button";
+
 const styles = theme => ({
   root: {
     listStyleType: "none",
@@ -49,13 +51,12 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
+  state = {
+    checked: []
+  };
   componentDidMount = () => {
     fetch("/store/", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      }
+      method: "GET"
     })
       .then(response => {
         return response.json();
@@ -64,17 +65,26 @@ class List extends React.Component {
         return this.props.getList(store.list);
       });
     fetch("/store/checked", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      }
+      method: "GET"
     })
       .then(response => {
         return response.json();
       })
       .then(checked => {
         return this.props.getChecked(checked);
+      });
+  };
+
+  getCh = () => {
+    fetch("/store/checked", {
+      method: "GET"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(checked => {
+        console.log(JSON.stringify(checked));
+        // return this.props.getChecked(checked);
       });
   };
 
@@ -94,6 +104,25 @@ class List extends React.Component {
     } else {
       newChecked.splice(currentIndex, 1);
     }
+    
+    // this.setState({ checked: newChecked });
+    fetch("/store/checked", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      mode: "cors",
+      body: JSON.stringify(newChecked)
+    })
+      .then(response => {
+        console.log(JSON.stringify(response));
+        return response.json();
+      })
+      .then(state => {
+        console.log(JSON.stringify(state));
+        return state;
+      })
+      .catch(error => console.log("EERRRRRRRRRRORRRRR ", error));
     handleCheckItem(newChecked);
   };
   render() {
@@ -112,7 +141,7 @@ class List extends React.Component {
         onClick={this.handleToggle(item)}
       >
         <Checkbox
-          checked={checked.indexOf(item) !== -1}
+          checked={JSON.stringify(checked).indexOf(JSON.stringify(item)) !== -1}
           tabIndex={-1}
           disableRipple
         />
@@ -141,7 +170,12 @@ class List extends React.Component {
       </ListItem>
     ));
 
-    return <div className={classes.root}>{shoppingList}</div>;
+    return (
+      <div className={classes.root}>
+        {shoppingList}
+        <Button onClick={this.getCh}>GET CHECKED</Button>
+      </div>
+    );
   }
 }
 

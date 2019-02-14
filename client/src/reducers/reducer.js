@@ -24,6 +24,7 @@ const reducer = (state, action) => {
     case "GET_LIST":
       return { ...state, list: action.list };
     case "GET_CHECKED":
+    // console.log(action.checked);
       return { ...state, checked: action.checked };
     case "HANDLE_CHECK":
       return { ...state, checked: action.newChecked };
