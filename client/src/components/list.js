@@ -12,7 +12,6 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
-import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
@@ -50,7 +49,6 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
-
   componentDidMount = () => {
     fetch("/store/", {
       method: "GET",
@@ -63,8 +61,21 @@ class List extends React.Component {
         return response.json();
       })
       .then(store => {
-        return this.props.prodsFromApiArrived(store.list);
-      }) 
+        return this.props.getList(store.list);
+      });
+    fetch("/store/checked", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(checked => {
+        return this.props.getChecked(checked);
+      });
   };
 
   handleOpenInfo = i => {
@@ -86,12 +97,13 @@ class List extends React.Component {
     handleCheckItem(newChecked);
   };
   render() {
-    const { list, classes, checked, store } = this.props;
+    const { classes, checked, list } = this.props;
 
-    console.log("ACHTUNG");
-    console.log(store);
+    // console.log("ACHTUNG");
+    console.log("list", list);
+    console.log("checked", checked);
 
-    const shoppingList = store.list.map((item, index) => (
+    const shoppingList = list.map((item, index) => (
       <ListItem
         key={index}
         role={undefined}
@@ -129,12 +141,7 @@ class List extends React.Component {
       </ListItem>
     ));
 
-    return (
-      <div className={classes.root}>
-        {shoppingList}
-        <Button onClick={this.props.getList}>GET NEW LIST</Button>
-      </div>
-    );
+    return <div className={classes.root}>{shoppingList}</div>;
   }
 }
 
@@ -147,17 +154,20 @@ List.propTypes = {
 
 const mapStateToProps = state => {
   console.log(state);
+  console.log(state.checked);
+
   return { list: state.list, store: state, checked: state.checked };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: i => dispatch({ type: "SHOW_INFO_DIALOG", index: i }),
+    handleOpenInfo: index =>
+      dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
-    handleDeleteItem: i => dispatch({ type: "DELETE_ITEM", index: i }),
-    getList: () => dispatch({ type: 'GET_LIST'}),
-    prodsFromApiArrived: items => dispatch({type: 'PRODS_ARRIVED', prods: items})
+    handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index }),
+    getList: list => dispatch({ type: "GET_LIST", list: list }),
+    getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })
   };
 };
 

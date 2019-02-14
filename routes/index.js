@@ -21,10 +21,10 @@ const store = {
       "info": "damian"
     }
    ],
-   "activeInfo": 666,
-   "checked": [],
-   "openInfo": "false",
-   "openAdd": "false"
+   "checked": [{
+    "name": "breadAPI",
+    "info": "Buy in Lidl"
+  }],
  };
  
  const appRouter = app => {

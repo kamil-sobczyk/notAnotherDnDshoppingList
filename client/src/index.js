@@ -7,33 +7,8 @@ import reducer from "./reducers/reducer";
 
 import App from "./App";
 
-let state;
-
-
-// getStore();
-
-// console.log('state', state);
-
-
 const store = createStore(reducer, {
-  list: [
-    // {
-    //   name: "bread",
-    //   info: "Buy in Lidl"
-    // },
-    // {
-    //   name: "milk",
-    //   info: ""
-    // },
-    // {
-    //   name: "potatoes",
-    //   info: "Buy in Tesco"
-    // },
-    // {
-    //   name: "beer",
-    //   info: ""
-    // }
-  ],
+  list: [],
   activeInfo: 0,
   checked: [],
   openInfo: false,

@@ -21,30 +21,12 @@ const reducer = (state, action) => {
         ...state,
         list: newList
       };
-    case "PRODS_ARRIVED":
-      console.log("PRODS_ARRIVED", action.prods);
-      return { ...state, list: action.prods };
+    case "GET_LIST":
+      return { ...state, list: action.list };
+    case "GET_CHECKED":
+      return { ...state, checked: action.checked };
     case "HANDLE_CHECK":
       return { ...state, checked: action.newChecked };
-    case "GET_LIST":
-    let listt;
-    
-
-      return { ...state, list: fetch("/store/", {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        }
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(store => {
-          return store.list;
-        }) };
-
-      
     default:
       return state;
   }
