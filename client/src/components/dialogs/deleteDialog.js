@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -66,7 +67,13 @@ class DeleteDialog extends React.Component {
   }
 }
 
-DeleteDialog.propTypes = {};
+DeleteDialog.propTypes = {
+  openDelete: PropTypes.bool,
+  handleOpenDelete: PropTypes.func,
+  handleDeleteItem: PropTypes.func,
+  list: PropTypes.array,
+  activeInfo: PropTypes.number
+};
 
 const mapStateToProps = state => {
   return { openDelete: state.openDelete, activeInfo: state.activeInfo, list: state.list };
