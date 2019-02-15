@@ -10,7 +10,7 @@ import CheckBox from "./components/checkBox";
 
 const styles = theme => ({
   root: {
-    textAlign: "center"
+    textAlign: "center",
   },
   content: {
     display: "flex",

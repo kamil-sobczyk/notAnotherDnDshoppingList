@@ -38,7 +38,13 @@ let store = {
      res.status(200).send(store.checked);
    });
    app.put("/store/checked", (req, res) => {
+<<<<<<< HEAD
      store.checked.push(req.body)
+=======
+    //  console.log('req', req)
+     console.log('res', res)
+
+>>>>>>> b2f4af8d19b819c7f7d589c7b2001a4783b1b240
     res.status(200).json(store.checked);
    })
  };
