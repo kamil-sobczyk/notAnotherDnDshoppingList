@@ -10,6 +10,7 @@ import List from "./list";
 import InfoDialog from "./dialogs/infoDialog";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
+import DeleteDialog from "./dialogs/deleteDialog";
 
 const styles = theme => ({
   root: {
@@ -34,6 +35,7 @@ class Checkbox extends Component {
         <InfoDialog />
         <AddDialog />
         <EditDialog />
+        <DeleteDialog />
         <Button color="primary" onClick={handleOpenAdd}>
           Add new item
         </Button>
@@ -45,7 +47,7 @@ class Checkbox extends Component {
 Checkbox.propTypes = {
   classes: PropTypes.object.isRequired,
   handleOpenAdd: PropTypes.func,
-  openInfo: PropTypes.bool,
+  openInfo: PropTypes.bool
 };
 
 const mapStateToProps = state => {

@@ -10,6 +10,9 @@ const reducer = (state, action) => {
       };
     case "SHOW_ADD_DIALOG":
       return { ...state, openAdd: state.openAdd ? false : true };
+      case "SHOW_DELETE_DIALOG":
+      action.index ? (index = action.index) : (index = 0);
+      return { ...state, openDelete: state.openDelete ? false : true, activeInfo: index };
     case "SHOW_EDIT_DIALOG":
       action.index ? (index = action.index) : (index = 0);
       return {
