@@ -53,7 +53,7 @@ class AddDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openAdd } = this.props;
+    const { classes, openAdd, handleOpenAdd } = this.props;
     return (
       <Dialog open={openAdd} onClose={this.handleCloseAdd}>
         <DialogTitle>Add a new product</DialogTitle>
@@ -77,6 +77,9 @@ class AddDialog extends Component {
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
+        <Button color="primary" onClick={handleOpenAdd}>
+            Cancel
+          </Button>
           <Button color="primary" onClick={this.handleAddItem}>
             Add
           </Button>
