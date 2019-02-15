@@ -13,8 +13,8 @@ import AddDialog from "./dialogs/addDialog";
 const styles = theme => ({
   root: {
     width: "100%",
-    maxWidth: 500,
-    minWidth: 300,
+    maxWidth: 800,
+    minWidth: 350,
     backgroundColor: theme.palette.background.paper
   },
   textField: {

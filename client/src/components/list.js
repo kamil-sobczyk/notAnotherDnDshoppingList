@@ -95,6 +95,9 @@ class List extends React.Component {
   handleDeleteItem = i => {
     this.props.handleDeleteItem(i);
   };
+  handleEditItem = i => {
+    this.props.handleEditItem(i)
+  }
   handleToggle = value => () => {
     const { checked, handleCheckItem } = this.props;
     const currentIndex = checked.indexOf(value);
@@ -207,6 +210,7 @@ const mapDispatchToProps = dispatch => {
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
     handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index }),
+    handleEditItem: index => dispatch({type: "EDIT_ITEM", index: index}),
     getList: list => dispatch({ type: "GET_LIST", list: list }),
     getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })
   };

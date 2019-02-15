@@ -21,6 +21,8 @@ const reducer = (state, action) => {
         ...state,
         list: newList
       };
+      case "EDIT_ITEM":
+      return {...state}
     case "GET_LIST":
       return { ...state, list: action.list };
     case "GET_CHECKED":
