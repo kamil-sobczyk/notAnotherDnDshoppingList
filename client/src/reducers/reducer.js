@@ -27,7 +27,9 @@ const reducer = (state, action) => {
     // console.log(action.checked);
       return { ...state, checked: action.checked };
     case "HANDLE_CHECK":
-      return { ...state, checked: action.newChecked };
+    let newChecked = state.checked;
+    newChecked.push(action.value)
+      return { ...state, checked: newChecked };
     default:
       return state;
   }

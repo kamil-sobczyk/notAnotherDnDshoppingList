@@ -13,8 +13,6 @@ import InfoIcon from "@material-ui/icons/Info";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 
-import Button from "@material-ui/core/Button";
-
 const styles = theme => ({
   root: {
     listStyleType: "none",
@@ -74,20 +72,6 @@ class List extends React.Component {
         return this.props.getChecked(checked);
       });
   };
-
-  getCh = () => {
-    fetch("/store/checked", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(checked => {
-        console.log(JSON.stringify(checked));
-        // return this.props.getChecked(checked);
-      });
-  };
-
   handleOpenInfo = i => {
     this.props.handleOpenInfo(i);
   };
@@ -95,42 +79,26 @@ class List extends React.Component {
     this.props.handleDeleteItem(i);
   };
   handleToggle = value => () => {
-    const { checked, handleCheckItem } = this.props;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    
-    // this.setState({ checked: newChecked });
     fetch("/store/checked", {
       method: "PUT",
       headers: {
         "Content-type": "application/json"
       },
       mode: "cors",
-      body: JSON.stringify(newChecked)
+      body: JSON.stringify(value)
     })
       .then(response => {
-        console.log(JSON.stringify(response));
         return response.json();
       })
       .then(state => {
-        console.log(JSON.stringify(state));
         return state;
       })
-      .catch(error => console.log("EERRRRRRRRRRORRRRR ", error));
-    handleCheckItem(newChecked);
+      .catch(error => console.log("Ooops", error));
+
+    this.props.handleCheckItem(value);
   };
   render() {
     const { classes, checked, list } = this.props;
-
-    // console.log("ACHTUNG");
-    console.log("list", list);
-    console.log("checked", checked);
 
     const shoppingList = list.map((item, index) => (
       <ListItem
@@ -170,12 +138,7 @@ class List extends React.Component {
       </ListItem>
     ));
 
-    return (
-      <div className={classes.root}>
-        {shoppingList}
-        <Button onClick={this.getCh}>GET CHECKED</Button>
-      </div>
-    );
+    return <div className={classes.root}>{shoppingList}</div>;
   }
 }
 
@@ -187,9 +150,6 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
-  console.log(state.checked);
-
   return { list: state.list, store: state, checked: state.checked };
 };
 
@@ -197,8 +157,7 @@ const mapDispatchToProps = dispatch => {
   return {
     handleOpenInfo: index =>
       dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
-    handleCheckItem: newChecked =>
-      dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
+    handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
     handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index }),
     getList: list => dispatch({ type: "GET_LIST", list: list }),
     getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })

@@ -38,9 +38,7 @@ let store = {
      res.status(200).send(store.checked);
    });
    app.put("/store/checked", (req, res) => {
-    //  console.log('req', req)
-     console.log('res', res)
-
+     store.checked.push(req.body)
     res.status(200).json(store.checked);
    })
  };
