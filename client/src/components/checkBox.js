@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import List from "./list";
 import InfoDialog from "./dialogs/infoDialog";
 import AddDialog from "./dialogs/addDialog";
+import EditDialog from "./dialogs/editDialog";
 
 const styles = theme => ({
   root: {
@@ -32,6 +33,7 @@ class Checkbox extends Component {
         <List />
         <InfoDialog />
         <AddDialog />
+        <EditDialog />
         <Button color="primary" onClick={handleOpenAdd}>
           Add new item
         </Button>

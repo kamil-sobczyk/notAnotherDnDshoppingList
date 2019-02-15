@@ -130,7 +130,7 @@ class List extends React.Component {
     handleCheckItem(newChecked);
   };
   render() {
-    const { classes, checked, list } = this.props;
+    const { classes, checked, list, handleOpenAdd } = this.props;
 
     // console.log("ACHTUNG");
     console.log("list render - ", list);
@@ -166,7 +166,7 @@ class List extends React.Component {
           </IconButton>
           <IconButton
             aria-label="Delete"
-            onClick={null}
+            onClick={handleOpenAdd}
           >
             <EditIcon className={classes.infoHover} />
           </IconButton>
@@ -193,7 +193,9 @@ List.propTypes = {
   classes: PropTypes.object.isRequired,
   openInfo: PropTypes.bool,
   handleOpenInfo: PropTypes.func,
-  handleCheckItem: PropTypes.func
+  handleCheckItem: PropTypes.func,
+  getList: PropTypes.func,
+  handleEditItem: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -207,6 +209,7 @@ const mapDispatchToProps = dispatch => {
   return {
     handleOpenInfo: index =>
       dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
+      handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" }),
     handleCheckItem: newChecked =>
       dispatch({ type: "HANDLE_CHECK", newChecked: newChecked }),
     handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index }),
