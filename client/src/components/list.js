@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
+import EditIcon from "@material-ui/icons/Edit";
 
 import Button from "@material-ui/core/Button";
 
@@ -19,8 +20,8 @@ const styles = theme => ({
   root: {
     listStyleType: "none",
     width: "100%",
-    maxWidth: 500,
-    minWidth: 300,
+    maxWidth: 800,
+    minWidth: 350,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     flexDirection: "column"
@@ -83,7 +84,7 @@ class List extends React.Component {
         return response.json();
       })
       .then(checked => {
-        console.log(JSON.stringify(checked));
+        console.log("checked - getCh() - ", JSON.stringify(checked));
         // return this.props.getChecked(checked);
       });
   };
@@ -115,11 +116,11 @@ class List extends React.Component {
       body: JSON.stringify(newChecked)
     })
       .then(response => {
-        console.log(JSON.stringify(response));
+        console.log("response handleToggle - ", JSON.stringify(response,));
         return response.json();
       })
       .then(state => {
-        console.log(JSON.stringify(state));
+        console.log("state handleToggle - ", JSON.stringify(state));
         return state;
       })
       .catch(error => console.log("EERRRRRRRRRRORRRRR ", error));
@@ -129,8 +130,8 @@ class List extends React.Component {
     const { classes, checked, list } = this.props;
 
     // console.log("ACHTUNG");
-    console.log("list", list);
-    console.log("checked", checked);
+    console.log("list render - ", list);
+    console.log("checked render - ", checked);
 
     const shoppingList = list.map((item, index) => (
       <ListItem
@@ -162,6 +163,12 @@ class List extends React.Component {
           </IconButton>
           <IconButton
             aria-label="Delete"
+            onClick={null}
+          >
+            <EditIcon className={classes.infoHover} />
+          </IconButton>
+          <IconButton
+            aria-label="Delete"
             onClick={() => this.handleDeleteItem(index)}
           >
             <DeleteIcon className={classes.deleteHover} />
@@ -187,8 +194,8 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
-  console.log(state.checked);
+  console.log("state mapStateToProps - ", state);
+  console.log("state.checked mapStateToProps - ",state.checked);
 
   return { list: state.list, store: state, checked: state.checked };
 };
