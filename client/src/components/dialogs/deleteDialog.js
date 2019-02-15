@@ -19,7 +19,9 @@ class DeleteDialog extends React.Component {
   }
   handleClese
   render() {
-    const { openDelete, handleOpenDelete } = this.props;
+    const { openDelete, handleOpenDelete, list, activeInfo } = this.props;
+    const active = !list[activeInfo] ? "" : list[activeInfo].name;
+
     return (
       <Dialog
         open={openDelete}
@@ -28,11 +30,11 @@ class DeleteDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"You are trying to delete something"}
+          {"You are trying to delete item"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure to delete <i>THIS ITEM</i> ?
+            Are you sure want to delete {active} ?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -51,7 +53,7 @@ class DeleteDialog extends React.Component {
 DeleteDialog.propTypes = {};
 
 const mapStateToProps = state => {
-  return { openDelete: state.openDelete, activeInfo: state.activeInfo };
+  return { openDelete: state.openDelete, activeInfo: state.activeInfo, list: state.list };
 };
 
 const mapDispatchToProps = dispatch => {

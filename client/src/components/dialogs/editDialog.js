@@ -34,7 +34,7 @@ class EditDialog extends Component {
         "Content-type": "application/json"
       },
       mode: "cors",
-      body: JSON.stringify({ newItem: this.state, index: i })
+      body: JSON.stringify( { newItem: this.state, index: i } )
     })
       .then(response => {
         return response.json();
@@ -55,16 +55,16 @@ class EditDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openEdit, activeInfo, list } = this.props;
+    const { classes, openEdit, activeInfo, list, handleOpenEdit } = this.props;
 
     return (
-      <Dialog open={openEdit} onClose={this.handleCloseEdit}>
+      <Dialog open={openEdit} >
         <DialogTitle>Edit product</DialogTitle>
         <TextField
           required
           id="outlined-required"
           label="Edit name"
-          defaultValue={!list[activeInfo] ? " " : list[activeInfo].name}
+          placeholder={!list[activeInfo] ? " " : list[activeInfo].name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -73,13 +73,19 @@ class EditDialog extends Component {
         <TextField
           id="outlined"
           label="Edit info"
-          defaultValue={!list[activeInfo] ? " " : list[activeInfo].info}
+          placeholder={!list[activeInfo] ? " " : list[activeInfo].info}
           className={classes.textField}
           margin="normal"
           variant="outlined"
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
+          <Button
+            color="primary"
+            onClick={handleOpenEdit}
+          >
+            Cancel
+          </Button>
           <Button
             color="primary"
             onClick={this.handleCloseEdit.bind(this, activeInfo)}
