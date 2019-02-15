@@ -10,17 +10,16 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 class DeleteDialog extends React.Component {
-  handleDeleteItem = (index) => {
-      this.props.handleOpenDelete();
-    this.props.handleDeleteItem(index);
+  handleDeleteItem = index => {
+    this.props.handleOpenDelete();
+    this.props.handleDeleteItem(this.props.activeInfo);
   };
+  handleOpenDelete = i => {
+      this.props.handleOpenDelete(i);
+  }
+  handleClese
   render() {
-    const {
-      openDelete,
-      activeInfo,
-
-      handleOpenDelete
-    } = this.props;
+    const { openDelete, handleOpenDelete } = this.props;
     return (
       <Dialog
         open={openDelete}
@@ -37,14 +36,10 @@ class DeleteDialog extends React.Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOpenDelete} color="primary">
+          <Button onClick={handleOpenDelete.bind(this, null)} color="primary">
             No
           </Button>
-          <Button
-            onClick={this.handleDeleteItem.bind(this, activeInfo)}
-            color="primary"
-            autoFocus
-          >
+          <Button onClick={this.handleDeleteItem} color="primary" autoFocus>
             Yes
           </Button>
         </DialogActions>
@@ -68,6 +63,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ) (DeleteDialog);
+  mapStateToProps,
+  mapDispatchToProps
+)(DeleteDialog);
