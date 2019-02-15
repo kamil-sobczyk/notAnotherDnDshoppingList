@@ -14,8 +14,6 @@ import Badge from "@material-ui/core/Badge";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
-import Button from "@material-ui/core/Button";
-
 const styles = theme => ({
   root: {
     listStyleType: "none",
@@ -52,9 +50,6 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
-  state = {
-    checked: []
-  };
   componentDidMount = () => {
     fetch("/store/", {
       method: "GET"
@@ -82,8 +77,8 @@ class List extends React.Component {
     this.props.handleDeleteItem(i);
   };
   handleEditItem = i => {
-    this.props.handleEditItem(i)
-  }
+    this.props.handleEditItem(i);
+  };
   handleToggle = value => () => {
     fetch("/store/checked", {
       method: "PUT",
@@ -134,10 +129,7 @@ class List extends React.Component {
               <InfoIcon className={classes.infoHover} />
             </Badge>
           </IconButton>
-          <IconButton
-            aria-label="Delete"
-            onClick={handleOpenAdd}
-          >
+          <IconButton aria-label="Delete" onClick={handleOpenAdd}>
             <EditIcon className={classes.infoHover} />
           </IconButton>
           <IconButton
@@ -150,12 +142,7 @@ class List extends React.Component {
       </ListItem>
     ));
 
-    return (
-      <div className={classes.root}>
-        {shoppingList}
-        <Button onClick={this.getCh}>GET CHECKED</Button>
-      </div>
-    );
+    return <div className={classes.root}>{shoppingList}</div>;
   }
 }
 
@@ -178,7 +165,7 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
     handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
     handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index }),
-    handleEditItem: index => dispatch({type: "EDIT_ITEM", index: index}),
+    handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
     getList: list => dispatch({ type: "GET_LIST", list: list }),
     getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })
   };

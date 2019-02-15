@@ -2,7 +2,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "SHOW_INFO_DIALOG":
       let index;
-      action.index === undefined ? (index = 0) : (index = action.index);
+      action.index ? (index = action.index) : (index = 0);
       return {
         ...state,
         openInfo: state.openInfo ? false : true,
@@ -26,10 +26,9 @@ const reducer = (state, action) => {
     case "GET_LIST":
       return { ...state, list: action.list };
     case "GET_CHECKED":
-    // console.log(action.checked);
       return { ...state, checked: action.checked };
     case "HANDLE_CHECK":
-    let newChecked = state.checked;
+    const newChecked = state.checked;
     newChecked.push(action.value)
       return { ...state, checked: newChecked };
     default:
