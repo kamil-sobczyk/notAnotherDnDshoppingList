@@ -24,7 +24,7 @@ class AddDialog extends Component {
   };
   handleAddItem = () => {
     const { handleAddNewItem, handleOpenAdd } = this.props;
-    console.log('handle addd method')
+
     fetch("/store/list", {
       method: "POST",
       headers: {
@@ -34,7 +34,6 @@ class AddDialog extends Component {
       body: JSON.stringify(this.state)
     })
       .then(response => {
-        console.log('responseeeeeeeeeee')
         return response.json();
       })
       .then(state => {
