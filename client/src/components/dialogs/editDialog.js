@@ -22,10 +22,33 @@ class EditDialog extends Component {
     name: "",
     info: ""
   };
-  handleCloseEdit = () => {
-    const { handleEditItem, handleOpenEdit } = this.props;
-    handleEditItem(this.state);
+  handleCloseEdit = (i) => {
+    const { handleEditItem, handleOpenEdit, list } = this.props;
+
+    handleEditItem(this.state, i);
     handleOpenEdit();
+
+    // const newList = list;
+    // newList[i] = this.state;
+
+    fetch("/store/list/", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      mode: "cors",
+      body: JSON.stringify({newItem: this.state, index: i})
+    })
+      .then(response => {
+        console.log('responseeeeeeeeeee')
+        return response.json();
+      })
+      .then(state => {
+        return state;
+      })
+      .catch(error => console.log("Ooops", error));
+
+    
     this.setState({ name: "", info: "" });
   };
 
@@ -38,7 +61,7 @@ class EditDialog extends Component {
   };
   render() {
     const { classes, openEdit, activeInfo, list } = this.props;
-    
+
     return (
       <Dialog open={openEdit} onClose={this.handleCloseEdit}>
         <DialogTitle>Edit product</DialogTitle>
@@ -62,7 +85,7 @@ class EditDialog extends Component {
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
-          <Button color="primary" onClick={this.handleCloseEdit}>
+          <Button color="primary" onClick={this.handleCloseEdit.bind(this, activeInfo)}>
             Confirm
           </Button>
         </DialogActions>

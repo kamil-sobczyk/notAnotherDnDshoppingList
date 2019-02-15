@@ -46,6 +46,12 @@ let store = {
     store.list.push(req.body)
     res.status(200).send(store.list);
   });
+  app.put("/store/list", (req, res) => {
+    console.log("req body", req.body)
+   store.list[req.body.index] = req.body.newItem;
+   res.status(200).send(store.list);
+ });
+  
  };
  
  module.exports = appRouter;

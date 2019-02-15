@@ -118,7 +118,7 @@ class List extends React.Component {
         <ListItemSecondaryAction>
           <IconButton
             aria-label="Info"
-            onClick={() => this.handleOpenInfo(index)}
+            onClick={this.handleOpenInfo.bind(this, index)}
           >
             <Badge
               classes={{ badge: classes.badge }}
@@ -137,7 +137,7 @@ class List extends React.Component {
           </IconButton>
           <IconButton
             aria-label="Delete item"
-            onClick={() => this.handleDeleteItem(index)}
+            onClick={this.handleDeleteItem.bind(this, index)}
           >
             <DeleteIcon className={classes.deleteHover} />
           </IconButton>
