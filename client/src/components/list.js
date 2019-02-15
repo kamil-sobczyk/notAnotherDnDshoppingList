@@ -76,8 +76,8 @@ class List extends React.Component {
   handleDeleteItem = i => {
     this.props.handleDeleteItem(i);
   };
-  handleEditItem = i => {
-    this.props.handleEditItem(i);
+  handleOpenEdit = i => {
+    this.props.handleOpenEdit(i);
   };
   handleToggle = value => () => {
     fetch("/store/checked", {
@@ -99,7 +99,7 @@ class List extends React.Component {
     this.props.handleCheckItem(value);
   };
   render() {
-    const { classes, checked, list, handleOpenAdd } = this.props;
+    const { classes, checked, list } = this.props;
 
     const shoppingList = list.map((item, index) => (
       <ListItem
@@ -129,11 +129,14 @@ class List extends React.Component {
               <InfoIcon className={classes.infoHover} />
             </Badge>
           </IconButton>
-          <IconButton aria-label="Delete" onClick={handleOpenAdd}>
+          <IconButton
+            aria-label="Edit item"
+            onClick={() => this.handleOpenEdit(index)}
+          >
             <EditIcon className={classes.infoHover} />
           </IconButton>
           <IconButton
-            aria-label="Delete"
+            aria-label="Delete item"
             onClick={() => this.handleDeleteItem(index)}
           >
             <DeleteIcon className={classes.deleteHover} />
@@ -163,6 +166,8 @@ const mapDispatchToProps = dispatch => {
   return {
     handleOpenInfo: index =>
       dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
+    handleOpenEdit: index =>
+      dispatch({ type: "SHOW_EDIT_DIALOG", index: index }),
     handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
     handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),

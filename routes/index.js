@@ -29,7 +29,7 @@ let store = {
  
  const appRouter = app => {
    app.get("/", function(req, res) {
-     res.status(200).send("REST API");
+     res.status(200).send("Application API");
    });
    app.get("/store", (req, res) => {
      res.status(200).send(store);
@@ -40,7 +40,12 @@ let store = {
    app.put("/store/checked", (req, res) => {
      store.checked.push(req.body)
     res.status(200).json(store.checked);
-   })
+   });
+   app.post("/store/list", (req, res) => {
+     console.log(req.body)
+    store.list.push(req.body)
+    res.status(200).send(store.list);
+  });
  };
  
  module.exports = appRouter;

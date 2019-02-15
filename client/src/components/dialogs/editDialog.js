@@ -22,9 +22,10 @@ class EditDialog extends Component {
     name: "",
     info: ""
   };
-  handleCloseAdd = () => {
-    this.props.handleEditItem(this.state);
-    this.props.handleOpenAdd();
+  handleCloseEdit = () => {
+    const { handleEditItem, handleOpenEdit } = this.props;
+    handleEditItem(this.state);
+    handleOpenEdit();
     this.setState({ name: "", info: "" });
   };
 
@@ -36,15 +37,16 @@ class EditDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openAdd } = this.props;
+    const { classes, openEdit, activeInfo, list } = this.props;
+    
     return (
-      <Dialog open={openAdd} onClose={this.handleCloseAdd}>
+      <Dialog open={openEdit} onClose={this.handleCloseEdit}>
         <DialogTitle>Edit product</DialogTitle>
         <TextField
           required
           id="outlined-required"
           label="Edit name"
-          defaultValue=""
+          defaultValue={!list[activeInfo] ? " " : list[activeInfo].name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -53,14 +55,14 @@ class EditDialog extends Component {
         <TextField
           id="outlined"
           label="Edit info"
-          defaultValue=""
+          defaultValue={!list[activeInfo] ? " " : list[activeInfo].info}
           className={classes.textField}
           margin="normal"
           variant="outlined"
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
-          <Button color="primary" onClick={this.handleCloseAdd}>
+          <Button color="primary" onClick={this.handleCloseEdit}>
             Confirm
           </Button>
         </DialogActions>
@@ -77,13 +79,20 @@ EditDialog.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { openAdd: state.openAdd };
+  return {
+    openAdd: state.openAdd,
+    openEdit: state.openEdit,
+    list: state.list,
+    activeInfo: state.activeInfo
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    handleOpenEdit: () => dispatch({ type: "SHOW_EDIT_DIALOG" }),
     handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" }),
-    handleEditItem: newItem => dispatch({ type: "EDIT_ITEM", newItem: newItem })
+    handleEditItem: (newItem, index) =>
+      dispatch({ type: "EDIT_ITEM", newItem: newItem, index: index })
   };
 };
 

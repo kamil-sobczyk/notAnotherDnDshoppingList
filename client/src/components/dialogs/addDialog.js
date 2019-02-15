@@ -22,16 +22,34 @@ class AddDialog extends Component {
     name: "",
     info: ""
   };
-  handleCloseAdd = () => {
-    this.props.handleAddItem(this.state);
-    this.props.handleOpenAdd();
+  handleAddItem = () => {
+    const { handleAddNewItem, handleOpenAdd } = this.props;
+    console.log('handle addd method')
+    fetch("/store/list", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      mode: "cors",
+      body: JSON.stringify(this.state)
+    })
+      .then(response => {
+        console.log('responseeeeeeeeeee')
+        return response.json();
+      })
+      .then(state => {
+        return state;
+      })
+      .catch(error => console.log("Ooops", error));
+
+    handleAddNewItem(this.state);
+    handleOpenAdd();
     this.setState({ name: "", info: "" });
   };
 
   changeNewItem = e => {
     this.setState({ name: e.target.value });
   };
-
   changeNewItemInfo = e => {
     this.setState({ info: e.target.value });
   };
@@ -60,7 +78,7 @@ class AddDialog extends Component {
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
-          <Button color="primary" onClick={this.handleCloseAdd}>
+          <Button color="primary" onClick={this.handleAddItem}>
             Add
           </Button>
         </DialogActions>
@@ -83,7 +101,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" }),
-    handleAddItem: newItem => dispatch({ type: "ADD_ITEM", newItem: newItem })
+    handleAddNewItem: item => dispatch({ type: "ADD_ITEM", newItem: item }),
   };
 };
 
