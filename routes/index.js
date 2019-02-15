@@ -51,6 +51,13 @@ const appRouter = app => {
     store.list[req.body.index] = req.body.newItem;
     res.status(200).send(store.list);
   });
+  app.delete("/store/list", (req, res) => {
+    store.list = [
+      ...store.list.slice(0, req.body.index),
+      ...store.list.slice(req.body.index + 1)
+    ];
+    res.status(200).send(store.list);
+  });
 };
 
 module.exports = appRouter;

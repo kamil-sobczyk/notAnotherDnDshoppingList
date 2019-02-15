@@ -13,6 +13,22 @@ class DeleteDialog extends React.Component {
   handleDeleteItem = index => {
     this.props.handleOpenDelete();
     this.props.handleDeleteItem(this.props.activeInfo);
+
+    fetch("/store/list/", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json"
+        },
+        mode: "cors",
+        body: JSON.stringify( { index: index } )
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(state => {
+          return state;
+        })
+        .catch(error => console.log("Ooops", error));
   };
   handleOpenDelete = i => {
       this.props.handleOpenDelete(i);
@@ -34,14 +50,14 @@ class DeleteDialog extends React.Component {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure want to delete {active} ?
+            Are you sure want to delete {active} from your list?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleOpenDelete.bind(this, null)} color="primary">
             No
           </Button>
-          <Button onClick={this.handleDeleteItem} color="primary" autoFocus>
+          <Button onClick={this.handleDeleteItem.bind(this, activeInfo)} color="primary" autoFocus>
             Yes
           </Button>
         </DialogActions>
