@@ -16,25 +16,25 @@ class DeleteDialog extends React.Component {
     this.props.handleDeleteItem(this.props.activeInfo);
 
     fetch("/store/list/", {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json"
-        },
-        mode: "cors",
-        body: JSON.stringify( { index: index } )
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      },
+      mode: "cors",
+      body: JSON.stringify({ index: index })
+    })
+      .then(response => {
+        return response.json();
       })
-        .then(response => {
-          return response.json();
-        })
-        .then(state => {
-          return state;
-        })
-        .catch(error => console.log("Ooops", error));
+      .then(state => {
+        return state;
+      })
+      .catch(error => console.log("Ooops", error));
   };
   handleOpenDelete = i => {
-      this.props.handleOpenDelete(i);
-  }
-  handleClese
+    this.props.handleOpenDelete(i);
+  };
+  handleClese;
   render() {
     const { openDelete, handleOpenDelete, list, activeInfo } = this.props;
     const active = !list[activeInfo] ? "" : list[activeInfo].name;
@@ -58,7 +58,11 @@ class DeleteDialog extends React.Component {
           <Button onClick={handleOpenDelete.bind(this, null)} color="primary">
             No
           </Button>
-          <Button onClick={this.handleDeleteItem.bind(this, activeInfo)} color="primary" autoFocus>
+          <Button
+            onClick={this.handleDeleteItem.bind(this, activeInfo)}
+            color="primary"
+            autoFocus
+          >
             Yes
           </Button>
         </DialogActions>
@@ -76,7 +80,11 @@ DeleteDialog.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { openDelete: state.openDelete, activeInfo: state.activeInfo, list: state.list };
+  return {
+    openDelete: state.openDelete,
+    activeInfo: state.activeInfo,
+    list: state.list
+  };
 };
 
 const mapDispatchToProps = dispatch => {

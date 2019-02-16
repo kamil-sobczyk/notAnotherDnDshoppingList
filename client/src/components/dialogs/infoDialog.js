@@ -14,7 +14,7 @@ class InfoDialog extends Component {
   render() {
     let info;
     const { openInfo, handleOpenInfo, list, activeInfo } = this.props;
-    !list[activeInfo] ? info = null : info = list[activeInfo].info;
+    !list[activeInfo] ? (info = null) : (info = list[activeInfo].info);
     return (
       <Dialog open={openInfo} onClose={handleOpenInfo}>
         <DialogTitle>More info</DialogTitle>
@@ -35,7 +35,7 @@ InfoDialog.propTypes = {
   openInfo: PropTypes.bool,
   list: PropTypes.array,
   activeInfo: PropTypes.number,
-  handleOpenInfo: PropTypes.func,
+  handleOpenInfo: PropTypes.func
 };
 
 const mapStateToProps = state => {

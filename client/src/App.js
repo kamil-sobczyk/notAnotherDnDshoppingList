@@ -8,6 +8,8 @@ import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
 import CheckBox from "./components/checkBox";
 
+import DND from './components/DND.js';
+
 const styles = theme => ({
   root: {
     textAlign: "center",
@@ -30,6 +32,10 @@ class App extends Component {
         <div className={classes.content}>
           <CheckBox />
         </div>
+    
+        <DND />
+  
+       
       </div>
     );
   }
