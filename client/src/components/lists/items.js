@@ -13,6 +13,8 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
+import { getItems } from '../data/fetchFunctions';
+
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const styles = theme => ({
@@ -53,19 +55,7 @@ const styles = theme => ({
 
 class Items extends Component {
     componentWillMount = () => {
-          fetch("/store/", {
-            mode: "cors",
-            method: "GET"
-            
-          })
-            .then(response => {
-
-              return response.json();
-            })
-            .then(store => {
-
-              return this.props.getItems(store.items);
-            });
+          getItems(this.props.getItems);
       };
   render() {
     const { classes, items } = this.props;

@@ -48,83 +48,32 @@ const styles = theme => ({
     }
   }
 });
-const store = {
-  items: [
-    {
-      name: "breadAPI",
-      info: "Buy in Lidl",
-      id: "item-0"
-    },
-    {
-      name: "milkAPI",
-      info: "",
-      id: "item-1"
-    },
-    {
-      name: "potatoesAPI",
-      info: "Buy in Tesco",
-      id: "item-2"
-    },
-    {
-      name: "beerAPI",
-      info: "",
-      id: "item-3"
-    },
-    {
-      name: "newBeerAPI",
-      info: "damian",
-      id: "item-4"
-    }
-  ],
-  selected: [
-    {
-      name: "potatoesAPI selected",
-      info: "Buy in Tesco",
-      id: "item-5"
-    },
-    {
-      name: "pot selected",
-      info: "Buy in Tesco",
-      id: "item-6"
-    },
-    {
-      name: "p selected",
-      info: "Buy in Tesco",
-      id: "item-7"
-    },
-    {
-      name: "API selecteed",
-      info: "Buy in Tesco",
-      id: "item-8"
-    }
-  ]
-};
 
 class Lists extends Component {
   state = {
-    items: store.items,
-    selected: store.selected
+    items: this.props.items,
+    selected: this.props.selected
   };
 
   componentDidMount = () => {
-    // fetch("/store/", {
-    //   method: "GET"
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(store => {
-    //     return this.props.getItems(store.items);
-    //   });
-    // fetch("/store/selected", {
-    //   method: "GET"
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(checked => {
-    //     return this.props.getChecked(checked);
-    //   });
+    fetch("/store/", {
+      method: "GET"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(store => {
+        return this.props.getItems(store.items);
+      });
+    fetch("/store/selected", {
+      method: "GET"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(selected => {
+        return this.props.getSelected(selected);
+      });
   };
 
   id2List = {
@@ -153,8 +102,22 @@ class Lists extends Component {
       if (source.droppableId === "droppable2") {
         state = { selected: items };
       }
-
-      this.setState(state);
+      fetch("/store/selected/", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json"
+        },
+        mode: "cors",
+        body: JSON.stringify( { selected: state } )
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(selected => {
+          return selected;
+        })
+        .catch(error => console.log("Ooops", error));
+      // this.setState(state);
     } else {
       const result = move(
         this.getList(source.droppableId),
@@ -192,7 +155,7 @@ Lists.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { list: state.items, store: state, selected: state.selected };
+  return { items: state.items, store: state, selected: state.selected };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -205,6 +168,7 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
+    handleEditSelected: selected => dispatch({type: "EDIT_SELECTED", selected: selected}),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
   };

@@ -20,6 +20,8 @@ const reducer = (state, action) => {
         openEdit: state.openEdit ? false : true,
         activeInfo: index
       };
+      case "EDIT_SELECTED":
+      return { ...state, selected: action.selected };
     case "ADD_ITEM":
       let newList = state.list;
       newList.push(action.newItem);

@@ -8,12 +8,14 @@ import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
+
+import { getSelected } from "../data/fetchFunctions";
 
 const styles = theme => ({
   root: {
@@ -52,17 +54,9 @@ const styles = theme => ({
 });
 
 class Selected extends Component {
-    componentDidMount = () => {
-            fetch("/store/selected", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(checked => {
-        return this.props.getSelected(checked);
-      });
-    }
+  componentDidMount = () => {
+    getSelected(this.props.getSelected);
+  };
   render() {
     const { classes, selected } = this.props;
     return (
@@ -103,7 +97,7 @@ class Selected extends Component {
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
-                    <Divider/>
+                    <Divider />
                   </div>
                 )}
               </Draggable>
@@ -127,8 +121,8 @@ Selected.propTypes = {
 };
 
 const mapStateToProps = state => {
-    return { list: state.items, store: state, selected: state.selected };
-  };
+  return { list: state.items, store: state, selected: state.selected };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -140,8 +134,8 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
-
+    getSelected: selected =>
+      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 
