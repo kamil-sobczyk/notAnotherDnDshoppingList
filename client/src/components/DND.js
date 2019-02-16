@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import Items from "./lists/items";
+import Selected from "./lists/selected";
 
-import Items from './lists/items';
-import Selected from './lists/selected';
+import { DragDropContext } from "react-beautiful-dnd";
 
-import { DragDropContext} from "react-beautiful-dnd";
-
-import { reorder, move } from './data/moveFunctions';
+import { reorder, move } from "./data/moveFunctions";
+import { changeSelected, getItems, getSelected } from "./data/fetchFunctions";
 
 const styles = theme => ({
   root: {
@@ -49,42 +49,37 @@ const styles = theme => ({
   }
 });
 
-class Lists extends Component {
-  state = {
-    items: this.props.items,
-    selected: this.props.selected
-  };
 
-  componentDidMount = () => {
-    fetch("/store/", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(store => {
-        return this.props.getItems(store.items);
-      });
-    fetch("/store/selected", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(selected => {
-        return this.props.getSelected(selected);
-      });
-  };
+class Lists extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      items: getItems(this.props.getItems),
+      selected: getSelected(this.props.getSelected)
+    };
+  }
+ 
 
   id2List = {
     droppable: "items",
     droppable2: "selected"
   };
 
-  getList = id => this.state[this.id2List[id]];
+  getList = id => this.list[this.id2List[id]];
+
+  list = {
+    items: getItems(this.props.getItems),
+    selected: getSelected(this.props.getSelected)
+  }
+ 
+
 
   onDragEnd = result => {
     const { source, destination } = result;
+
+    console.log('source', source)
+    console.log('dest', destination)
+    console.log('result', result)
 
     if (!destination) {
       return;
@@ -97,27 +92,20 @@ class Lists extends Component {
         destination.index
       );
 
+      console.log('items', items)
+      console.log('reorder', reorder( this.getList(source.droppableId),
+      source.index,
+      destination.index))
+      console.log('getList', this.getList(source.droppableId))
+
       let state = { items };
 
       if (source.droppableId === "droppable2") {
         state = { selected: items };
       }
-      fetch("/store/selected/", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json"
-        },
-        mode: "cors",
-        body: JSON.stringify( { selected: state } )
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(selected => {
-          return selected;
-        })
-        .catch(error => console.log("Ooops", error));
-      // this.setState(state);
+      this.setState(state, console.log('newstate',state));
+      // changeSelected(this.props.handleEditSelected, items);
+      
     } else {
       const result = move(
         this.getList(source.droppableId),
@@ -125,20 +113,23 @@ class Lists extends Component {
         source,
         destination
       );
+      console.log('result else', result)
 
       this.setState({
         items: result.droppable,
         selected: result.droppable2
-      });
+      }, console.log("this.state", this.state));
     }
   };
   render() {
-    const { classes, selected } = this.props;
+    const { classes } = this.props;
+    console.log(this.state);
+
     return (
       <div className={classes.root}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Items/>
-          <Selected state={selected}/>
+          <Items />
+          <Selected />
         </DragDropContext>
       </div>
     );
@@ -168,9 +159,11 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    handleEditSelected: selected => dispatch({type: "EDIT_SELECTED", selected: selected}),
+    handleEditSelected: selected =>
+      dispatch({ type: "EDIT_SELECTED", selected: selected }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
+    getSelected: selected =>
+      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 
