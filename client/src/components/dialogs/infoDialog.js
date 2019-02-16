@@ -13,8 +13,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 class InfoDialog extends Component {
   render() {
     let info;
-    const { openInfo, handleOpenInfo, list, activeInfo } = this.props;
-    !list[activeInfo] ? (info = null) : (info = list[activeInfo].info);
+    const { openInfo, handleOpenInfo, items, activeInfo } = this.props;
+    !items[activeInfo] ? (info = null) : (info = items[activeInfo].info);
     return (
       <Dialog open={openInfo} onClose={handleOpenInfo}>
         <DialogTitle>More info</DialogTitle>
@@ -41,7 +41,7 @@ InfoDialog.propTypes = {
 const mapStateToProps = state => {
   return {
     openInfo: state.openInfo,
-    list: state.list,
+    items: state.items,
     activeInfo: state.activeInfo
   };
 };

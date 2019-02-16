@@ -53,33 +53,23 @@ const styles = theme => ({
 
 class Items extends Component {
     componentWillMount = () => {
-        console.log('cdm items')
-  
           fetch("/store/", {
+            mode: "cors",
             method: "GET"
+            
           })
             .then(response => {
-                console.log('f response', response)
+
               return response.json();
             })
             .then(store => {
-                console.log('fetch store items',store.items)
+
               return this.props.getItems(store.items);
             });
-        // fetch("/store/selected", {
-        //   method: "GET"
-        // })
-        //   .then(response => {
-        //     return response.json();
-        //   })
-        //   .then(checked => {
-        //     return this.props.getChecked(checked);
-        //   });
       };
   render() {
     const { classes, items } = this.props;
 
-    console.log('items render Items component', items)
     return (
       <Droppable droppableId="droppable">
         {provided => (

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Typography from "@material-ui/core/Typography";
+
 import { withStyles } from "@material-ui/core/styles";
 
 import withRoot from "./components/withRoot";
@@ -9,7 +9,7 @@ import NavBar from "./components/nav";
 import ListBox from "./components/ListBox";
 
 import DND from './components/DND.js';
-import List from './components/list';
+
 
 const styles = theme => ({
   root: {

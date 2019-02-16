@@ -38,9 +38,6 @@ const reducer = (state, action) => {
       newList[action.index] = action.newItem;
       return { ...state, list: newList };
     case "GET_ITEMS":
-    console.log('reduer get items')
-    console.log('reducer state',state)
-    console.log('reducer a.items',action.items)
       return { ...state, items: action.items };
     case "GET_SELECTED":
       return { ...state, selected: action.selected };

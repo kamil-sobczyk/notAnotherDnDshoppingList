@@ -36,8 +36,8 @@ class DeleteDialog extends React.Component {
   };
   handleClese;
   render() {
-    const { openDelete, handleOpenDelete, list, activeInfo } = this.props;
-    const active = !list[activeInfo] ? "" : list[activeInfo].name;
+    const { openDelete, handleOpenDelete, items, activeInfo } = this.props;
+    const active = !items[activeInfo] ? "" : items[activeInfo].name;
 
     return (
       <Dialog
@@ -83,7 +83,7 @@ const mapStateToProps = state => {
   return {
     openDelete: state.openDelete,
     activeInfo: state.activeInfo,
-    list: state.list
+    items: state.items
   };
 };
 

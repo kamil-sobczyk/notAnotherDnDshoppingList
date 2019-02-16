@@ -52,24 +52,24 @@ const styles = theme => ({
 class List extends React.Component {
   componentDidMount = () => {
     console.log('idt cdm')
-    fetch("/store/", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(store => {
-        return this.props.getList(store.list);
-      });
-    fetch("/store/checked", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(checked => {
-        return this.props.getChecked(checked);
-      });
+    // fetch("/store/", {
+    //   method: "GET"
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(store => {
+    //     return this.props.getList(store.list);
+    //   });
+    // fetch("/store/checked", {
+    //   method: "GET"
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(checked => {
+    //     return this.props.getChecked(checked);
+    //   });
   };
   handleOpenInfo = i => {
     this.props.handleOpenInfo(i);

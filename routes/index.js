@@ -1,7 +1,7 @@
 const store = {
   items: [
     {
-      name: "breadAPI",
+      name: "breadAPI1111111111111111",
       info: "Buy in Lidl",
       id: "item-0"
     },
@@ -55,7 +55,7 @@ const appRouter = app => {
     res.status(200).send("Application API");
   });
   app.get("/store", (req, res) => {
-    console.log('back s.i', store.items, 'back req body', req.body)
+    console.log('back s.i', store.items, 'back req body', req.body, 'store', store)
     res.status(200).send(store);
   });
   app.get("/store/selected", (req, res) => {

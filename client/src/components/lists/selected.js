@@ -52,8 +52,19 @@ const styles = theme => ({
 });
 
 class Selected extends Component {
+    componentDidMount = () => {
+            fetch("/store/selected", {
+      method: "GET"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(checked => {
+        return this.props.getSelected(checked);
+      });
+    }
   render() {
-    const { classes } = this.props;
+    const { classes, selected } = this.props;
     return (
       <Droppable droppableId="droppable2">
         {provided => (
@@ -61,7 +72,7 @@ class Selected extends Component {
             <Typography variant="h6" gutterBottom>
               Items to buy
             </Typography>
-            {this.props.state.selected.map((item, index) => (
+            {selected.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {provided => (
                   <div
@@ -111,7 +122,7 @@ Selected.propTypes = {
   openDelete: PropTypes.bool,
   handleOpenInfo: PropTypes.func,
   handleCheckItem: PropTypes.func,
-  getList: PropTypes.func,
+  getItems: PropTypes.func,
   handleEditItem: PropTypes.func
 };
 
@@ -129,8 +140,8 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    getList: list => dispatch({ type: "GET_LIST", list: list }),
-    getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })
+    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
+
   };
 };
 

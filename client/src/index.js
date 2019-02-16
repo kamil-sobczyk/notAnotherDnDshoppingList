@@ -8,7 +8,7 @@ import reducer from "./reducers/reducer";
 import App from "./App";
 
 const store = createStore(reducer, {
-  list: [],
+  items: [],
   activeInfo: 0,
   selected: [],
   openInfo: false,
