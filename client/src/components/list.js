@@ -51,6 +51,7 @@ const styles = theme => ({
 
 class List extends React.Component {
   componentDidMount = () => {
+    console.log('idt cdm')
     fetch("/store/", {
       method: "GET"
     })

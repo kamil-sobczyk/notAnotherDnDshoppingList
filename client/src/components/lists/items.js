@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
+import Divider from '@material-ui/core/Divider';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
@@ -51,8 +52,34 @@ const styles = theme => ({
 });
 
 class Items extends Component {
+    componentWillMount = () => {
+        console.log('cdm items')
+  
+          fetch("/store/", {
+            method: "GET"
+          })
+            .then(response => {
+                console.log('f response', response)
+              return response.json();
+            })
+            .then(store => {
+                console.log('fetch store items',store.items)
+              return this.props.getItems(store.items);
+            });
+        // fetch("/store/selected", {
+        //   method: "GET"
+        // })
+        //   .then(response => {
+        //     return response.json();
+        //   })
+        //   .then(checked => {
+        //     return this.props.getChecked(checked);
+        //   });
+      };
   render() {
-    const { classes } = this.props;
+    const { classes, items } = this.props;
+
+    console.log('items render Items component', items)
     return (
       <Droppable droppableId="droppable">
         {provided => (
@@ -60,7 +87,7 @@ class Items extends Component {
             <Typography variant="h6" gutterBottom>
               Items to choose
             </Typography>
-            {this.props.state.items.map((item, index) => (
+            {items.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {provided => (
                   <div
@@ -75,7 +102,7 @@ class Items extends Component {
                       button
                       // onClick={this.handleToggle(item)}
                     >
-                      <ListItemText primary={item.name} />
+                      <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
                         <IconButton
                           aria-label="Edit item"
@@ -91,6 +118,7 @@ class Items extends Component {
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
+                    <Divider/>
                   </div>
                 )}
               </Draggable>
@@ -109,13 +137,13 @@ Items.propTypes = {
   openDelete: PropTypes.bool,
   handleOpenInfo: PropTypes.func,
   handleCheckItem: PropTypes.func,
-  getList: PropTypes.func,
+  getItems: PropTypes.func,
   handleEditItem: PropTypes.func
 };
 
 const mapStateToProps = state => {
-  return { list: state.list, store: state, checked: state.checked };
-};
+    return { items: state.items, store: state, selected: state.selected };
+  };
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -127,8 +155,9 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    getList: list => dispatch({ type: "GET_LIST", list: list }),
-    getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })
+    getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
+
+    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 

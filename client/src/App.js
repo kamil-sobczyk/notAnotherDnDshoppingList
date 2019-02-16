@@ -6,9 +6,10 @@ import { withStyles } from "@material-ui/core/styles";
 
 import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
-import CheckBox from "./components/checkBox";
+import ListBox from "./components/ListBox";
 
 import DND from './components/DND.js';
+import List from './components/list';
 
 const styles = theme => ({
   root: {
@@ -26,12 +27,10 @@ class App extends Component {
     return (
       <div className={classes.root}>
         <NavBar />
-        <Typography variant="h4" gutterBottom>
-          Check items that you need to buy
-        </Typography>
         <div className={classes.content}>
-          <CheckBox />
+          <ListBox />
         </div>
+        {/* <List/> */}
     
         <DND />
   

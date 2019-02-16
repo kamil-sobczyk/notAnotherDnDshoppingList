@@ -37,10 +37,13 @@ const reducer = (state, action) => {
       newList = state.list;
       newList[action.index] = action.newItem;
       return { ...state, list: newList };
-    case "GET_LIST":
-      return { ...state, list: action.list };
-    case "GET_CHECKED":
-      return { ...state, checked: action.checked };
+    case "GET_ITEMS":
+    console.log('reduer get items')
+    console.log('reducer state',state)
+    console.log('reducer a.items',action.items)
+      return { ...state, items: action.items };
+    case "GET_SELECTED":
+      return { ...state, selected: action.selected };
     case "HANDLE_CHECK":
       const newChecked = state.checked;
       newChecked.push(action.value);

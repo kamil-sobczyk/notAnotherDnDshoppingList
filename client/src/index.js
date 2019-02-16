@@ -10,7 +10,7 @@ import App from "./App";
 const store = createStore(reducer, {
   list: [],
   activeInfo: 0,
-  checked: [],
+  selected: [],
   openInfo: false,
   openAdd: false,
   openEdit: false,

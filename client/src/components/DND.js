@@ -103,12 +103,6 @@ const store = {
       info: "Buy in Tesco",
       id: "item-8"
     }
-  ],
-  checked: [
-    {
-      name: "newBeerAPI",
-      info: "damian"
-    }
   ]
 };
 
@@ -116,6 +110,27 @@ class Lists extends Component {
   state = {
     items: store.items,
     selected: store.selected
+  };
+
+  componentDidMount = () => {
+    fetch("/store/", {
+      method: "GET"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(store => {
+        return this.props.getItems(store.items);
+      });
+    // fetch("/store/selected", {
+    //   method: "GET"
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(checked => {
+    //     return this.props.getChecked(checked);
+    //   });
   };
 
   id2List = {
@@ -161,12 +176,13 @@ class Lists extends Component {
     }
   };
   render() {
-    const { classes } = this.props;
+    const { classes, items, selected } = this.props;
+    console.log('items ddd', items)
     return (
       <div className={classes.root}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Items state={this.state}/>
-          <Selected state={this.state}/>
+          <Items/>
+          {/* <Selected state={selected}/> */}
         </DragDropContext>
       </div>
     );
@@ -178,12 +194,12 @@ Lists.propTypes = {
   openDelete: PropTypes.bool,
   handleOpenInfo: PropTypes.func,
   handleCheckItem: PropTypes.func,
-  getList: PropTypes.func,
+  getItems: PropTypes.func,
   handleEditItem: PropTypes.func
 };
 
 const mapStateToProps = state => {
-  return { list: state.list, store: state, checked: state.checked };
+  return { list: state.items, store: state, selected: state.selected };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -196,8 +212,8 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    getList: list => dispatch({ type: "GET_LIST", list: list }),
-    getChecked: checked => dispatch({ type: "GET_CHECKED", checked: checked })
+    // getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
+    // getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 

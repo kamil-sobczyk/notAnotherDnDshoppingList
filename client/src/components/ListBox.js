@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-import List from "./list";
+import DND from './DND.js';
 import InfoDialog from "./dialogs/infoDialog";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
@@ -25,13 +25,14 @@ const styles = theme => ({
   }
 });
 
-class Checkbox extends Component {
+class ListBox extends Component {
   render() {
     const { classes, handleOpenAdd } = this.props;
 
     return (
       <div className={classes.checkList}>
-        <List />
+        {/* <List /> */}
+        {/* <DND /> */}
         <InfoDialog />
         <AddDialog />
         <EditDialog />
@@ -44,7 +45,7 @@ class Checkbox extends Component {
   }
 }
 
-Checkbox.propTypes = {
+ListBox.propTypes = {
   classes: PropTypes.object.isRequired,
   handleOpenAdd: PropTypes.func,
   openInfo: PropTypes.bool
@@ -63,4 +64,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Checkbox));
+)(withStyles(styles)(ListBox));

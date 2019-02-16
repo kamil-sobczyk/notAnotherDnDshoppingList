@@ -1,30 +1,51 @@
-let store = {
-  list: [
+const store = {
+  items: [
     {
       name: "breadAPI",
-      info: "Buy in Lidl"
+      info: "Buy in Lidl",
+      id: "item-0"
     },
     {
       name: "milkAPI",
-      info: ""
+      info: "",
+      id: "item-1"
     },
     {
       name: "potatoesAPI",
-      info: "Buy in Tesco"
+      info: "Buy in Tesco",
+      id: "item-2"
     },
     {
       name: "beerAPI",
-      info: ""
+      info: "",
+      id: "item-3"
     },
     {
       name: "newBeerAPI",
-      info: "damian"
+      info: "damian",
+      id: "item-4"
     }
   ],
-  checked: [
+  selected: [
     {
-      name: "newBeerAPI",
-      info: "damian"
+      name: "potatoesAPI selected",
+      info: "Buy in Tesco",
+      id: "item-5"
+    },
+    {
+      name: "pot selected",
+      info: "Buy in Tesco",
+      id: "item-6"
+    },
+    {
+      name: "p selected",
+      info: "Buy in Tesco",
+      id: "item-7"
+    },
+    {
+      name: "API selecteed",
+      info: "Buy in Tesco",
+      id: "item-8"
     }
   ]
 };
@@ -34,22 +55,23 @@ const appRouter = app => {
     res.status(200).send("Application API");
   });
   app.get("/store", (req, res) => {
+    console.log('back s.i', store.items, 'back req body', req.body)
     res.status(200).send(store);
   });
-  app.get("/store/checked", (req, res) => {
-    res.status(200).send(store.checked);
+  app.get("/store/selected", (req, res) => {
+    res.status(200).send(store.selected);
   });
-  app.put("/store/checked", (req, res) => {
-    store.checked.push(req.body);
-    res.status(200).json(store.checked);
+  app.put("/store/selected", (req, res) => {
+    store.selected.push(req.body);
+    res.status(200).json(store.selected);
   });
-  app.post("/store/list", (req, res) => {
-    store.list.push(req.body);
-    res.status(200).send(store.list);
+  app.post("/store/items", (req, res) => {
+    store.items.push(req.body);
+    res.status(200).send(store.items);
   });
-  app.put("/store/list", (req, res) => {
-    store.list[req.body.index] = req.body.newItem;
-    res.status(200).send(store.list);
+  app.put("/store/items", (req, res) => {
+    store.items[req.body.index] = req.body.newItem;
+    res.status(200).send(store.items);
   });
   app.delete("/store/list", (req, res) => {
     store.list = [

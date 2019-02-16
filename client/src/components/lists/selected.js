@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
+import Divider from '@material-ui/core/Divider';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
@@ -75,7 +76,7 @@ class Selected extends Component {
                       button
                       // onClick={this.handleToggle(item)}
                     >
-                      <ListItemText primary={item.name} />
+                      <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
                         <IconButton
                           aria-label="Edit item"
@@ -91,6 +92,7 @@ class Selected extends Component {
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
+                    <Divider/>
                   </div>
                 )}
               </Draggable>
@@ -114,8 +116,8 @@ Selected.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { list: state.list, store: state, checked: state.checked };
-};
+    return { list: state.items, store: state, selected: state.selected };
+  };
 
 const mapDispatchToProps = dispatch => {
   return {
