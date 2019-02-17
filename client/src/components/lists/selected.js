@@ -54,11 +54,12 @@ const styles = theme => ({
 });
 
 class Selected extends Component {
-  componentDidMount = () => {
+  componentWillMount = () => {
     getSelected(this.props.getSelected);
   };
   render() {
     const { classes, selected } = this.props;
+
     return (
       <Droppable droppableId="droppable2">
         {provided => (
@@ -121,7 +122,7 @@ Selected.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { list: state.items, store: state, selected: state.selected };
+  return { items: state.items, store: state, selected: state.selected };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -134,6 +135,7 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
+    getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected })
   };

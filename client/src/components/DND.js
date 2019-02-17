@@ -5,13 +5,14 @@ import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import Items from "./lists/items";
+import Selected from "./lists/selected";
 
-import Items from './lists/items';
-import Selected from './lists/selected';
+import { DragDropContext } from "react-beautiful-dnd";
 
-import { DragDropContext} from "react-beautiful-dnd";
+import { reorder, move } from "./data/moveFunctions";
 
-import { reorder, move } from './data/moveFunctions';
+import { getItems, getSelected } from "./data/fetchFunctions";
 
 const styles = theme => ({
   root: {
@@ -49,31 +50,56 @@ const styles = theme => ({
   }
 });
 
+// const getItems = (count, offset = 0) =>
+//     Array.from({ length: count }, (v, k) => k).map(k => ({
+//         id: `item-${k + offset}`,
+//         content: `item ${k + offset}`
+//     }));
+
 class Lists extends Component {
-  state = {
-    items: this.props.items,
-    selected: this.props.selected
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: this.props.items,
+      selected: this.props.selected
+    };
+  }
+
+  componentWillReceiveProps = newProps => {
+    if (newProps.items != this.props.items) {
+      this.setState({ items: newProps.items, selected: newProps.selected });
+    }
   };
 
   componentDidMount = () => {
-    fetch("/store/", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(store => {
-        return this.props.getItems(store.items);
-      });
-    fetch("/store/selected", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(selected => {
-        return this.props.getSelected(selected);
-      });
+    console.log("dnd state", this.state);
+
+    // console.log("this.store", this.store);
+    // fetch("/store/", {
+    //   mode: "cors",
+    //   method: "GET"
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(store => {
+    //     return this.props.getItems(store.items);
+    //   });
+    // fetch("/store/selected", {
+    //   mode: "cors",
+    //   method: "GET"
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(selected => {
+    //     return this.props.getSelected(selected);
+    //   });
+
+    // this.setState(
+    //   { items: [], selected: [] },
+    //   console.log("this.props", this.props)
+    // );
   };
 
   id2List = {
@@ -84,6 +110,7 @@ class Lists extends Component {
   getList = id => this.state[this.id2List[id]];
 
   onDragEnd = result => {
+    console.log("result", result);
     const { source, destination } = result;
 
     if (!destination) {
@@ -97,27 +124,31 @@ class Lists extends Component {
         destination.index
       );
 
+      console.log("items", items);
+
       let state = { items };
 
       if (source.droppableId === "droppable2") {
         state = { selected: items };
       }
-      fetch("/store/selected/", {
+
+      fetch("/store/items", {
         method: "PUT",
         headers: {
           "Content-type": "application/json"
         },
         mode: "cors",
-        body: JSON.stringify( { selected: state } )
+        body: JSON.stringify(items)
       })
         .then(response => {
           return response.json();
         })
-        .then(selected => {
-          return selected;
+        .then(items => {
+          return this.props.getItems(items);
         })
-        .catch(error => console.log("Ooops", error));
-      // this.setState(state);
+      .catch(error => console.log("Ooops", error));
+      
+      // this.setState( {items: items, selected: this.state.selected}, console.log("state2", this.state));
     } else {
       const result = move(
         this.getList(source.droppableId),
@@ -126,19 +157,33 @@ class Lists extends Component {
         destination
       );
 
-      this.setState({
-        items: result.droppable,
-        selected: result.droppable2
-      });
+      console.log("result", result);
+
+    //   fetch("/store/selected", {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-type": "application/json"
+    //     },
+    //     mode: "cors",
+    //     body: JSON.stringify(result)
+    //   })
+    //     .then(response => {
+    //       return response.json();
+    //     })
+    //     .then(items => {
+    //       return this.props.getSelected(items);
+    //     })
+    //   .catch(error => console.log("Ooops", error));
     }
+   
   };
   render() {
-    const { classes, selected } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Items/>
-          <Selected state={selected}/>
+          <Items />
+          <Selected />
         </DragDropContext>
       </div>
     );
@@ -168,9 +213,11 @@ const mapDispatchToProps = dispatch => {
     handleOpenDelete: index =>
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    handleEditSelected: selected => dispatch({type: "EDIT_SELECTED", selected: selected}),
+    handleEditSelected: selected =>
+      dispatch({ type: "EDIT_SELECTED", selected: selected }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
+    getSelected: selected =>
+      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 

@@ -1,7 +1,7 @@
 const store = {
   items: [
     {
-      name: "breadAPI1111111111111111",
+      name: "111111",
       info: "Buy in Lidl",
       id: "item-0"
     },
@@ -28,7 +28,7 @@ const store = {
   ],
   selected: [
     {
-      name: "potatoesAPI selected",
+      name: "AAAAAAAA",
       info: "Buy in Tesco",
       id: "item-5"
     },
@@ -55,22 +55,29 @@ const appRouter = app => {
     res.status(200).send("Application API");
   });
   app.get("/store", (req, res) => {
-    console.log('back s.i', store.items, 'back req body', req.body, 'store', store)
+    console.log( 'store', store)
     res.status(200).send(store);
   });
+
   app.get("/store/selected", (req, res) => {
     res.status(200).send(store.selected);
   });
   app.put("/store/selected", (req, res) => {
-    store.selected.push(req.body);
+    store.selected = (req.body);
+    console.log("store selcted puT", req.body)
     res.status(200).json(store.selected);
   });
+  // app.put("/store/", (req, res) => {
+  //   store.selected = (req.body);
+  //   res.status(200).json(req.body);
+  // });
   app.post("/store/items", (req, res) => {
     store.items.push(req.body);
     res.status(200).send(store.items);
   });
   app.put("/store/items", (req, res) => {
-    store.items[req.body.index] = req.body.newItem;
+    store.items = req.body;
+    console.log(store);
     res.status(200).send(store.items);
   });
   app.delete("/store/list", (req, res) => {

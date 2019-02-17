@@ -8,12 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
-import { getItems } from '../data/fetchFunctions';
+import { getItems } from "../data/fetchFunctions";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -54,9 +54,9 @@ const styles = theme => ({
 });
 
 class Items extends Component {
-    componentWillMount = () => {
-          getItems(this.props.getItems);
-      };
+  componentWillMount = () => {
+    getItems(this.props.getItems);
+  };
   render() {
     const { classes, items } = this.props;
 
@@ -98,7 +98,7 @@ class Items extends Component {
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
-                    <Divider/>
+                    <Divider />
                   </div>
                 )}
               </Draggable>
@@ -122,8 +122,8 @@ Items.propTypes = {
 };
 
 const mapStateToProps = state => {
-    return { items: state.items, store: state, selected: state.selected };
-  };
+  return { items: state.items, store: state, selected: state.selected };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -136,8 +136,8 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-
-    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
+    getSelected: selected =>
+      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 
