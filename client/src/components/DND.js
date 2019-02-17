@@ -20,46 +20,14 @@ import {
 } from "./data/fetchFunctions";
 
 const styles = theme => ({
-  root: {
+  lists: {
     listStyleType: "none",
     width: "100%",
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     justifyContent: "center"
-  },
-  list: {
-    width: "30%"
-  },
-  badge: {
-    top: "15%",
-    right: "15%",
-    width: "40%",
-    height: "40%",
-    border: `2px solid ${
-      theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[900]
-    }`
-  },
-  deleteHover: {
-    color: theme.palette.primary.main,
-    "&:hover": {
-      color: "red"
-    }
-  },
-  infoHover: {
-    color: theme.palette.primary.light,
-    "&:hover": {
-      color: theme.palette.primary.main
-    }
   }
 });
-
-// const getItems = (count, offset = 0) =>
-//     Array.from({ length: count }, (v, k) => k).map(k => ({
-//         id: `item-${k + offset}`,
-//         content: `item ${k + offset}`
-//     }));
 
 class Lists extends Component {
   constructor(props) {
@@ -77,37 +45,6 @@ class Lists extends Component {
     ) {
       this.setState({ items: newProps.items, selected: newProps.selected });
     }
-  };
-
-  componentDidMount = () => {
-    console.log("dnd state", this.state);
-
-    // console.log("this.store", this.store);
-    // fetch("/store/", {
-    //   mode: "cors",
-    //   method: "GET"
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(store => {
-    //     return this.props.getItems(store.items);
-    //   });
-    // fetch("/store/selected", {
-    //   mode: "cors",
-    //   method: "GET"
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(selected => {
-    //     return this.props.getSelected(selected);
-    //   });
-
-    // this.setState(
-    //   { items: [], selected: [] },
-    //   console.log("this.props", this.props)
-    // );
   };
 
   id2List = {
@@ -152,10 +89,11 @@ class Lists extends Component {
       changeSelected(this.props.getSelected, result.droppable2);
     }
   };
+
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div className={classes.lists}>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Items />
           <Selected />
