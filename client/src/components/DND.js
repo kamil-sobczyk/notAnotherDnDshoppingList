@@ -12,7 +12,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import { reorder, move } from "./data/moveFunctions";
 
-import { getItems, getSelected } from "./data/fetchFunctions";
+import { getItems, getSelected, changeSelected, changeItems } from "./data/fetchFunctions";
 
 const styles = theme => ({
   root: {
@@ -66,7 +66,7 @@ class Lists extends Component {
   }
 
   componentWillReceiveProps = newProps => {
-    if (newProps.items != this.props.items) {
+    if (newProps.items !== this.props.items || newProps.selected !== this.props.selected) {
       this.setState({ items: newProps.items, selected: newProps.selected });
     }
   };
@@ -107,22 +107,11 @@ class Lists extends Component {
     droppable2: "selected"
   };
 
-  getList = id => this.list[this.id2List[id]];
-
-  list = {
-    items: getItems(this.props.getItems),
-    selected: getSelected(this.props.getSelected)
-  }
- 
-
+  getList = id => this.state[this.id2List[id]];
 
   onDragEnd = result => {
     console.log("result", result);
     const { source, destination } = result;
-
-    console.log('source', source)
-    console.log('dest', destination)
-    console.log('result', result)
 
     if (!destination) {
       return;
@@ -143,23 +132,11 @@ class Lists extends Component {
         state = { selected: items };
       }
 
-      fetch("/store/items", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json"
-        },
-        mode: "cors",
-        body: JSON.stringify(items)
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(items => {
-          return this.props.getItems(items);
-        })
-      .catch(error => console.log("Ooops", error));
-      
-      // this.setState( {items: items, selected: this.state.selected}, console.log("state2", this.state));
+      if(JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) !== -1) {
+        changeItems(this.props.getItems, items);
+      }else {
+        changeSelected(this.props.getSelected, items);
+      }
     } else {
       const result = move(
         this.getList(source.droppableId),
@@ -167,7 +144,6 @@ class Lists extends Component {
         source,
         destination
       );
-      console.log('result else', result)
 
       console.log("result", result);
 

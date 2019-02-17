@@ -63,7 +63,7 @@ const appRouter = app => {
     res.status(200).send(store.selected);
   });
   app.put("/store/selected", (req, res) => {
-    store.selected = (req.body);
+    store.selected = req.body;
     console.log("store selcted puT", req.body)
     res.status(200).json(store.selected);
   });
@@ -77,7 +77,7 @@ const appRouter = app => {
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;
-    console.log(store);
+    console.log('store items put', store);
     res.status(200).send(store.items);
   });
   app.delete("/store/list", (req, res) => {

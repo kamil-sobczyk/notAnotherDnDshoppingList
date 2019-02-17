@@ -23,6 +23,23 @@ const getSelected = dispatch => {
     });
 };
 
+const changeItems = (dispatch, body) =>{
+  fetch("/store/items", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(body)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(items => {
+      return dispatch(items);
+    })
+  .catch(error => console.log("Ooops", error));
+}
 const changeSelected = (dispatch, body) => {
     fetch("/store/selected/", {
         method: "PUT",
@@ -41,4 +58,4 @@ const changeSelected = (dispatch, body) => {
         .catch(error => console.log("Ooops", error));
 }
 
-export { getItems, getSelected, changeSelected };
+export { getItems, getSelected, changeSelected, changeItems };
