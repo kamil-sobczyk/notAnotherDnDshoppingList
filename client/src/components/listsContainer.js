@@ -20,18 +20,15 @@ const styles = theme => ({
     width: "100%",
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   }
 });
 
-class Lists extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: this.props.items,
-      selected: this.props.selected
-    };
-  }
+class ListsContainer extends Component {
+  state = {
+    items: this.props.items,
+    selected: this.props.selected
+  };
 
   componentWillReceiveProps = newProps => {
     if (
@@ -96,7 +93,7 @@ class Lists extends Component {
     );
   }
 }
-Lists.propTypes = {
+ListsContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   getItems: PropTypes.func,
   getSelected: PropTypes.func
@@ -117,4 +114,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Lists));
+)(withStyles(styles)(ListsContainer));

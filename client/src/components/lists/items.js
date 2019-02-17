@@ -18,37 +18,14 @@ import { getItems } from "../data/fetchFunctions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const styles = theme => ({
-  root: {
-    listStyleType: "none",
-    width: "100%",
-    backgroundColor: theme.palette.background.paper,
-    display: "flex",
-    justifyContent: "center"
-  },
   list: {
-    width: "30%"
-  },
-  badge: {
-    top: "15%",
-    right: "15%",
-    width: "40%",
-    height: "40%",
-    border: `2px solid ${
-      theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[900]
-    }`
+    width: "45%",
+    maxWidth: 400
   },
   deleteHover: {
     color: theme.palette.primary.main,
     "&:hover": {
       color: "red"
-    }
-  },
-  infoHover: {
-    color: theme.palette.primary.light,
-    "&:hover": {
-      color: theme.palette.primary.main
     }
   }
 });
@@ -61,7 +38,7 @@ class Items extends Component {
     const { classes, items } = this.props;
 
     return (
-      <Droppable droppableId="droppable">
+      <Droppable droppableId="droppable" >
         {provided => (
           <div ref={provided.innerRef} className={classes.list}>
             <Typography variant="h6" gutterBottom>

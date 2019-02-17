@@ -6,22 +6,16 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-import DND from './DND.js';
+import ListsContainer from "./listsContainer";
 import InfoDialog from "./dialogs/infoDialog";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
 import DeleteDialog from "./dialogs/deleteDialog";
 
 const styles = theme => ({
-  root: {
+  lists: {
     width: "100%",
-    maxWidth: 800,
-    minWidth: 350,
     backgroundColor: theme.palette.background.paper
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
   }
 });
 
@@ -30,9 +24,8 @@ class ListBox extends Component {
     const { classes, handleOpenAdd } = this.props;
 
     return (
-      <div className={classes.checkList}>
-        {/* <List /> */}
-        {/* <DND /> */}
+      <div className={classes.lists}>
+        <ListsContainer />
         <InfoDialog />
         <AddDialog />
         <EditDialog />

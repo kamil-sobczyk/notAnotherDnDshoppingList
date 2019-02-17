@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-
 import { withStyles } from "@material-ui/core/styles";
 
 import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
 import ListBox from "./components/ListBox";
 
-import DND from './components/DND.js';
-
-
 const styles = theme => ({
   root: {
-    textAlign: "center",
-  },
-  content: {
-    display: "flex",
-    justifyContent: "center"
+    textAlign: "center"
   }
 });
 
@@ -27,14 +19,7 @@ class App extends Component {
     return (
       <div className={classes.root}>
         <NavBar />
-        <div className={classes.content}>
-          <ListBox />
-        </div>
-        {/* <List/> */}
-    
-        <DND />
-  
-       
+        <ListBox />
       </div>
     );
   }

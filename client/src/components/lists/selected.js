@@ -18,26 +18,9 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { getSelected } from "../data/fetchFunctions";
 
 const styles = theme => ({
-  root: {
-    listStyleType: "none",
-    width: "100%",
-    backgroundColor: theme.palette.background.paper,
-    display: "flex",
-    justifyContent: "center"
-  },
   list: {
-    width: "30%"
-  },
-  badge: {
-    top: "15%",
-    right: "15%",
-    width: "40%",
-    height: "40%",
-    border: `2px solid ${
-      theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[900]
-    }`
+    width: "45%",
+    maxWidth: 400
   },
   deleteHover: {
     color: theme.palette.primary.main,
@@ -45,12 +28,6 @@ const styles = theme => ({
       color: "red"
     }
   },
-  infoHover: {
-    color: theme.palette.primary.light,
-    "&:hover": {
-      color: theme.palette.primary.main
-    }
-  }
 });
 
 class Selected extends Component {
