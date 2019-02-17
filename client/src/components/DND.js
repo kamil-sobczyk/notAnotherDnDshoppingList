@@ -12,12 +12,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import { reorder, move } from "./data/moveFunctions";
 
-import {
-  getItems,
-  getSelected,
-  changeSelected,
-  changeItems
-} from "./data/fetchFunctions";
+import { changeSelected, changeItems } from "./data/fetchFunctions";
 
 const styles = theme => ({
   lists: {
@@ -55,7 +50,6 @@ class Lists extends Component {
   getList = id => this.state[this.id2List[id]];
 
   onDragEnd = result => {
-    console.log("result", result);
     const { source, destination } = result;
 
     if (!destination) {
@@ -104,12 +98,8 @@ class Lists extends Component {
 }
 Lists.propTypes = {
   classes: PropTypes.object.isRequired,
-  openInfo: PropTypes.bool,
-  openDelete: PropTypes.bool,
-  handleOpenInfo: PropTypes.func,
-  handleCheckItem: PropTypes.func,
   getItems: PropTypes.func,
-  handleEditItem: PropTypes.func
+  getSelected: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -118,16 +108,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: index =>
-      dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
-    handleOpenEdit: index =>
-      dispatch({ type: "SHOW_EDIT_DIALOG", index: index }),
-    handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
-    handleOpenDelete: index =>
-      dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
-    handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
-    handleEditSelected: selected =>
-      dispatch({ type: "EDIT_SELECTED", selected: selected }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected })

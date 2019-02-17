@@ -55,7 +55,6 @@ const appRouter = app => {
     res.status(200).send("Application API");
   });
   app.get("/store", (req, res) => {
-    console.log( 'store', store)
     res.status(200).send(store);
   });
 
@@ -64,20 +63,14 @@ const appRouter = app => {
   });
   app.put("/store/selected", (req, res) => {
     store.selected = req.body;
-    console.log("store selcted puT", req.body)
     res.status(200).json(store.selected);
   });
-  // app.put("/store/", (req, res) => {
-  //   store.selected = (req.body);
-  //   res.status(200).json(req.body);
-  // });
   app.post("/store/items", (req, res) => {
     store.items.push(req.body);
     res.status(200).send(store.items);
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;
-    console.log('store items put', store);
     res.status(200).send(store.items);
   });
   app.delete("/store/list", (req, res) => {
