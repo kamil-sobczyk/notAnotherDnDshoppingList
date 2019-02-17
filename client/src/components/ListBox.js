@@ -7,7 +7,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 import ListsContainer from "./listsContainer";
-import InfoDialog from "./dialogs/infoDialog";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
 import DeleteDialog from "./dialogs/deleteDialog";
@@ -26,7 +25,6 @@ class ListBox extends Component {
     return (
       <div className={classes.lists}>
         <ListsContainer />
-        <InfoDialog />
         <AddDialog />
         <EditDialog />
         <DeleteDialog />
@@ -44,10 +42,6 @@ ListBox.propTypes = {
   openInfo: PropTypes.bool
 };
 
-const mapStateToProps = state => {
-  return { openInfo: state.openInfo };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" })
@@ -55,6 +49,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(withStyles(styles)(ListBox));
