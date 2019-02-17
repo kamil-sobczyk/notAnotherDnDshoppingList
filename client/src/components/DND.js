@@ -12,7 +12,12 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import { reorder, move } from "./data/moveFunctions";
 
-import { getItems, getSelected, changeSelected, changeItems } from "./data/fetchFunctions";
+import {
+  getItems,
+  getSelected,
+  changeSelected,
+  changeItems
+} from "./data/fetchFunctions";
 
 const styles = theme => ({
   root: {
@@ -66,7 +71,10 @@ class Lists extends Component {
   }
 
   componentWillReceiveProps = newProps => {
-    if (newProps.items !== this.props.items || newProps.selected !== this.props.selected) {
+    if (
+      newProps.items !== this.props.items ||
+      newProps.selected !== this.props.selected
+    ) {
       this.setState({ items: newProps.items, selected: newProps.selected });
     }
   };
@@ -124,17 +132,12 @@ class Lists extends Component {
         destination.index
       );
 
-      console.log("items", items);
-
-      let state = { items };
-
-      if (source.droppableId === "droppable2") {
-        state = { selected: items };
-      }
-
-      if(JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) !== -1) {
+      if (
+        JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) !==
+        -1
+      ) {
         changeItems(this.props.getItems, items);
-      }else {
+      } else {
         changeSelected(this.props.getSelected, items);
       }
     } else {
@@ -145,25 +148,9 @@ class Lists extends Component {
         destination
       );
 
-      console.log("result", result);
-
-    //   fetch("/store/selected", {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-type": "application/json"
-    //     },
-    //     mode: "cors",
-    //     body: JSON.stringify(result)
-    //   })
-    //     .then(response => {
-    //       return response.json();
-    //     })
-    //     .then(items => {
-    //       return this.props.getSelected(items);
-    //     })
-    //   .catch(error => console.log("Ooops", error));
+      changeItems(this.props.getItems, result.droppable);
+      changeSelected(this.props.getSelected, result.droppable2);
     }
-   
   };
   render() {
     const { classes } = this.props;
