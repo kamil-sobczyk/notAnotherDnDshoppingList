@@ -107,11 +107,22 @@ class Lists extends Component {
     droppable2: "selected"
   };
 
-  getList = id => this.state[this.id2List[id]];
+  getList = id => this.list[this.id2List[id]];
+
+  list = {
+    items: getItems(this.props.getItems),
+    selected: getSelected(this.props.getSelected)
+  }
+ 
+
 
   onDragEnd = result => {
     console.log("result", result);
     const { source, destination } = result;
+
+    console.log('source', source)
+    console.log('dest', destination)
+    console.log('result', result)
 
     if (!destination) {
       return;
@@ -156,6 +167,7 @@ class Lists extends Component {
         source,
         destination
       );
+      console.log('result else', result)
 
       console.log("result", result);
 

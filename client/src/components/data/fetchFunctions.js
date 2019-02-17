@@ -23,4 +23,22 @@ const getSelected = dispatch => {
     });
 };
 
-export { getItems, getSelected };
+const changeSelected = (dispatch, body) => {
+    fetch("/store/selected/", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json"
+        },
+        mode: "cors",
+        body: JSON.stringify(body)
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(selected => {
+          return dispatch(selected);
+        })
+        .catch(error => console.log("Ooops", error));
+}
+
+export { getItems, getSelected, changeSelected };
