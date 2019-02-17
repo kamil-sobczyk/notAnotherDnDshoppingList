@@ -58,4 +58,23 @@ const changeSelected = (dispatch, body) => {
         .catch(error => console.log("Ooops", error));
 }
 
-export { getItems, getSelected, changeSelected, changeItems };
+const addNewItem = (dispatch, body) => {
+  fetch("/store/items", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(body)
+  })
+    .then(response => {
+      console.log('response', response)
+      return response.json();
+    })
+    .then(item => {
+      console.log('item', item)
+      return dispatch(item);
+    })
+    .catch(error => console.log("Ooops", error));
+}
+export { getItems, getSelected, changeSelected, changeItems, addNewItem };

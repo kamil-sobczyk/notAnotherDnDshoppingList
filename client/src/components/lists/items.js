@@ -34,8 +34,11 @@ class Items extends Component {
   componentWillMount = () => {
     getItems(this.props.getItems);
   };
+
   render() {
     const { classes, items } = this.props;
+
+    console.log('items in ITEMS', items);
 
     return (
       <Droppable droppableId="droppable" >

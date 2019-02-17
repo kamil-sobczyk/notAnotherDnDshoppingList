@@ -10,6 +10,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
+import { addNewItem } from '../data/fetchFunctions';
+
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
@@ -25,23 +27,9 @@ class AddDialog extends Component {
   handleAddItem = () => {
     const { handleAddNewItem, handleOpenAdd } = this.props;
 
-    fetch("/store/list", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      mode: "cors",
-      body: JSON.stringify(this.state)
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(state => {
-        return state;
-      })
-      .catch(error => console.log("Ooops", error));
-
-    handleAddNewItem(this.state);
+    addNewItem(handleAddNewItem, this.state);
+   
+    // handleAddNewItem( this.state);
     handleOpenAdd();
     this.setState({ name: "", info: "" });
   };

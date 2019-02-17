@@ -3,49 +3,49 @@ const store = {
     {
       name: "111111",
       info: "Buy in Lidl",
-      id: "item-0"
+      id: "0"
     },
     {
       name: "milkAPI",
       info: "",
-      id: "item-1"
+      id: "1"
     },
     {
       name: "potatoesAPI",
       info: "Buy in Tesco",
-      id: "item-2"
+      id: "2"
     },
     {
       name: "beerAPI",
       info: "",
-      id: "item-3"
+      id: "3"
     },
     {
       name: "newBeerAPI",
       info: "damian",
-      id: "item-4"
+      id: "4"
     }
   ],
   selected: [
     {
       name: "AAAAAAAA",
       info: "Buy in Tesco",
-      id: "item-5"
+      id: "5"
     },
     {
       name: "pot selected",
       info: "Buy in Tesco",
-      id: "item-6"
+      id: "6"
     },
     {
       name: "p selected",
       info: "Buy in Tesco",
-      id: "item-7"
+      id: "7"
     },
     {
       name: "API selecteed",
       info: "Buy in Tesco",
-      id: "item-8"
+      id: "8"
     }
   ]
 };
@@ -66,8 +66,8 @@ const appRouter = app => {
     res.status(200).json(store.selected);
   });
   app.post("/store/items", (req, res) => {
-    store.items.push(req.body);
-    res.status(200).send(store.items);
+    console.log('req.body', req.body)
+    res.status(200).send(req.body);
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;
