@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
-import { getItems } from "../data/fetchFunctions";
+import { getItems } from "../functions/fetchFunctions";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -96,12 +96,10 @@ class Items extends Component {
 
 Items.propTypes = {
   classes: PropTypes.object.isRequired,
-  openInfo: PropTypes.bool,
   openDelete: PropTypes.bool,
-  handleOpenInfo: PropTypes.func,
-  handleCheckItem: PropTypes.func,
   getItems: PropTypes.func,
-  handleEditItem: PropTypes.func
+  handleOpenDelete: PropTypes.func,
+  handleOpenEdit: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -110,25 +108,19 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenInfo: index =>
-      dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
     handleOpenEdit: activeItem =>
       dispatch({
         type: "SHOW_EDIT_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),
-    handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
     handleOpenDelete: activeItem =>
       dispatch({
         type: "SHOW_DELETE_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),
-    handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    getSelected: selected =>
-      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 

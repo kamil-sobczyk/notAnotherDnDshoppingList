@@ -12,15 +12,13 @@ import DeleteDialog from "./dialogs/deleteDialog";
 
 class ListBox extends Component {
   render() {
-    const { handleOpenAdd } = this.props;
-
     return (
       <>
         <ListsContainer />
         <AddDialog />
         <EditDialog />
         <DeleteDialog />
-        <Button color="primary" onClick={handleOpenAdd}>
+        <Button color="primary" onClick={this.props.handleOpenAdd}>
           Add new item
         </Button>
       </>

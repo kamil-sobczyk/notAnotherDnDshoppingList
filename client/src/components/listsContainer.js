@@ -10,9 +10,9 @@ import Selected from "./lists/selected";
 
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { reorder, move } from "./data/moveFunctions";
+import { reorder, move } from "./functions/moveFunctions";
 
-import { changeSelected, changeItems } from "./data/fetchFunctions";
+import { changeSelected, changeItems } from "./functions/fetchFunctions";
 
 const styles = theme => ({
   lists: {

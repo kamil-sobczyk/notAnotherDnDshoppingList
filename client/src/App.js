@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
-import ListBox from "./components/ListBox";
+import ListBox from "./components/listBox";
 
 const styles = theme => ({
   root: {

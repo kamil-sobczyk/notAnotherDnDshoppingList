@@ -10,7 +10,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { deleteItems } from "../data/fetchFunctions";
+import { deleteItems } from "../functions/fetchFunctions";
 
 class DeleteDialog extends React.Component {
   handleDeleteItem = activeItem => {
