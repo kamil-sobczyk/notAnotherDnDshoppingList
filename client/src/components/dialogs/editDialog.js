@@ -55,7 +55,7 @@ class EditDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openEdit, activeItem, handleOpenEdit } = this.props;
+    const { classes, openEdit, activeItem, handleOpenEdit, store } = this.props;
 
     return (
       <Dialog open={openEdit} >
@@ -64,7 +64,7 @@ class EditDialog extends Component {
           required
           id="outlined-required"
           label="Edit name"
-          // placeholder={!items[activeItem.list][activeItem.index] ? " " : items[activeItem.list][activeItem.index].name}
+          placeholder={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -73,7 +73,7 @@ class EditDialog extends Component {
         <TextField
           id="outlined"
           label="Edit info"
-          // placeholder={!items[activeItem.list][activeItem.index] ? " " : items[activeItem.list][activeItem.index].info}
+          placeholder={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -103,19 +103,17 @@ class EditDialog extends Component {
 
 EditDialog.propTypes = {
   classes: PropTypes.object.isRequired,
-  openAdd: PropTypes.bool,
+  handleOpenEdit: PropTypes.func,
   openEdit: PropTypes.bool,
-  handleOpenAdd: PropTypes.func,
   handleEditItem: PropTypes.func,
-  items: PropTypes.array,
-  activeItem: PropTypes.object
+  activeItem: PropTypes.object,
+  store: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
-    openAdd: state.openAdd,
+    store: state,
     openEdit: state.openEdit,
-    items: state.items,
     activeItem: state.activeItem
   };
 };
