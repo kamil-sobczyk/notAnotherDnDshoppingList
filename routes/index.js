@@ -85,12 +85,12 @@ const appRouter = app => {
     store.items = req.body;
     res.status(200).send(store.items);
   });
-  app.delete("/store/list", (req, res) => {
-    store[req.body.activeInfo[0]] = [
-      ...store[req.body,activeInfo[0]].slice(0, req.body.activeInfo[1]),
-      ...store.list.slice(req.body.activeInfo[1] + 1)
+  app.delete("/store", (req, res) => {
+    store[req.body.list] = [
+      ...store[req.body.list].slice(0, req.body.index),
+      ...store[req.body.list].slice(req.body.index + 1)
     ];
-    res.status(200).send(store.list);
+    res.status(200).send(store);
   });
 };
 

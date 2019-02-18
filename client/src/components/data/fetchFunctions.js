@@ -76,8 +76,8 @@ const addNewItem = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 }
 
-const deleteItem = (dispatch, activeItem) => {
-  fetch("/store/list/", {
+const deleteItems = (dispatch, activeItem) => {
+  fetch("/store/", {
     method: "DELETE",
     headers: {
       "Content-type": "application/json"
@@ -89,8 +89,8 @@ const deleteItem = (dispatch, activeItem) => {
       return response.json();
     })
     .then(state => {
-      return dispatch(state);
+      return state;
     })
     .catch(error => console.log("Ooops", error));
 }
-export { getItems, getSelected, changeSelected, changeItems, addNewItem };
+export { getItems, getSelected, changeSelected, changeItems, addNewItem, deleteItems };

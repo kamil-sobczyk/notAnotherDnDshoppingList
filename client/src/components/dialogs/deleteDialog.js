@@ -10,15 +10,16 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { deleteItem } from '../data/fetchFunctions';
+import { deleteItems } from "../data/fetchFunctions";
 
 class DeleteDialog extends React.Component {
   handleDeleteItem = activeItem => {
- 
-    this.props.handleDeleteItem(this.props.activeItem);
+    const { handleDeleteItem, handleOpenDelete } = this.props;
 
+    handleDeleteItem(activeItem);
+    deleteItems(null, activeItem);
 
-      this.props.handleOpenDelete({list: "items", index: 0});
+    handleOpenDelete({ list: "items", index: 0 });
   };
   handleOpenDelete = i => {
     this.props.handleOpenDelete(i);
@@ -27,12 +28,14 @@ class DeleteDialog extends React.Component {
   render() {
     const { openDelete, handleOpenDelete, store, activeItem } = this.props;
 
-    const active = store[activeItem.list][activeItem.index] ? store[activeItem.list][activeItem.index].name : "";
+    const active = store[activeItem.list][activeItem.index]
+      ? store[activeItem.list][activeItem.index].name
+      : "";
 
-    console.log('store', store)
+    console.log("store", store);
 
-    console.log('activeItem', activeItem)
-    console.log('active', active)
+    console.log("activeItem", activeItem);
+    console.log("active", active);
 
     return (
       <Dialog
@@ -50,7 +53,10 @@ class DeleteDialog extends React.Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOpenDelete.bind(this, {list: "items", index: 0})} color="primary">
+          <Button
+            onClick={handleOpenDelete.bind(this, { list: "items", index: 0 })}
+            color="primary"
+          >
             No
           </Button>
           <Button
@@ -85,8 +91,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleOpenDelete: activeItem =>
-      dispatch({ type: "SHOW_DELETE_DIALOG", index: activeItem.index, list: activeItem.list }),
-    handleDeleteItem: activeItem => dispatch({ type: "DELETE_ITEM", list: activeItem.list, index: activeItem.index })
+      dispatch({
+        type: "SHOW_DELETE_DIALOG",
+        index: activeItem.index,
+        list: activeItem.list
+      }),
+    handleDeleteItem: activeItem =>
+      dispatch({
+        type: "DELETE_ITEM",
+        list: activeItem.list,
+        index: activeItem.index
+      })
   };
 };
 
