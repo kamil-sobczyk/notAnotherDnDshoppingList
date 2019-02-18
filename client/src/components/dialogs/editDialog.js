@@ -59,7 +59,6 @@ class EditDialog extends Component {
           required
           id="outlined-required"
           label="Type new name"
-          placeholder={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].name}
           defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].name}
           className={classes.textField}
           margin="normal"
@@ -69,7 +68,6 @@ class EditDialog extends Component {
         <TextField
           id="outlined"
           label="Type new info"
-          placeholder={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
           defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
           className={classes.textField}
           margin="normal"
