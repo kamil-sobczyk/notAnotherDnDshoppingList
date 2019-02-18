@@ -85,6 +85,14 @@ const appRouter = app => {
     store.items = req.body;
     res.status(200).send(store.items);
   });
+  app.put("/store", (req, res) => {
+    let newItem = req.body.newItem;
+    let activeItem = req.body.activeItem;
+    newItem.id = newID;
+    newID = String(parseInt(newID) - 1);
+    store[activeItem.list][activeItem.index] = newItem;
+    res.status(200).send(store);
+  });
   app.delete("/store", (req, res) => {
     store[req.body.list] = [
       ...store[req.body.list].slice(0, req.body.index),

@@ -93,11 +93,31 @@ const deleteItems = (dispatch, activeItem) => {
     })
     .catch(error => console.log("Ooops", error));
 };
+
+const editItem = (newItem, activeItem) => {
+  fetch("/store/", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify({activeItem: activeItem, newItem: newItem})
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(state => {
+      return state;
+    })
+    .catch(error => console.log("Ooops", error));
+};
+
 export {
   getItems,
   getSelected,
   changeSelected,
   changeItems,
   addNewItem,
-  deleteItems
+  deleteItems,
+  editItem
 };

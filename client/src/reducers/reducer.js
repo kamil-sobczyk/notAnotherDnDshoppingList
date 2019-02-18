@@ -23,7 +23,7 @@ const reducer = (state, action) => {
       newList.push(newItem);
       return { ...state, items: newList };
     case "DELETE_ITEM":
-      const newState = state;
+      let newState = state;
       newState[action.list] = [
         ...state[action.list].slice(0, action.index),
         ...state[action.list].slice(action.index + 1)
@@ -33,9 +33,16 @@ const reducer = (state, action) => {
         newState
       };
     case "EDIT_ITEM":
-      newList = state.list;
-      newList[action.index] = action.newItem;
-      return { ...state, list: newList };
+    console.log("reducer edit item")
+    console.log("reducer newItem", action.newItem)
+    console.log("reducer list", action.list)
+    console.log("reducer index", action.index)
+    newState = state;
+      newState[action.list][action.index].name = action.newItem.name;
+      newState[action.list][action.index].info = action.newItem.info;
+    console.log("reducer newState", newState);
+
+      return { ...state, newState };
     case "GET_ITEMS":
       return { ...state, items: action.items };
     case "GET_SELECTED":

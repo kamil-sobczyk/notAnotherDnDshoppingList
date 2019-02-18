@@ -10,6 +10,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
+import { editItem } from "../data/fetchFunctions";
+
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
@@ -22,27 +24,16 @@ class EditDialog extends Component {
     name: "",
     info: ""
   };
-  handleCloseEdit = i => {
+  handleCloseEdit = activeItem => {
     const { handleEditItem, handleOpenEdit } = this.props;
 
-    handleEditItem(this.state, i);
-    handleOpenEdit();
+    console.log('handleClose activeItem', activeItem)
 
-    fetch("/store/list/", {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json"
-      },
-      mode: "cors",
-      body: JSON.stringify( { newItem: this.state, index: i } )
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(state => {
-        return state;
-      })
-      .catch(error => console.log("Ooops", error));
+    editItem(this.state, activeItem)
+    handleEditItem(this.state, activeItem);
+
+
+    handleOpenEdit(activeItem);
 
     this.setState({ name: "", info: "" });
   };
@@ -126,8 +117,8 @@ const mapDispatchToProps = dispatch => {
         index: activeItem.index,
         list: activeItem.list
       }),
-    handleEditItem: (newItem, index) =>
-      dispatch({ type: "EDIT_ITEM", newItem: newItem, index: index })
+    handleEditItem: (newItem, activeItem) =>
+      dispatch({ type: "EDIT_ITEM", newItem: newItem, index: activeItem.index, list: activeItem.list })
   };
 };
 
