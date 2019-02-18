@@ -30,7 +30,6 @@ class EditDialog extends Component {
 
     const newState = this.state;
     newState.name === "" ? newState.name = store[activeItem.list][activeItem.index].name : newState.name = this.state.name;
-    newState.info === "" ? newState.info = store[activeItem.list][activeItem.index].info : newState.info = this.state.info;
 
     editItem(newState, activeItem)
     handleEditItem(newState, activeItem);
