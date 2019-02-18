@@ -20,7 +20,8 @@ import { getSelected } from "../functions/fetchFunctions";
 const styles = theme => ({
   list: {
     width: "45%",
-    maxWidth: 400
+    maxWidth: 400,
+    margin: "5px"
   },
   deleteHover: {
     color: theme.palette.primary.main,

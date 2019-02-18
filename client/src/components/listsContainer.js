@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 
 import Items from "./lists/items";
 import Selected from "./lists/selected";
@@ -82,15 +81,12 @@ class ListsContainer extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, display } = this.props;
     return (
       <div className={classes.lists}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Items />
+        {display ?  <Items /> : false}
           <Selected />
-          <Button color="primary" onClick={this.props.handleOpenAdd}>
-          Add new item
-        </Button>
         </DragDropContext>
       </div>
     );
@@ -103,7 +99,7 @@ ListsContainer.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { items: state.items, store: state, selected: state.selected };
+  return { items: state.items, store: state, selected: state.selected, display: state.showItems };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -111,7 +107,6 @@ const mapDispatchToProps = dispatch => {
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected }),
-      handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" })
   };
 };
 

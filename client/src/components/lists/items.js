@@ -12,6 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
+import Button from "@material-ui/core/Button";
 
 import { getItems } from "../functions/fetchFunctions";
 
@@ -20,7 +21,8 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 const styles = theme => ({
   list: {
     width: "45%",
-    maxWidth: 400
+    maxWidth: 400,
+    margin: "5px"
   },
   deleteHover: {
     color: theme.palette.primary.main,
@@ -61,7 +63,8 @@ class Items extends Component {
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
-                        <IconButton className={classes.editHover}
+                        <IconButton
+                          className={classes.editHover}
                           aria-label="Edit item"
                           onClick={handleOpenEdit.bind(this, {
                             list: "items",
@@ -87,6 +90,9 @@ class Items extends Component {
               </Draggable>
             ))}
             {provided.placeholder}
+            <Button color="primary" onClick={this.props.handleOpenAdd}>
+              Add new item
+            </Button>
           </div>
         )}
       </Droppable>
@@ -99,7 +105,8 @@ Items.propTypes = {
   openDelete: PropTypes.bool,
   getItems: PropTypes.func,
   handleOpenDelete: PropTypes.func,
-  handleOpenEdit: PropTypes.func
+  handleOpenEdit: PropTypes.func,
+  handleOpenAdd: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -121,6 +128,7 @@ const mapDispatchToProps = dispatch => {
         list: activeItem.list
       }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
+    handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" })
   };
 };
 

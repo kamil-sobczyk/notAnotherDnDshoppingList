@@ -16,7 +16,8 @@ const store = createStore(reducer, {
   },
   openAdd: false,
   openEdit: false,
-  openDelete: false
+  openDelete: false,
+  showItems: true
 });
 
 ReactDOM.render(

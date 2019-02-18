@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import ViewButton from "./viewButton";
 import ListsContainer from "./listsContainer";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
@@ -9,6 +10,7 @@ class ListBox extends Component {
   render() {
     return (
       <>
+        <ViewButton />
         <ListsContainer />
         <AddDialog />
         <EditDialog />

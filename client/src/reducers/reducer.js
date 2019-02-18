@@ -1,5 +1,7 @@
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SHOW_ITEMS":
+    return {...state, showItems: state.showItems ? false : true}
     case "SHOW_ADD_DIALOG":
       return { ...state, openAdd: state.openAdd ? false : true };
     case "SHOW_DELETE_DIALOG":
