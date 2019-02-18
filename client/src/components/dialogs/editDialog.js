@@ -55,7 +55,7 @@ class EditDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openEdit, activeItem, items, handleOpenEdit } = this.props;
+    const { classes, openEdit, activeItem, handleOpenEdit } = this.props;
 
     return (
       <Dialog open={openEdit} >
@@ -82,7 +82,10 @@ class EditDialog extends Component {
         <DialogActions>
           <Button
             color="primary"
-            onClick={handleOpenEdit}
+            onClick={handleOpenEdit.bind(this, {
+              list: "items",
+              index: 0
+            })}
           >
             Cancel
           </Button>
@@ -119,8 +122,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenEdit: () => dispatch({ type: "SHOW_EDIT_DIALOG" }),
-    handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" }),
+    handleOpenEdit: activeItem =>
+      dispatch({
+        type: "SHOW_EDIT_DIALOG",
+        index: activeItem.index,
+        list: activeItem.list
+      }),
     handleEditItem: (newItem, index) =>
       dispatch({ type: "EDIT_ITEM", newItem: newItem, index: index })
   };
