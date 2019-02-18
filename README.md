@@ -1,6 +1,6 @@
 ## Shopping List
 
-## Web app build with Node, Express React, Redux, Material UI.
+## Web app build with ReactJS, Redux, NodeJS Express, Material UI.
 
 ### This is not another clone app made with internet course. Application were made from scratch, for personal usage.
 
