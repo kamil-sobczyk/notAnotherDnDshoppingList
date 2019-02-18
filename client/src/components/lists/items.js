@@ -38,8 +38,6 @@ class Items extends Component {
   render() {
     const { classes, items } = this.props;
 
-    console.log('items in ITEMS', items);
-
     return (
       <Droppable droppableId="droppable" >
         {provided => (

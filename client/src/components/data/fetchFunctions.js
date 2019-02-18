@@ -60,7 +60,7 @@ const changeSelected = (dispatch, body) => {
 
 const addNewItem = (dispatch, body) => {
   fetch("/store/items", {
-    method: "PUT",
+    method: "POST",
     headers: {
       "Content-type": "application/json"
     },

@@ -50,7 +50,11 @@ const store = {
   ]
 };
 
+
+
+
 const appRouter = app => {
+  let newID = "9999";
   app.get("/", function(req, res) {
     res.status(200).send("Application API");
   });
@@ -66,8 +70,12 @@ const appRouter = app => {
     res.status(200).json(store.selected);
   });
   app.post("/store/items", (req, res) => {
-    console.log('req.body', req.body)
-    res.status(200).send(req.body);
+    let newItem = req.body;
+    newItem.id = newID;
+    newID = String(parseInt(newID) - 1);
+    store.items.push(newItem);
+    res.status(200).json(newItem);
+
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;

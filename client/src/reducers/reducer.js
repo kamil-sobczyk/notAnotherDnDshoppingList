@@ -1,5 +1,3 @@
-let newID = "99";
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "SHOW_INFO_DIALOG":
@@ -28,10 +26,10 @@ const reducer = (state, action) => {
       let newList = state.items;
       let newItem = action.newItem;
       console.log('newitem before', newItem)
-      newItem.id = newID;
+
       newList.push(newItem);
       console.log('newList', newList)
-      newID = String(parseInt(newID) - 1);
+  
       return {...state, items: newList} ;
     case "DELETE_ITEM":
       newList = [
