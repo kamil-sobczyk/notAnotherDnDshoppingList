@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 import Items from "./lists/items";
 import Selected from "./lists/selected";
@@ -11,7 +12,6 @@ import Selected from "./lists/selected";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import { reorder, move } from "./functions/moveFunctions";
-
 import { changeSelected, changeItems } from "./functions/fetchFunctions";
 
 const styles = theme => ({
@@ -88,6 +88,9 @@ class ListsContainer extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Items />
           <Selected />
+          <Button color="primary" onClick={this.props.handleOpenAdd}>
+          Add new item
+        </Button>
         </DragDropContext>
       </div>
     );
@@ -107,7 +110,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>
-      dispatch({ type: "GET_SELECTED", selected: selected })
+      dispatch({ type: "GET_SELECTED", selected: selected }),
+      handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" })
   };
 };
 
