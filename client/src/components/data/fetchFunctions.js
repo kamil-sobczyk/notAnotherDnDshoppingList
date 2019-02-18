@@ -23,7 +23,7 @@ const getSelected = dispatch => {
     });
 };
 
-const changeItems = (dispatch, body) =>{
+const changeItems = (dispatch, body) => {
   fetch("/store/items", {
     method: "PUT",
     headers: {
@@ -38,25 +38,25 @@ const changeItems = (dispatch, body) =>{
     .then(items => {
       return dispatch(items);
     })
-  .catch(error => console.log("Ooops", error));
-}
+    .catch(error => console.log("Ooops", error));
+};
 const changeSelected = (dispatch, body) => {
-    fetch("/store/selected/", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json"
-        },
-        mode: "cors",
-        body: JSON.stringify(body)
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(selected => {
-          return dispatch(selected);
-        })
-        .catch(error => console.log("Ooops", error));
-}
+  fetch("/store/selected/", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(body)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(selected => {
+      return dispatch(selected);
+    })
+    .catch(error => console.log("Ooops", error));
+};
 
 const addNewItem = (dispatch, body) => {
   fetch("/store/items", {
@@ -74,7 +74,7 @@ const addNewItem = (dispatch, body) => {
       return dispatch(item);
     })
     .catch(error => console.log("Ooops", error));
-}
+};
 
 const deleteItems = (dispatch, activeItem) => {
   fetch("/store/", {
@@ -92,5 +92,12 @@ const deleteItems = (dispatch, activeItem) => {
       return state;
     })
     .catch(error => console.log("Ooops", error));
-}
-export { getItems, getSelected, changeSelected, changeItems, addNewItem, deleteItems };
+};
+export {
+  getItems,
+  getSelected,
+  changeSelected,
+  changeItems,
+  addNewItem,
+  deleteItems
+};

@@ -31,12 +31,6 @@ class DeleteDialog extends React.Component {
     const active = store[activeItem.list][activeItem.index]
       ? store[activeItem.list][activeItem.index].name
       : "";
-
-    console.log("store", store);
-
-    console.log("activeItem", activeItem);
-    console.log("active", active);
-
     return (
       <Dialog
         open={openDelete}

@@ -28,6 +28,11 @@ const styles = theme => ({
       color: "red"
     }
   },
+  editHover: {
+    "&:hover": {
+      color: theme.palette.primary.main
+    }
+  }
 });
 
 class Selected extends Component {
@@ -35,7 +40,7 @@ class Selected extends Component {
     getSelected(this.props.getSelected);
   };
   render() {
-    const { classes, selected, handleOpenDelete } = this.props;
+    const { classes, selected, handleOpenDelete, handleOpenEdit } = this.props;
 
     return (
       <Droppable droppableId="droppable2">
@@ -61,11 +66,14 @@ class Selected extends Component {
                     >
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
-                        <IconButton
+                        <IconButton className={classes.editHover}
                           aria-label="Edit item"
-                          // onClick={() => this.handleOpenEdit(index)}
+                          onClick={handleOpenEdit.bind(this, {
+                            list: "selected",
+                            index: index
+                          })}
                         >
-                          <EditIcon className={classes.infoHover} />
+                          <EditIcon />
                         </IconButton>
                         <IconButton
                           aria-label="Delete item"
@@ -106,8 +114,12 @@ const mapDispatchToProps = dispatch => {
   return {
     handleOpenInfo: index =>
       dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
-    handleOpenEdit: index =>
-      dispatch({ type: "SHOW_EDIT_DIALOG", index: index }),
+      handleOpenEdit: activeItem =>
+      dispatch({
+        type: "SHOW_EDIT_DIALOG",
+        index: activeItem.index,
+        list: activeItem.list
+      }),
     handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
     handleOpenDelete: activeInfo =>
     dispatch({ type: "SHOW_DELETE_DIALOG", index: activeInfo.index, list: activeInfo.list }),

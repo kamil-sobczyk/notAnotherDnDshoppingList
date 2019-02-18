@@ -27,6 +27,11 @@ const styles = theme => ({
     "&:hover": {
       color: "red"
     }
+  },
+  editHover: {
+    "&:hover": {
+      color: theme.palette.primary.main
+    }
   }
 });
 
@@ -36,10 +41,10 @@ class Items extends Component {
   };
 
   render() {
-    const { classes, items, handleOpenDelete } = this.props;
+    const { classes, items, handleOpenDelete, handleOpenEdit } = this.props;
 
     return (
-      <Droppable droppableId="droppable" >
+      <Droppable droppableId="droppable">
         {provided => (
           <div ref={provided.innerRef} className={classes.list}>
             <Typography variant="h6" gutterBottom>
@@ -53,23 +58,24 @@ class Items extends Component {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <ListItem
-                      key={index}
-                      role={undefined}
-                      dense
-                      button
-                    >
+                    <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
-                        <IconButton
+                        <IconButton className={classes.editHover}
                           aria-label="Edit item"
-                          // onClick={() => this.handleOpenEdit(index)}
+                          onClick={handleOpenEdit.bind(this, {
+                            list: "items",
+                            index: index
+                          })}
                         >
-                          <EditIcon className={classes.infoHover} />
+                          <EditIcon />
                         </IconButton>
                         <IconButton
                           aria-label="Delete item"
-                          onClick={handleOpenDelete.bind(this, {list: "items", index: index})}
+                          onClick={handleOpenDelete.bind(this, {
+                            list: "items",
+                            index: index
+                          })}
                         >
                           <DeleteIcon className={classes.deleteHover} />
                         </IconButton>
@@ -106,11 +112,19 @@ const mapDispatchToProps = dispatch => {
   return {
     handleOpenInfo: index =>
       dispatch({ type: "SHOW_INFO_DIALOG", index: index }),
-    handleOpenEdit: index =>
-      dispatch({ type: "SHOW_EDIT_DIALOG", index: index }),
+    handleOpenEdit: activeItem =>
+      dispatch({
+        type: "SHOW_EDIT_DIALOG",
+        index: activeItem.index,
+        list: activeItem.list
+      }),
     handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
-    handleOpenDelete: activeInfo =>
-      dispatch({ type: "SHOW_DELETE_DIALOG", index: activeInfo.index, list: activeInfo.list }),
+    handleOpenDelete: activeItem =>
+      dispatch({
+        type: "SHOW_DELETE_DIALOG",
+        index: activeItem.index,
+        list: activeItem.list
+      }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>

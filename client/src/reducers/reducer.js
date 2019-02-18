@@ -10,12 +10,11 @@ const reducer = (state, action) => {
         activeItem: { list: action.list, index: action.index }
       };
     case "SHOW_EDIT_DIALOG":
-      action.index ? (index = action.index) : (index = 0);
-      return {
-        ...state,
-        openEdit: state.openEdit ? false : true,
-        activeItem: index
-      };
+    return {
+      ...state,
+      openEdit: state.openEdit ? false : true,
+      activeItem: { list: action.list, index: action.index }
+    };
     case "EDIT_SELECTED":
       return { ...state, selected: action.selected };
     case "ADD_ITEM":
