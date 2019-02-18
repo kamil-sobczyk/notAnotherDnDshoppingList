@@ -36,7 +36,7 @@ class Items extends Component {
   };
 
   render() {
-    const { classes, items } = this.props;
+    const { classes, items, handleOpenDelete } = this.props;
 
     return (
       <Droppable droppableId="droppable" >
@@ -58,7 +58,6 @@ class Items extends Component {
                       role={undefined}
                       dense
                       button
-                      // onClick={this.handleToggle(item)}
                     >
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
@@ -70,7 +69,7 @@ class Items extends Component {
                         </IconButton>
                         <IconButton
                           aria-label="Delete item"
-                          // onClick={handleOpenDelete.bind(this, index)}
+                          onClick={handleOpenDelete.bind(this, {list: "items", index: index})}
                         >
                           <DeleteIcon className={classes.deleteHover} />
                         </IconButton>
@@ -110,8 +109,8 @@ const mapDispatchToProps = dispatch => {
     handleOpenEdit: index =>
       dispatch({ type: "SHOW_EDIT_DIALOG", index: index }),
     handleCheckItem: value => dispatch({ type: "HANDLE_CHECK", value: value }),
-    handleOpenDelete: index =>
-      dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
+    handleOpenDelete: activeInfo =>
+      dispatch({ type: "SHOW_DELETE_DIALOG", index: activeInfo.index, list: activeInfo.list }),
     handleEditItem: index => dispatch({ type: "EDIT_ITEM", index: index }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>

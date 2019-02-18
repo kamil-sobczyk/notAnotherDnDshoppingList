@@ -55,7 +55,7 @@ class EditDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openEdit, activeInfo, items, handleOpenEdit } = this.props;
+    const { classes, openEdit, activeItem, items, handleOpenEdit } = this.props;
 
     return (
       <Dialog open={openEdit} >
@@ -64,7 +64,7 @@ class EditDialog extends Component {
           required
           id="outlined-required"
           label="Edit name"
-          placeholder={!items[activeInfo] ? " " : items[activeInfo].name}
+          // placeholder={!items[activeItem.list][activeItem.index] ? " " : items[activeItem.list][activeItem.index].name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -73,7 +73,7 @@ class EditDialog extends Component {
         <TextField
           id="outlined"
           label="Edit info"
-          placeholder={!items[activeInfo] ? " " : items[activeInfo].info}
+          // placeholder={!items[activeItem.list][activeItem.index] ? " " : items[activeItem.list][activeItem.index].info}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -88,7 +88,7 @@ class EditDialog extends Component {
           </Button>
           <Button
             color="primary"
-            onClick={this.handleCloseEdit.bind(this, activeInfo)}
+            onClick={this.handleCloseEdit.bind(this, activeItem)}
           >
             Confirm
           </Button>
@@ -105,7 +105,7 @@ EditDialog.propTypes = {
   handleOpenAdd: PropTypes.func,
   handleEditItem: PropTypes.func,
   items: PropTypes.array,
-  activeInfo: PropTypes.number
+  activeItem: PropTypes.object
 };
 
 const mapStateToProps = state => {
@@ -113,7 +113,7 @@ const mapStateToProps = state => {
     openAdd: state.openAdd,
     openEdit: state.openEdit,
     items: state.items,
-    activeInfo: state.activeInfo
+    activeItem: state.activeItem
   };
 };
 

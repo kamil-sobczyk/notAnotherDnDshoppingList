@@ -10,34 +10,29 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-class DeleteDialog extends React.Component {
-  handleDeleteItem = index => {
-    this.props.handleOpenDelete();
-    this.props.handleDeleteItem(this.props.activeInfo);
+import { deleteItem } from '../data/fetchFunctions';
 
-    fetch("/store/list/", {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json"
-      },
-      mode: "cors",
-      body: JSON.stringify({ index: index })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(state => {
-        return state;
-      })
-      .catch(error => console.log("Ooops", error));
+class DeleteDialog extends React.Component {
+  handleDeleteItem = activeItem => {
+ 
+    this.props.handleDeleteItem(this.props.activeItem);
+
+
+      this.props.handleOpenDelete({list: "items", index: 0});
   };
   handleOpenDelete = i => {
     this.props.handleOpenDelete(i);
   };
   handleClese;
   render() {
-    const { openDelete, handleOpenDelete, items, activeInfo } = this.props;
-    const active = !items[activeInfo] ? "" : items[activeInfo].name;
+    const { openDelete, handleOpenDelete, store, activeItem } = this.props;
+
+    const active = store[activeItem.list][activeItem.index] ? store[activeItem.list][activeItem.index].name : "";
+
+    console.log('store', store)
+
+    console.log('activeItem', activeItem)
+    console.log('active', active)
 
     return (
       <Dialog
@@ -55,11 +50,11 @@ class DeleteDialog extends React.Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOpenDelete.bind(this, null)} color="primary">
+          <Button onClick={handleOpenDelete.bind(this, {list: "items", index: 0})} color="primary">
             No
           </Button>
           <Button
-            onClick={this.handleDeleteItem.bind(this, activeInfo)}
+            onClick={this.handleDeleteItem.bind(this, activeItem)}
             color="primary"
             autoFocus
           >
@@ -76,22 +71,22 @@ DeleteDialog.propTypes = {
   handleOpenDelete: PropTypes.func,
   handleDeleteItem: PropTypes.func,
   list: PropTypes.array,
-  activeInfo: PropTypes.number
+  activeItem: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
     openDelete: state.openDelete,
-    activeInfo: state.activeInfo,
-    items: state.items
+    activeItem: state.activeItem,
+    store: state
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenDelete: index =>
-      dispatch({ type: "SHOW_DELETE_DIALOG", index: index }),
-    handleDeleteItem: index => dispatch({ type: "DELETE_ITEM", index: index })
+    handleOpenDelete: activeItem =>
+      dispatch({ type: "SHOW_DELETE_DIALOG", index: activeItem.index, list: activeItem.list }),
+    handleDeleteItem: activeItem => dispatch({ type: "DELETE_ITEM", list: activeItem.list, index: activeItem.index })
   };
 };
 

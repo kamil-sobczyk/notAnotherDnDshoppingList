@@ -68,12 +68,28 @@ const addNewItem = (dispatch, body) => {
     body: JSON.stringify(body)
   })
     .then(response => {
-      console.log('response', response)
       return response.json();
     })
     .then(item => {
-      console.log('item', item)
       return dispatch(item);
+    })
+    .catch(error => console.log("Ooops", error));
+}
+
+const deleteItem = (dispatch, activeItem) => {
+  fetch("/store/list/", {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(activeItem)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(state => {
+      return dispatch(state);
     })
     .catch(error => console.log("Ooops", error));
 }

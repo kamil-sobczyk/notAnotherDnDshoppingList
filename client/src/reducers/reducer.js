@@ -1,40 +1,28 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SHOW_INFO_DIALOG":
-      let index = 0;
-      action.index ? (index = action.index) : (index = 0);
-      return {
-        ...state,
-        openInfo: state.openInfo ? false : true,
-        activeInfo: index
-      };
     case "SHOW_ADD_DIALOG":
+    let index = 0;
       return { ...state, openAdd: state.openAdd ? false : true };
       case "SHOW_DELETE_DIALOG":
-      action.index ? (index = action.index) : (index = 0);
-      return { ...state, openDelete: state.openDelete ? false : true, activeInfo: index };
+      return { ...state, openDelete: state.openDelete ? false : true, activeItem: {list: action.list, index: action.index}};
     case "SHOW_EDIT_DIALOG":
       action.index ? (index = action.index) : (index = 0);
       return {
         ...state,
         openEdit: state.openEdit ? false : true,
-        activeInfo: index
+        activeItem: index
       };
       case "EDIT_SELECTED":
       return { ...state, selected: action.selected };
     case "ADD_ITEM":
       let newList = state.items;
       let newItem = action.newItem;
-      console.log('newitem before', newItem)
-
       newList.push(newItem);
-      console.log('newList', newList)
-  
-      return {...state, items: newList} ;
+          return {...state, items: newList} ;
     case "DELETE_ITEM":
       newList = [
-        ...state.list.slice(0, action.index),
-        ...state.list.slice(action.index + 1)
+        ...state[action.list].slice(0, action.index),
+        ...state[action.list].slice(action.index + 1)
       ];
       return {
         ...state,

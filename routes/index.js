@@ -47,7 +47,11 @@ const store = {
       info: "Buy in Tesco",
       id: "8"
     }
-  ]
+  ],
+  activeItem: {
+    list: "items",
+    index: 0
+  }
 };
 
 
@@ -82,9 +86,9 @@ const appRouter = app => {
     res.status(200).send(store.items);
   });
   app.delete("/store/list", (req, res) => {
-    store.list = [
-      ...store.list.slice(0, req.body.index),
-      ...store.list.slice(req.body.index + 1)
+    store[req.body.activeInfo[0]] = [
+      ...store[req.body,activeInfo[0]].slice(0, req.body.activeInfo[1]),
+      ...store.list.slice(req.body.activeInfo[1] + 1)
     ];
     res.status(200).send(store.list);
   });
