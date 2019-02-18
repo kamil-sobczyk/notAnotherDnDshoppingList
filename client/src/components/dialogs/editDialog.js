@@ -26,10 +26,14 @@ class EditDialog extends Component {
   };
   
   handleCloseEdit = activeItem => {
-    const { handleEditItem, handleOpenEdit } = this.props;
+    const { handleEditItem, handleOpenEdit, store } = this.props;
 
-    editItem(this.state, activeItem)
-    handleEditItem(this.state, activeItem);
+    const newState = this.state;
+    newState.name === "" ? newState.name = store[activeItem.list][activeItem.index].name : newState.name = this.state.name;
+    newState.info === "" ? newState.info = store[activeItem.list][activeItem.index].info : newState.info = this.state.info;
+
+    editItem(newState, activeItem)
+    handleEditItem(newState, activeItem);
     handleOpenEdit(activeItem);
     this.setState({ name: "", info: "" });
   };
@@ -37,12 +41,12 @@ class EditDialog extends Component {
   changeNewItem = e => {
     const { store, activeItem } = this.props;
 
-    this.setState({ name: e.target.value ? e.target.value : store[activeItem.list][activeItem.index].name });
+    this.setState({ name: e ? e.target.value : store[activeItem.list][activeItem.index].name });
   };
 
   changeNewItemInfo = e => {
     const { store, activeItem } = this.props;
-    this.setState({ info: e.target.value ? e.target.value : store[activeItem.list][activeItem.index].info });
+    this.setState({ info: e ? e.target.value : store[activeItem.list][activeItem.index].info });
   };
 
   render() {
