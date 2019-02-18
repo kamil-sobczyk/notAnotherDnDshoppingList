@@ -6,8 +6,9 @@ import Button from "@material-ui/core/Button";
 
 class ViewButton extends Component {
   state = {
-    text: "SHOW ITEMS TO BUY ONLY"
+    text: "ADD NEW ITEMS TO LIST"
   };
+
   handleClick = () => {
     this.setState({
       text:
@@ -17,6 +18,7 @@ class ViewButton extends Component {
     });
     this.props.showItems();
   };
+  
   render() {
     return (
       <Button color="primary" onClick={this.handleClick}>

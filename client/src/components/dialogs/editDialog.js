@@ -35,11 +35,14 @@ class EditDialog extends Component {
   };
 
   changeNewItem = e => {
-    this.setState({ name: e.target.value });
+    const { store, activeItem } = this.props;
+
+    this.setState({ name: e.target.value ? e.target.value : store[activeItem.list][activeItem.index].name });
   };
 
   changeNewItemInfo = e => {
-    this.setState({ info: e.target.value });
+    const { store, activeItem } = this.props;
+    this.setState({ info: e.target.value ? e.target.value : store[activeItem.list][activeItem.index].info });
   };
 
   render() {
@@ -51,8 +54,9 @@ class EditDialog extends Component {
         <TextField
           required
           id="outlined-required"
-          label="Edit name"
+          label="Type new name"
           placeholder={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].name}
+          defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -60,8 +64,9 @@ class EditDialog extends Component {
         />
         <TextField
           id="outlined"
-          label="Edit info"
+          label="Type new info"
           placeholder={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
+          defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
           className={classes.textField}
           margin="normal"
           variant="outlined"

@@ -85,7 +85,7 @@ class ListsContainer extends Component {
     return (
       <div className={classes.lists}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-        {display ?  <Items /> : false}
+        {display ? <Items /> : false}
           <Selected />
         </DragDropContext>
       </div>

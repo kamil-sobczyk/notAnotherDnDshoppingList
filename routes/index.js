@@ -1,50 +1,50 @@
 const store = {
   items: [
     {
-      name: "111111",
+      name: "Bread",
       info: "Buy in Lidl",
       id: "0"
     },
     {
-      name: "milkAPI",
+      name: "Cola",
       info: "",
       id: "1"
     },
     {
-      name: "potatoesAPI",
+      name: "Milk",
       info: "Buy in Tesco",
       id: "2"
     },
     {
-      name: "beerAPI",
+      name: "Beer",
       info: "",
       id: "3"
     },
     {
-      name: "newBeerAPI",
-      info: "damian",
+      name: "Beef",
+      info: "1kg",
       id: "4"
     }
   ],
   selected: [
     {
-      name: "AAAAAAAA",
-      info: "Buy in Tesco",
+      name: "Ham",
+      info: "In slices",
       id: "5"
     },
     {
-      name: "pot selected",
-      info: "Buy in Tesco",
+      name: "Rice",
+      info: "",
       id: "6"
     },
     {
-      name: "p selected",
+      name: "Potatoes",
       info: "Buy in Tesco",
       id: "7"
     },
     {
-      name: "API selecteed",
-      info: "Buy in Tesco",
+      name: "Aplles",
+      info: "3kg",
       id: "8"
     }
   ],
