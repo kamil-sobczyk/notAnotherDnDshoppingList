@@ -54,18 +54,11 @@ const store = {
   }
 };
 
-
-
-
 const appRouter = app => {
   let newID = "9999";
-  app.get("/", function(req, res) {
-    res.status(200).send("Application API");
-  });
   app.get("/store", (req, res) => {
     res.status(200).send(store);
   });
-
   app.get("/store/selected", (req, res) => {
     res.status(200).send(store.selected);
   });
