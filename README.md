@@ -4,7 +4,10 @@
 
 ### This is not another clone app made with internet course. Application were made from scratch, for personal usage.
 
-#### In development 
+### Preview (in preview main functionalities dont work) :
+http://kamilsobczyk.slask.pl/
+
+#### In development ! 
 
 #### Instalation:
 1. git clone https://github.com/Ogar616/shoppingList.git
@@ -16,5 +19,3 @@
 6. npm install
 7. npm start
 
-Preview: 
-http://kamilsobczyk.slask.pl/

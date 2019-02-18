@@ -34,6 +34,7 @@ class EditDialog extends Component {
     editItem(newState, activeItem)
     handleEditItem(newState, activeItem);
     handleOpenEdit(activeItem);
+    
     this.setState({ name: "", info: "" });
   };
 
