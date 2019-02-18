@@ -14,8 +14,6 @@ const reducer = (state, action) => {
       openEdit: state.openEdit ? false : true,
       activeItem: { list: action.list, index: action.index }
     };
-    case "EDIT_SELECTED":
-      return { ...state, selected: action.selected };
     case "ADD_ITEM":
       let newList = state.items;
       let newItem = action.newItem;
@@ -40,10 +38,6 @@ const reducer = (state, action) => {
       return { ...state, items: action.items };
     case "GET_SELECTED":
       return { ...state, selected: action.selected };
-    case "HANDLE_CHECK":
-      const newChecked = state.checked;
-      newChecked.push(action.value);
-      return { ...state, checked: newChecked };
     default:
       return state;
   }
