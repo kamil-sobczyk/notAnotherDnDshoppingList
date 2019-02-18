@@ -9,12 +9,11 @@ import App from "./App";
 
 const store = createStore(reducer, {
   items: [],
+  selected: [],
   activeItem: {
     list: "items",
     index: 0
   },
-  selected: [],
-  openInfo: false,
   openAdd: false,
   openEdit: false,
   openDelete: false

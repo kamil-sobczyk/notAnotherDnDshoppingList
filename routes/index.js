@@ -72,7 +72,6 @@ const appRouter = app => {
     newID = String(parseInt(newID) - 1);
     store.items.push(newItem);
     res.status(200).json(newItem);
-
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;

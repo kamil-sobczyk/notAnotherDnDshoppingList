@@ -24,6 +24,7 @@ class EditDialog extends Component {
     name: "",
     info: ""
   };
+  
   handleCloseEdit = activeItem => {
     const { handleEditItem, handleOpenEdit } = this.props;
 
@@ -40,6 +41,7 @@ class EditDialog extends Component {
   changeNewItemInfo = e => {
     this.setState({ info: e.target.value });
   };
+
   render() {
     const { classes, openEdit, activeItem, handleOpenEdit, store } = this.props;
 

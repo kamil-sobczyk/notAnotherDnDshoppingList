@@ -9,7 +9,8 @@ import ListBox from "./components/ListBox";
 
 const styles = theme => ({
   root: {
-    textAlign: "center"
+    textAlign: "center",
+    backgroundColor: theme.palette.background.paper
   }
 });
 

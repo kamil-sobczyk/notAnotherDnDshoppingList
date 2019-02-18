@@ -62,7 +62,6 @@ class Selected extends Component {
                       role={undefined}
                       dense
                       button
-                      // onClick={this.handleToggle(item)}
                     >
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
