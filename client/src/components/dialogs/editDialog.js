@@ -27,14 +27,9 @@ class EditDialog extends Component {
   handleCloseEdit = activeItem => {
     const { handleEditItem, handleOpenEdit } = this.props;
 
-    console.log('handleClose activeItem', activeItem)
-
     editItem(this.state, activeItem)
     handleEditItem(this.state, activeItem);
-
-
     handleOpenEdit(activeItem);
-
     this.setState({ name: "", info: "" });
   };
 

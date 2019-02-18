@@ -1,7 +1,6 @@
 const reducer = (state, action) => {
   switch (action.type) {
     case "SHOW_ADD_DIALOG":
-      let index = 0;
       return { ...state, openAdd: state.openAdd ? false : true };
     case "SHOW_DELETE_DIALOG":
       return {
@@ -33,15 +32,9 @@ const reducer = (state, action) => {
         newState
       };
     case "EDIT_ITEM":
-    console.log("reducer edit item")
-    console.log("reducer newItem", action.newItem)
-    console.log("reducer list", action.list)
-    console.log("reducer index", action.index)
     newState = state;
       newState[action.list][action.index].name = action.newItem.name;
       newState[action.list][action.index].info = action.newItem.info;
-    console.log("reducer newState", newState);
-
       return { ...state, newState };
     case "GET_ITEMS":
       return { ...state, items: action.items };
