@@ -37,7 +37,7 @@ const reducer = (state, action) => {
       newState[action.list][action.index].info = action.newItem.info;
       return { ...state, newState };
     case "GET_ITEMS":
-      return { ...state, items: action.items };
+      return { ...state, items: action.items.sort((a,b) => a.name.localeCompare(b.name))};
     case "GET_SELECTED":
       return { ...state, selected: action.selected };
     default:

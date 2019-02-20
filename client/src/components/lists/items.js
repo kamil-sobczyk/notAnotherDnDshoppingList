@@ -44,6 +44,10 @@ class Items extends Component {
 
   render() {
     const { classes, items, handleOpenDelete, handleOpenEdit } = this.props;
+    // let sortedItems;
+
+    // if (items) sortedItems = String(items).sort((a, b) => a.name.localCompare(b.name));
+   
 
     return (
       <Droppable droppableId="droppable">
