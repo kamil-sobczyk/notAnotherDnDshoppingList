@@ -14,7 +14,7 @@ import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 
-import { getItems } from "../functions/fetchFunctions";
+import { getItems } from "../functions/apiClient";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 

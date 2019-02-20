@@ -11,7 +11,7 @@ import Selected from "./lists/selected";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import { reorder, move } from "./functions/moveFunctions";
-import { changeSelected, changeItems } from "./functions/fetchFunctions";
+import { changeSelected, changeItems } from "./functions/apiClient";
 
 const styles = theme => ({
   lists: {

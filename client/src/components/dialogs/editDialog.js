@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
-import { editItem } from "../functions/fetchFunctions";
+import { editItem } from "../functions/apiClient";
 
 const styles = theme => ({
   textField: {

@@ -15,7 +15,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getSelected } from "../functions/fetchFunctions";
+import { getSelected } from "../functions/apiClient";
 
 const styles = theme => ({
   list: {
