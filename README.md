@@ -1,10 +1,10 @@
 ## Shopping List
 
-## Web app build with ReactJS, Redux, NodeJS Express, Material UI.
+## Web app build with ReactJS, Redux, NodeJS Express, Material UI. Uses its own API deployed on Google Cloud Platform
 
 ### This is not another clone app made with internet course. Application were made from scratch, for personal usage.
 
-### Preview (in preview main functionalities dont work) :
+### Preview :
 http://kamilsobczyk.slask.pl/
 
 #### In development ! 
