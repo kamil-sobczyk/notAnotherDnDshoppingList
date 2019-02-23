@@ -4,6 +4,9 @@ const routes = require("./index.js");
 const app = express();
 const cors = require('cors')
 
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function(req, res, next) {
@@ -16,6 +19,5 @@ routes(app);
 
 app.use(cors())
 
-var server = app.listen(3001, function () {
-    console.log("app running on port.", server.address().port);
-});
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);

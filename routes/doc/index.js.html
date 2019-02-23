@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "index.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>index.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> store = {
+  <span class="hljs-attr">items</span>: [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Bread"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">"Buy in Lidl"</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"0"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Cola"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"1"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Milk"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">"Buy in Tesco"</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"2"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Beer"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"3"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Beef"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">"1kg"</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"4"</span>
+    }
+  ],
+  <span class="hljs-attr">selected</span>: [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Ham"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">"In slices"</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"5"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Rice"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"6"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Potatoes"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">"Buy in Tesco"</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"7"</span>
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Aplles"</span>,
+      <span class="hljs-attr">info</span>: <span class="hljs-string">"3kg"</span>,
+      <span class="hljs-attr">id</span>: <span class="hljs-string">"8"</span>
+    }
+  ],
+  <span class="hljs-attr">activeItem</span>: {
+    <span class="hljs-attr">list</span>: <span class="hljs-string">"items"</span>,
+    <span class="hljs-attr">index</span>: <span class="hljs-number">0</span>
+  }
+};
+
+<span class="hljs-keyword">const</span> appRouter = <span class="hljs-function"><span class="hljs-params">app</span> =&gt;</span> {
+  app.get(<span class="hljs-string">"/"</span>, (req, res) =&gt; {
+    res.send(<span class="hljs-string">"Hello world\n"</span>);
+  });
+  <span class="hljs-keyword">let</span> newID = <span class="hljs-string">"9999"</span>;
+  app.get(<span class="hljs-string">"/store"</span>, (req, res) =&gt; {
+    res.status(<span class="hljs-number">200</span>).send(store);
+  });
+  app.get(<span class="hljs-string">"/store/selected"</span>, (req, res) =&gt; {
+    res.status(<span class="hljs-number">200</span>).send(store.selected);
+  });
+  app.put(<span class="hljs-string">"/store/selected"</span>, (req, res) =&gt; {
+    store.selected = req.body;
+    res.status(<span class="hljs-number">200</span>).json(store.selected);
+  });
+  app.post(<span class="hljs-string">"/store/items"</span>, (req, res) =&gt; {
+    <span class="hljs-keyword">let</span> newItem = req.body;
+    newItem.id = newID;
+    newID = <span class="hljs-built_in">String</span>(<span class="hljs-built_in">parseInt</span>(newID) - <span class="hljs-number">1</span>);
+    store.items.push(newItem);
+    res.status(<span class="hljs-number">200</span>).json(newItem);
+  });
+  app.put(<span class="hljs-string">"/store/items"</span>, (req, res) =&gt; {
+    store.items = req.body;
+    res.status(<span class="hljs-number">200</span>).send(store.items);
+  });
+  app.put(<span class="hljs-string">"/store"</span>, (req, res) =&gt; {
+    <span class="hljs-keyword">let</span> newItem = req.body.newItem;
+    <span class="hljs-keyword">let</span> activeItem = req.body.activeItem;
+    newItem.id = newID;
+    newID = <span class="hljs-built_in">String</span>(<span class="hljs-built_in">parseInt</span>(newID) - <span class="hljs-number">1</span>);
+    store[activeItem.list][activeItem.index] = newItem;
+    res.status(<span class="hljs-number">200</span>).send(store);
+  });
+  app.delete(<span class="hljs-string">"/store"</span>, (req, res) =&gt; {
+    store[req.body.list] = [
+      ...store[req.body.list].slice(<span class="hljs-number">0</span>, req.body.index),
+      ...store[req.body.list].slice(req.body.index + <span class="hljs-number">1</span>)
+    ];
+    res.status(<span class="hljs-number">200</span>).send(store);
+  });
+};
+
+<span class="hljs-built_in">module</span>.exports = appRouter;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

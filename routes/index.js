@@ -55,6 +55,9 @@ const store = {
 };
 
 const appRouter = app => {
+  app.get("/", (req, res) => {
+    res.send("Hello world\n");
+  });
   let newID = "9999";
   app.get("/store", (req, res) => {
     res.status(200).send(store);

@@ -19,7 +19,7 @@ const styles = theme => ({
     width: "100%",
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   }
 });
 
@@ -60,13 +60,9 @@ class ListsContainer extends Component {
       );
 
       if (
-        JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) !==
-        -1
-      ) {
-        changeItems(this.props.getItems, items);
-      } else {
+        JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) < 0
+      )
         changeSelected(this.props.getSelected, items);
-      }
     } else {
       const result = move(
         this.getList(source.droppableId),
@@ -85,7 +81,7 @@ class ListsContainer extends Component {
     return (
       <div className={classes.lists}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-        {display ? <Items /> : false}
+          {display ? <Items /> : false}
           <Selected />
         </DragDropContext>
       </div>
@@ -99,14 +95,19 @@ ListsContainer.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { items: state.items, store: state, selected: state.selected, display: state.showItems };
+  return {
+    items: state.items,
+    store: state,
+    selected: state.selected,
+    display: state.showItems
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     getSelected: selected =>
-      dispatch({ type: "GET_SELECTED", selected: selected }),
+      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 
