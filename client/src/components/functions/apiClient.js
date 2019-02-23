@@ -1,5 +1,7 @@
+const server = "http://35.202.93.206";
+
 const getItems = dispatch => {
-  fetch("/store/", {
+  fetch(server + "/store/", {
     mode: "cors",
     method: "GET"
   })
@@ -12,7 +14,7 @@ const getItems = dispatch => {
 };
 
 const getSelected = dispatch => {
-  fetch("/store/selected", {
+  fetch(server + "/store/selected", {
     method: "GET"
   })
     .then(response => {
@@ -24,7 +26,7 @@ const getSelected = dispatch => {
 };
 
 const changeItems = (dispatch, body) => {
-  fetch("/store/items", {
+  fetch(server + "/store/items", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
@@ -41,7 +43,7 @@ const changeItems = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 };
 const changeSelected = (dispatch, body) => {
-  fetch("/store/selected/", {
+  fetch(server + "/store/selected/", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
@@ -59,7 +61,7 @@ const changeSelected = (dispatch, body) => {
 };
 
 const addNewItem = (dispatch, body) => {
-  fetch("/store/items", {
+  fetch(server + "/store/items", {
     method: "POST",
     headers: {
       "Content-type": "application/json"
@@ -77,7 +79,7 @@ const addNewItem = (dispatch, body) => {
 };
 
 const deleteItems = (dispatch, activeItem) => {
-  fetch("/store/", {
+  fetch(server + "/store/", {
     method: "DELETE",
     headers: {
       "Content-type": "application/json"
@@ -95,7 +97,7 @@ const deleteItems = (dispatch, activeItem) => {
 };
 
 const editItem = (newItem, activeItem) => {
-  fetch("/store/", {
+  fetch(server + "/store/", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
