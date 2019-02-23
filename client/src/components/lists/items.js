@@ -20,7 +20,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const styles = theme => ({
   list: {
-    width: "45%",
+    width: "50%",
     maxWidth: 400,
     margin: "5px"
   },

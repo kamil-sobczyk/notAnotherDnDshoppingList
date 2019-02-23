@@ -17,6 +17,7 @@ const styles = theme => ({
   lists: {
     listStyleType: "none",
     width: "100%",
+    margin: 0,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     justifyContent: "center"

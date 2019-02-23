@@ -67,7 +67,7 @@ class EditDialog extends Component {
         />
         <TextField
           id="outlined"
-          label="Type new info"
+          label="Type new additional info"
           defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
           className={classes.textField}
           margin="normal"
