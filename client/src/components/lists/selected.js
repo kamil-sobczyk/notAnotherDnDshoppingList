@@ -17,6 +17,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import { getSelected, changeSelected, changeItems } from "../functions/apiClient";
+import FinishDialog from '../dialogs/finishDialog';
 
 const styles = theme => ({
   list: {
@@ -38,17 +39,23 @@ const styles = theme => ({
 });
 
 class Selected extends Component {
+  state = {
+    openFinish: false,
+}
   componentWillMount = () => {
     getSelected(this.props.getSelected);
   };
   handleFinishShopping = () => {
-
-    
+    this.setState({
+      openFinish: this.state.openFinish ? false : true,
+  })
   };
   render() {
     const { classes, selected, handleOpenEdit } = this.props;
+    const { openFinish, openCounter } = this.state;
 
     return (
+      <>
       <Droppable droppableId="droppable2">
         {provided => (
           <div ref={provided.innerRef} className={classes.list}>
@@ -89,9 +96,12 @@ class Selected extends Component {
             <Button color="primary" onClick={this.handleFinishShopping}>
               Finish shopping
             </Button>
+            
           </div>
         )}
       </Droppable>
+      <FinishDialog openFinish={openFinish} openCounter={openCounter} handleOpenFinish={this.handleFinishShopping.bind(this)}/>
+      </>
     );
   }
 }

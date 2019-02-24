@@ -72,7 +72,7 @@ class MoreMenu extends Component {
           onClose={this.handleClose}
           TransitionComponent={Fade}
         >
-          <Tooltip title="Edit" placement="right">
+          <Tooltip title="Edit" placement="top">
             <IconButton
               className={classes.edit}
               aria-label="Edit item"

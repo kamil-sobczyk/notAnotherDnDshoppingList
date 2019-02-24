@@ -13,47 +13,47 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { deleteItems } from "../functions/apiClient";
 
 class FinishDialog extends React.Component {
-  handleDeleteItem = activeItem => {
-    const { handleDeleteItem, handleOpenDelete } = this.props;
+    state = {
+        openCounter: false
+    }
+  
+    handleOpenCounter = () => {
+        this.props.handleOpenFinish();
+        this.setState({
+            openCounter: true
+        })
+    }
 
-    handleDeleteItem(activeItem);
-    deleteItems(null, activeItem);
-
-    handleOpenDelete({ list: "items", index: 0 });
-  };
 
   render() {
-    const { openDelete, handleOpenDelete, store, activeItem } = this.props;
+    const { openFinish, openCounter, handleOpenFinish } = this.props;
 
-    const active = store[activeItem.list][activeItem.index]
-      ? store[activeItem.list][activeItem.index].name
-      : "";
     return (
       <Dialog
-        open={openDelete}
+        open={openFinish}
         onClose={this.handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"You are trying to delete item"}
+          {"You are trying to finish your shopping"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure want to delete {active} from your list?
+            Are you sure want to clear selected items and finnish your shopping?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={handleOpenDelete.bind(this, { list: "items", index: 0 })}
             color="primary"
+            onClick={handleOpenFinish}
           >
             No
           </Button>
           <Button
-            onClick={this.handleDeleteItem.bind(this, activeItem)}
             color="primary"
             autoFocus
+            onClick={this.handleOpenCounter}
           >
             Yes
           </Button>
@@ -62,14 +62,6 @@ class FinishDialog extends React.Component {
     );
   }
 }
-
-FinishDialog.propTypes = {
-  openDelete: PropTypes.bool,
-  handleOpenDelete: PropTypes.func,
-  handleDeleteItem: PropTypes.func,
-  list: PropTypes.array,
-  activeItem: PropTypes.object
-};
 
 const mapStateToProps = state => {
   return {
