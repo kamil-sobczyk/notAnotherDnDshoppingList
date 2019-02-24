@@ -108,7 +108,7 @@ class Selected extends Component {
                           secondary={item.info}
                         />
 
-                        <Tooltip title="Edit">
+                        <Tooltip title="Edit" placement="right">
                           <IconButton
                             className={classes.editHover}
                             aria-label="Edit item"

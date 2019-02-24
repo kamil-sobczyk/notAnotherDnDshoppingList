@@ -114,6 +114,37 @@ const editItem = (newItem, activeItem) => {
     .catch(error => console.log("Ooops", error));
 };
 
+const getCosts = dispatch => {
+  fetch(server + "/store/costs", {
+    mode: "cors",
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(costs => {
+      return dispatch(costs);
+    });
+};
+
+const addCosts = (dispatch, costs) => {
+  fetch(server + "/store/costs", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(costs)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(state => {
+      return state;
+    })
+    .catch(error => console.log("Ooops", error));
+};
+
 export {
   getItems,
   getSelected,
@@ -121,5 +152,7 @@ export {
   changeItems,
   addNewItem,
   deleteItems,
-  editItem
+  editItem,
+  getCosts,
+  addCosts
 };

@@ -56,7 +56,7 @@ class MoreMenu extends Component {
 
     return (
       <>
-      <Tooltip title="More" >
+      <Tooltip title="More" placement="left" >
         <IconButton
           aria-owns={open ? "fade-menu" : undefined}
           aria-haspopup="true"

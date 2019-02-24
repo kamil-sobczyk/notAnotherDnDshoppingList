@@ -48,6 +48,7 @@ const store = {
       id: "8"
     }
   ],
+  costs = [],
   activeItem: {
     list: "items",
     index: 0
@@ -94,6 +95,10 @@ const appRouter = app => {
       ...store[req.body.list].slice(req.body.index + 1)
     ];
     res.status(200).send(store);
+  });
+  app.post("/store/costs", (req, res) => {
+    store.costs.push(req.body);
+    res.status(200).json(req.body);
   });
 };
 

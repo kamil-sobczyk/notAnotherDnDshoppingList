@@ -4,15 +4,26 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { changeSelected, changeItems } from "../functions/apiClient";
+import { changeSelected, changeItems, addCosts } from "../functions/apiClient";
 
 class FinishDialog extends React.Component {
+  state = {
+    count: 0
+  };
+
+  handleChangeCounter = e => {
+    this.setState({
+      count: e.target.value,
+      date: Date.now()
+    });
+  };
   handleFinish = () => {
     const {
       handleOpenFinish,
@@ -23,7 +34,6 @@ class FinishDialog extends React.Component {
     } = this.props;
 
     const newSelected = [];
-
     let newItems = [];
 
     if (items) {
@@ -33,10 +43,11 @@ class FinishDialog extends React.Component {
       );
     }
 
+
     changeSelected(getSelected, newSelected);
     changeItems(getItems, newItems);
-
-    handleOpenFinish(getItems, newItems);
+    handleOpenFinish();
+    addCosts("!!!!!!!!!!", this.state)
   };
 
   render() {
@@ -49,18 +60,33 @@ class FinishDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Shopping finished"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"Finishing shopping"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure want to clear selected items and finnish your shopping?
+            Check items will be moved to items list. Type how much you spent for
+            shopping.
           </DialogContentText>
+          <TextField
+            id="outlined-number"
+            label="Value"
+            defaultValue={0}
+            onChange={this.handleChangeCounter}
+            type="number"
+            InputLabelProps={{
+              shrink: true
+            }}
+            margin="normal"
+            variant="outlined"
+          />
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={handleOpenFinish}>
-            No
+            Cancel
           </Button>
           <Button color="primary" autoFocus onClick={this.handleFinish}>
-            Yes
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>
