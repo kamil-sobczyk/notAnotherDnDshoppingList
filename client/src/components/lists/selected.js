@@ -9,8 +9,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -41,7 +41,7 @@ class Selected extends Component {
     getSelected(this.props.getSelected);
   };
   render() {
-    const { classes, selected, handleOpenDelete, handleOpenEdit } = this.props;
+    const { classes, selected, handleOpenEdit } = this.props;
 
     return (
       <Droppable droppableId="droppable2">
@@ -58,15 +58,12 @@ class Selected extends Component {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <ListItem
-                      key={index}
-                      role={undefined}
-                      dense
-                      button
-                    >
+                    <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
-                        <IconButton className={classes.editHover}
+                      <Tooltip title="Edit">
+                        <IconButton
+                          className={classes.editHover}
                           aria-label="Edit item"
                           onClick={handleOpenEdit.bind(this, {
                             list: "selected",
@@ -75,12 +72,7 @@ class Selected extends Component {
                         >
                           <EditIcon />
                         </IconButton>
-                        <IconButton
-                          aria-label="Delete item"
-                          onClick={handleOpenDelete.bind(this, {list: "selected", index: index})}
-                        >
-                          <DeleteIcon className={classes.deleteHover} />
-                        </IconButton>
+                        </Tooltip>
                       </ListItemSecondaryAction>
                     </ListItem>
                     <Divider />
@@ -110,14 +102,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      handleOpenEdit: activeItem =>
+    handleOpenEdit: activeItem =>
       dispatch({
         type: "SHOW_EDIT_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),
-    handleOpenDelete: activeInfo =>
-    dispatch({ type: "SHOW_DELETE_DIALOG", index: activeInfo.index, list: activeInfo.list }),
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected })
   };

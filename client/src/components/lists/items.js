@@ -9,12 +9,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/DeleteForever";
-import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 
 import { getItems } from "../functions/apiClient";
+import Menu from "./menu";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -23,17 +21,6 @@ const styles = theme => ({
     width: "50%",
     maxWidth: 400,
     margin: "5px"
-  },
-  deleteHover: {
-    color: theme.palette.primary.main,
-    "&:hover": {
-      color: "red"
-    }
-  },
-  editHover: {
-    "&:hover": {
-      color: theme.palette.primary.main
-    }
   }
 });
 
@@ -43,11 +30,7 @@ class Items extends Component {
   };
 
   render() {
-    const { classes, items, handleOpenDelete, handleOpenEdit } = this.props;
-    // let sortedItems;
-
-    // if (items) sortedItems = String(items).sort((a, b) => a.name.localCompare(b.name));
-   
+    const { classes, items } = this.props;
 
     return (
       <Droppable droppableId="droppable">
@@ -67,25 +50,7 @@ class Items extends Component {
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
-                        <IconButton
-                          className={classes.editHover}
-                          aria-label="Edit item"
-                          onClick={handleOpenEdit.bind(this, {
-                            list: "items",
-                            index: index
-                          })}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton
-                          aria-label="Delete item"
-                          onClick={handleOpenDelete.bind(this, {
-                            list: "items",
-                            index: index
-                          })}
-                        >
-                          <DeleteIcon className={classes.deleteHover} />
-                        </IconButton>
+                        <Menu index={index} />
                       </ListItemSecondaryAction>
                     </ListItem>
                     <Divider />
