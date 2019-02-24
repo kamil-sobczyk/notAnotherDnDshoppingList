@@ -7,11 +7,12 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Items from "./lists/items";
 import Selected from "./lists/selected";
+import { reorder, move } from "./functions/moveFunctions";
+import { changeSelected, changeItems } from "./functions/apiClient";
 
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { reorder, move } from "./functions/moveFunctions";
-import { changeSelected, changeItems } from "./functions/apiClient";
+
 
 const styles = theme => ({
   lists: {

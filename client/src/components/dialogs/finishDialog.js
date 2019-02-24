@@ -21,7 +21,8 @@ class FinishDialog extends React.Component {
   handleChangeCounter = e => {
     this.setState({
       count: e.target.value,
-      date: new Date().toLocaleDateString()
+      date: new Date().toLocaleDateString(),
+      chosenItems: []
     });
   };
   handleFinish = () => {
@@ -30,25 +31,31 @@ class FinishDialog extends React.Component {
       selected,
       getSelected,
       items,
-      getItems
+      getItems,
+      addCost
     } = this.props;
 
     const newSelected = [];
     let newItems = [];
+    const chosenNames = [];
 
     if (items) {
       newItems = items;
-      selected.forEach(item =>
-        item.checked ? newItems.push(item) : newSelected.push(item)
-      );
+      selected.forEach(item => {
+        if (item.checked) {
+          newItems.push(item);
+          chosenNames.push(item.name);
+        } else newSelected.push(item);
+      });
     }
 
-    console.log(this.state)
+    const item = this.state;
+    item.chosenItems = chosenNames;
 
+    addCosts(addCost, item);
     changeSelected(getSelected, newSelected);
     changeItems(getItems, newItems);
     handleOpenFinish();
-    addCosts("!!!!!!!!!!", this.state);
   };
 
   render() {
@@ -66,8 +73,8 @@ class FinishDialog extends React.Component {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Checked items will be moved to items list. <br/> Type how much you spent
-            for shopping.
+            Checked items will be moved to items list. <br /> Type how much you
+            spent for shopping.
           </DialogContentText>
           <TextField
             id="outlined-number"
@@ -106,7 +113,7 @@ const mapDispatchToProps = dispatch => {
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    addCost: cost => dispatch({type: "ADD_COSTS", cost: cost})
+    addCost: cost => dispatch({ type: "ADD_COSTS", cost: cost })
   };
 };
 

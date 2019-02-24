@@ -11,16 +11,11 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 
 import Pagination from "./tablePaginationActions";
 
-import { getCosts } from '../functions/apiClient';
-
-let counter = 0;
-const createData = (date, cost) => {
-  counter += 1;
-  return { id: counter, date, cost };
-};
+import { getCosts } from "../functions/apiClient";
 
 const styles = theme => ({
   root: {
@@ -38,27 +33,21 @@ const styles = theme => ({
 
 class CustomPaginationActionsTable extends React.Component {
   state = {
-    rows: [
-      createData("01.01.2018", 305),
-      createData("03.01.2018", 452),
-      createData("04.01.2018", 262),
-      createData("07.01.2018", 159),
-      createData("09.01.2018", 356),
-      createData("13.01.2018", 408),
-      createData("18.01.2018", 237),
-      createData("23.01.2018", 375),
-      createData("01.02.2018", 518),
-      createData("05.02.2018", 392),
-      createData("14.02.2018", 318),
-      createData("19.02.2018", 360),
-      createData("22.02.2018", 437)
-    ],
     page: 0,
-    rowsPerPage: 5
+    rowsPerPage: 5,
+    costs: []
   };
 
   componentWillMount = () => {
     getCosts(this.props.getCosts);
+  };
+
+  componentWillReceiveProps = newProps => {
+    if (
+      newProps.costs !== this.props.costs 
+    ) {
+      this.setState({ costs: newProps.costs });
+    }
   };
 
   handleChangePage = (event, page) => {
@@ -70,24 +59,29 @@ class CustomPaginationActionsTable extends React.Component {
   };
 
   render() {
-    const { classes, costs } = this.props;
-    const { rowsPerPage, page } = this.state;
+    const { classes } = this.props;
+    const { rowsPerPage, page, costs } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
+
+    const sortedCosts = costs.sort((a, b) => a.date > b.date);
 
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
+          <Typography variant="h6" gutterBottom>
+            Table of your outgoings
+          </Typography>
           <Table className={classes.table}>
             <TableBody>
-              {costs
+              {sortedCosts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => (
-                  <TableRow key={row.id}>
+                .map((row, index) => (
+                  <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       {row.date}
                     </TableCell>
-                    <TableCell align="right">{row.cost + "zł"}</TableCell>
+                    <TableCell align="right">{row.count + "zł"}</TableCell>
                   </TableRow>
                 ))}
               {emptyRows > 0 && (
