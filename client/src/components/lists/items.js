@@ -71,10 +71,7 @@ class Items extends Component {
 
 Items.propTypes = {
   classes: PropTypes.object.isRequired,
-  openDelete: PropTypes.bool,
   getItems: PropTypes.func,
-  handleOpenDelete: PropTypes.func,
-  handleOpenEdit: PropTypes.func,
   handleOpenAdd: PropTypes.func
 };
 
@@ -84,18 +81,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenEdit: activeItem =>
-      dispatch({
-        type: "SHOW_EDIT_DIALOG",
-        index: activeItem.index,
-        list: activeItem.list
-      }),
-    handleOpenDelete: activeItem =>
-      dispatch({
-        type: "SHOW_DELETE_DIALOG",
-        index: activeItem.index,
-        list: activeItem.list
-      }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
     handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" })
   };

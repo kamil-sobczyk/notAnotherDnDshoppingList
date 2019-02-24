@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -81,7 +82,6 @@ class MoreMenu extends Component {
               <EditIcon />
             </IconButton>
           </Tooltip>
-
           <Tooltip title="Delete">
             <IconButton
               aria-label="Delete item"
@@ -98,6 +98,13 @@ class MoreMenu extends Component {
     );
   }
 }
+
+MoreMenu.propTypes = {
+    classes: PropTypes.object.isRequired,
+    openDelete: PropTypes.bool,
+    handleOpenDelete: PropTypes.func,
+    handleOpenEdit: PropTypes.func,
+  };
 
 const mapStateToProps = state => {
   return { items: state.items, store: state, selected: state.selected };
