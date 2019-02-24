@@ -21,7 +21,7 @@ class FinishDialog extends React.Component {
   handleChangeCounter = e => {
     this.setState({
       count: e.target.value,
-      date: Date.now()
+      date: new Date().toLocaleDateString()
     });
   };
   handleFinish = () => {
@@ -43,11 +43,12 @@ class FinishDialog extends React.Component {
       );
     }
 
+    console.log(this.state)
 
     changeSelected(getSelected, newSelected);
     changeItems(getItems, newItems);
     handleOpenFinish();
-    addCosts("!!!!!!!!!!", this.state)
+    addCosts("!!!!!!!!!!", this.state);
   };
 
   render() {
@@ -65,8 +66,8 @@ class FinishDialog extends React.Component {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Check items will be moved to items list. Type how much you spent for
-            shopping.
+            Checked items will be moved to items list. <br/> Type how much you spent
+            for shopping.
           </DialogContentText>
           <TextField
             id="outlined-number"
@@ -104,7 +105,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected }),
-    getItems: items => dispatch({ type: "GET_ITEMS", items: items })
+    getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
+    addCost: cost => dispatch({type: "ADD_COSTS", cost: cost})
   };
 };
 

@@ -40,6 +40,9 @@ const reducer = (state, action) => {
       return { ...state, items: action.items.sort((a,b) => a.name.localeCompare(b.name))};
     case "GET_SELECTED":
       return { ...state, selected: action.selected };
+      case "ADD_COST":
+      const newCosts = state.costs.push(action.cost)
+      return {...state, costs: newCosts }
     default:
       return state;
   }

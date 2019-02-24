@@ -14,6 +14,7 @@ const store = createStore(reducer, {
     list: "items",
     index: 0
   },
+  costs: [],
   openAdd: false,
   openEdit: false,
   openDelete: false,
