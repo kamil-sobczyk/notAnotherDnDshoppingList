@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -15,7 +16,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getSelected } from "../functions/apiClient";
+import { getSelected, changeSelected, changeItems } from "../functions/apiClient";
 
 const styles = theme => ({
   list: {
@@ -40,6 +41,10 @@ class Selected extends Component {
   componentWillMount = () => {
     getSelected(this.props.getSelected);
   };
+  handleFinishShopping = () => {
+
+    
+  };
   render() {
     const { classes, selected, handleOpenEdit } = this.props;
 
@@ -61,17 +66,17 @@ class Selected extends Component {
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
                       <ListItemSecondaryAction>
-                      <Tooltip title="Edit">
-                        <IconButton
-                          className={classes.editHover}
-                          aria-label="Edit item"
-                          onClick={handleOpenEdit.bind(this, {
-                            list: "selected",
-                            index: index
-                          })}
-                        >
-                          <EditIcon />
-                        </IconButton>
+                        <Tooltip title="Edit">
+                          <IconButton
+                            className={classes.editHover}
+                            aria-label="Edit item"
+                            onClick={handleOpenEdit.bind(this, {
+                              list: "selected",
+                              index: index
+                            })}
+                          >
+                            <EditIcon />
+                          </IconButton>
                         </Tooltip>
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -81,6 +86,9 @@ class Selected extends Component {
               </Draggable>
             ))}
             {provided.placeholder}
+            <Button color="primary" onClick={this.handleFinishShopping}>
+              Finish shopping
+            </Button>
           </div>
         )}
       </Droppable>

@@ -21,10 +21,7 @@ class DeleteDialog extends React.Component {
 
     handleOpenDelete({ list: "items", index: 0 });
   };
-  handleOpenDelete = i => {
-    this.props.handleOpenDelete(i);
-  };
-  handleClese;
+
   render() {
     const { openDelete, handleOpenDelete, store, activeItem } = this.props;
 
