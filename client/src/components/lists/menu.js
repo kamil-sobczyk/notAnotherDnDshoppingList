@@ -13,13 +13,15 @@ import EditIcon from "@material-ui/icons/Edit";
 import MoreIcon from "@material-ui/icons/MoreVert";
 
 const styles = theme => ({
-  deleteHover: {
+  delete: {
     color: theme.palette.primary.main,
+    display: "block",
     "&:hover": {
       color: "red"
     }
   },
-  editHover: {
+  edit: {
+    display: "block",
     "&:hover": {
       color: theme.palette.primary.main
     }
@@ -54,7 +56,7 @@ class MoreMenu extends Component {
 
     return (
       <>
-      <Tooltip title="More">
+      <Tooltip title="More" >
         <IconButton
           aria-owns={open ? "fade-menu" : undefined}
           aria-haspopup="true"
@@ -70,9 +72,9 @@ class MoreMenu extends Component {
           onClose={this.handleClose}
           TransitionComponent={Fade}
         >
-          <Tooltip title="Edit">
+          <Tooltip title="Edit" placement="right">
             <IconButton
-              className={classes.editHover}
+              className={classes.edit}
               aria-label="Edit item"
               onClick={handleOpenEdit.bind(this, {
                 list: "items",
@@ -90,7 +92,7 @@ class MoreMenu extends Component {
                 index: index
               })}
             >
-              <DeleteIcon className={classes.deleteHover} />
+              <DeleteIcon className={classes.delete} />
             </IconButton>
           </Tooltip>
         </Menu>
