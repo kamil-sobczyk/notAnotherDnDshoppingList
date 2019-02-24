@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
+import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -16,8 +16,12 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getSelected, changeSelected, changeItems } from "../functions/apiClient";
-import FinishDialog from '../dialogs/finishDialog';
+import {
+  getSelected
+  // changeSelected,
+  // changeItems
+} from "../functions/apiClient";
+import FinishDialog from "../dialogs/finishDialog";
 
 const styles = theme => ({
   list: {
@@ -41,14 +45,27 @@ const styles = theme => ({
 class Selected extends Component {
   state = {
     openFinish: false,
-}
+    selected: this.props.selected
+  };
+
   componentWillMount = () => {
     getSelected(this.props.getSelected);
   };
+
+  handleToggle = index => () => {
+    const { selected } = this.props;
+
+    selected[index].checked
+      ? (selected[index].checked = false)
+      : (selected[index].checked = true);
+
+    this.setState({ selected });
+  };
+
   handleFinishShopping = () => {
     this.setState({
-      openFinish: this.state.openFinish ? false : true,
-  })
+      openFinish: this.state.openFinish ? false : true
+    });
   };
   render() {
     const { classes, selected, handleOpenEdit } = this.props;
@@ -56,23 +73,41 @@ class Selected extends Component {
 
     return (
       <>
-      <Droppable droppableId="droppable2">
-        {provided => (
-          <div ref={provided.innerRef} className={classes.list}>
-            <Typography variant="h6" gutterBottom>
-              Items to buy
-            </Typography>
-            {selected.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {provided => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <ListItem key={index} role={undefined} dense button>
-                      <ListItemText primary={item.name} secondary={item.info} />
-                      <ListItemSecondaryAction>
+        <Droppable droppableId="droppable2">
+          {provided => (
+            <div ref={provided.innerRef} className={classes.list}>
+              <Typography variant="h6" gutterBottom>
+                Items to buy
+              </Typography>
+              {selected.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {provided => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <ListItem
+                        key={index}
+                        role={undefined}
+                        dense
+                        button
+                        onClick={this.handleToggle(index)}
+                      >
+                        <Checkbox
+                          checked={
+                            this.props.selected[index]
+                              ? this.props.selected[index].checked
+                              : false
+                          }
+                          tabIndex={-1}
+                          disableRipple
+                        />
+                        <ListItemText
+                          primary={item.name}
+                          secondary={item.info}
+                        />
+
                         <Tooltip title="Edit">
                           <IconButton
                             className={classes.editHover}
@@ -85,22 +120,25 @@ class Selected extends Component {
                             <EditIcon />
                           </IconButton>
                         </Tooltip>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <Divider />
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-            <Button color="primary" onClick={this.handleFinishShopping}>
-              Finish shopping
-            </Button>
-            
-          </div>
-        )}
-      </Droppable>
-      <FinishDialog openFinish={openFinish} openCounter={openCounter} handleOpenFinish={this.handleFinishShopping.bind(this)}/>
+                      </ListItem>
+                      <Divider />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+              <Button color="primary" onClick={this.handleFinishShopping}>
+                Finish shopping
+              </Button>
+            </div>
+          )}
+        </Droppable>
+        <FinishDialog
+          openFinish={openFinish}
+          openCounter={openCounter}
+          handleOpenFinish={this.handleFinishShopping.bind(this)}
+          selected={this.state.selected}
+        />
       </>
     );
   }

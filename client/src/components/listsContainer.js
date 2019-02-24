@@ -71,7 +71,8 @@ class ListsContainer extends Component {
         source,
         destination
       );
-
+      result.droppable2.forEach(item => item.checked = false);
+      
       changeItems(this.props.getItems, result.droppable);
       changeSelected(this.props.getSelected, result.droppable2);
     }

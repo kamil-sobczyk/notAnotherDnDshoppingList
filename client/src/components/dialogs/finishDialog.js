@@ -10,23 +10,37 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { deleteItems } from "../functions/apiClient";
+import { changeSelected, changeItems } from "../functions/apiClient";
 
 class FinishDialog extends React.Component {
-    state = {
-        openCounter: false
-    }
-  
-    handleOpenCounter = () => {
-        this.props.handleOpenFinish();
-        this.setState({
-            openCounter: true
-        })
+  handleFinish = () => {
+    const {
+      handleOpenFinish,
+      selected,
+      getSelected,
+      items,
+      getItems
+    } = this.props;
+
+    const newSelected = [];
+
+    let newItems = [];
+
+    if (items) {
+      newItems = items;
+      selected.forEach(item =>
+        item.checked ? newItems.push(item) : newSelected.push(item)
+      );
     }
 
+    changeSelected(getSelected, newSelected);
+    changeItems(getItems, newItems);
+
+    handleOpenFinish(getItems, newItems);
+  };
 
   render() {
-    const { openFinish, openCounter, handleOpenFinish } = this.props;
+    const { openFinish, handleOpenFinish } = this.props;
 
     return (
       <Dialog
@@ -35,26 +49,17 @@ class FinishDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"You are trying to finish your shopping"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Shopping finished"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure want to clear selected items and finnish your shopping?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            color="primary"
-            onClick={handleOpenFinish}
-          >
+          <Button color="primary" onClick={handleOpenFinish}>
             No
           </Button>
-          <Button
-            color="primary"
-            autoFocus
-            onClick={this.handleOpenCounter}
-          >
+          <Button color="primary" autoFocus onClick={this.handleFinish}>
             Yes
           </Button>
         </DialogActions>
@@ -65,26 +70,15 @@ class FinishDialog extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    openDelete: state.openDelete,
-    activeItem: state.activeItem,
-    store: state
+    items: state.items
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenDelete: activeItem =>
-      dispatch({
-        type: "SHOW_DELETE_DIALOG",
-        index: activeItem.index,
-        list: activeItem.list
-      }),
-    handleDeleteItem: activeItem =>
-      dispatch({
-        type: "DELETE_ITEM",
-        list: activeItem.list,
-        index: activeItem.index
-      })
+    getSelected: selected =>
+      dispatch({ type: "GET_SELECTED", selected: selected }),
+    getItems: items => dispatch({ type: "GET_ITEMS", items: items })
   };
 };
 

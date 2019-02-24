@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
@@ -49,9 +48,7 @@ class Items extends Component {
                   >
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
-                      <ListItemSecondaryAction>
                         <Menu index={index} />
-                      </ListItemSecondaryAction>
                     </ListItem>
                     <Divider />
                   </div>
