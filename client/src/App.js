@@ -8,6 +8,8 @@ import NavBar from "./components/nav";
 import ListBox from "./components/listBox";
 import Table from './components/table/table';
 
+import ShoppingDialog from './components/dialogs/shoppingDialog';
+
 const styles = theme => ({
   root: {
     textAlign: "center",
@@ -22,7 +24,7 @@ class App extends Component {
       <div className={classes.root}>
         <NavBar />
         <ListBox />
-        <Table/>
+        <ShoppingDialog/>
       </div>
     );
   }

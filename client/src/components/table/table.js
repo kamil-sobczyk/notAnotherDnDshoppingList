@@ -11,7 +11,6 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import Pagination from "./tablePaginationActions";
@@ -22,10 +21,9 @@ import { getCosts } from "../functions/apiClient";
 const styles = theme => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
   },
   table: {
-    maxWidth: 500,
     margin: "0 auto"
   },
   tableWrapper: {
@@ -76,9 +74,6 @@ class CustomPaginationActionsTable extends React.Component {
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
-          <Typography variant="h6" gutterBottom>
-            Table of your outgoings
-          </Typography>
           <Table className={classes.table}>
             <TableBody>
               {sortedCosts
