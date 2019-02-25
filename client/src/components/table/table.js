@@ -12,11 +12,28 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from "@material-ui/core/Tooltip";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 import Pagination from "./tablePaginationActions";
 
 import { getCosts } from "../functions/apiClient";
+
+const countMothOutgoings = costs => {
+  let sumOfCost;
+  const date = new Date().toLocaleDateString();
+
+  if (costs[0]) {
+    sumOfCost = costs.reduce((a, b) => {
+      // if (a.date[4] === date[4] && b.date[4] === date[4]) {
+        return parseInt(a.count) + parseInt(b.count);
+      // }
+    });
+  } console.log(sumOfCost)
+  return sumOfCost;
+ 
+};
 
 const styles = theme => ({
   root: {
@@ -29,6 +46,9 @@ const styles = theme => ({
   },
   tableWrapper: {
     overflowX: "auto"
+  },
+  title: {
+    fontSize: 14
   }
 });
 
@@ -44,9 +64,7 @@ class CustomPaginationActionsTable extends React.Component {
   };
 
   componentWillReceiveProps = newProps => {
-    if (
-      newProps.costs !== this.props.costs 
-    ) {
+    if (newProps.costs !== this.props.costs) {
       this.setState({ costs: newProps.costs });
     }
   };
@@ -78,15 +96,19 @@ class CustomPaginationActionsTable extends React.Component {
               {sortedCosts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <Tooltip disableFocusListener title={row.chosenItems.join(", ")} placement='right' key={index}>
-                     <TableRow key={index}>
-                    <TableCell component="th" scope="row">
-                      {row.date}
-                    </TableCell>
-                    <TableCell align="right">{row.count + "zł"}</TableCell>
-                  </TableRow>
-                </Tooltip>
-              
+                  <Tooltip
+                    disableFocusListener
+                    title={row.chosenItems.join(", ")}
+                    placement="right"
+                    key={index}
+                  >
+                    <TableRow key={index}>
+                      <TableCell component="th" scope="row">
+                        {row.date}
+                      </TableCell>
+                      <TableCell align="right">{row.count + "zł"}</TableCell>
+                    </TableRow>
+                  </Tooltip>
                 ))}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 48 * emptyRows }}>
@@ -113,6 +135,20 @@ class CustomPaginationActionsTable extends React.Component {
             </TableFooter>
           </Table>
         </div>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              This month you spent:
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {countMothOutgoings(sortedCosts) + "zł"}
+            </Typography>
+          </CardContent>
+        </Card>
       </Paper>
     );
   }

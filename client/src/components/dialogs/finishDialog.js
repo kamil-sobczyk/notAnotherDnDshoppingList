@@ -10,6 +10,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 import { changeSelected, changeItems, addCosts } from "../functions/apiClient";
 
@@ -21,8 +22,11 @@ class FinishDialog extends React.Component {
   };
 
   handleChangeCounter = e => {
+    let value = e.target.value;
+    value < 0 ? (value = 0) : (value = e.target.value);
+
     this.setState({
-      count: e.target.value,
+      count: value
     });
   };
   handleFinish = () => {
@@ -77,13 +81,14 @@ class FinishDialog extends React.Component {
             spent for shopping.
           </DialogContentText>
           <TextField
-            id="outlined-number"
-            label="Value"
+            id="outlined-adornment-number"
+            label="Amount"
             defaultValue={0}
             onChange={this.handleChangeCounter}
             type="number"
-            InputLabelProps={{
-              shrink: true
+            InputProps={{
+              inputProps: { min: 0 },
+              endAdornment: <InputAdornment position="end">PLN</InputAdornment>
             }}
             margin="normal"
             variant="outlined"
