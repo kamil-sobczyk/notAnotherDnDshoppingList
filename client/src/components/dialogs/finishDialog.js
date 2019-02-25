@@ -26,6 +26,7 @@ class FinishDialog extends React.Component {
       count: e.target.value
     });
   };
+
   handleFinish = () => {
     const {
       handleOpenFinish,
@@ -33,7 +34,6 @@ class FinishDialog extends React.Component {
       getSelected,
       items,
       getItems,
-      addCost,
       getCosts
     } = this.props;
 
@@ -105,6 +105,13 @@ class FinishDialog extends React.Component {
   }
 }
 
+FinishDialog.propTypes = {
+  items: PropTypes.array,
+  getCosts: PropTypes.func,
+  getItems: PropTypes.func,
+  getSelected: PropTypes.func
+};
+
 const mapStateToProps = state => {
   return {
     items: state.items
@@ -116,7 +123,6 @@ const mapDispatchToProps = dispatch => {
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    addCost: cost => dispatch({ type: "ADD_COSTS", cost: cost }),
     getCosts: costs => dispatch({ type: "GET_COSTS", costs: costs })
   };
 };

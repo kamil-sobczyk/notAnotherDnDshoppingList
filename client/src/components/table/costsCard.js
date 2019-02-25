@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes, { number } from "prop-types";
+import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -47,5 +47,10 @@ const styles = theme => ({
         )
       }
   }
+
+  CostsCard.propTypes = {
+    classes: PropTypes.object.isRequired,
+    sortedCosts: PropTypes.array
+  };
 
   export default withStyles(styles)(CostsCard);

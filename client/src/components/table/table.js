@@ -130,7 +130,9 @@ class CustomPaginationActionsTable extends React.Component {
 }
 
 CustomPaginationActionsTable.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  costs: PropTypes.array,
+  getCosts: PropTypes.func
 };
 
 const mapStateToProps = state => {
