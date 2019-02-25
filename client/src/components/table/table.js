@@ -12,6 +12,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Pagination from "./tablePaginationActions";
 
@@ -77,12 +78,15 @@ class CustomPaginationActionsTable extends React.Component {
               {sortedCosts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <TableRow key={index}>
+                  <Tooltip disableFocusListener title={row.chosenItems.join(", ")} placement='right' key={index}>
+                     <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       {row.date}
                     </TableCell>
                     <TableCell align="right">{row.count + "zł"}</TableCell>
                   </TableRow>
+                </Tooltip>
+              
                 ))}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 48 * emptyRows }}>

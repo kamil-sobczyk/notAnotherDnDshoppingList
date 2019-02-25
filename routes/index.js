@@ -48,7 +48,7 @@ const store = {
       id: "8"
     }
   ],
-  costs: [{date: "today", cost: 500}],
+  costs: [],
   activeItem: {
     list: "items",
     index: 0

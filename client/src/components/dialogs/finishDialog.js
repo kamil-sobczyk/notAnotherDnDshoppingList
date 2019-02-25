@@ -15,14 +15,14 @@ import { changeSelected, changeItems, addCosts } from "../functions/apiClient";
 
 class FinishDialog extends React.Component {
   state = {
-    count: 0
+    count: 0,
+    date: new Date().toLocaleDateString(),
+    chosenItems: []
   };
 
   handleChangeCounter = e => {
     this.setState({
       count: e.target.value,
-      date: new Date().toLocaleDateString(),
-      chosenItems: []
     });
   };
   handleFinish = () => {
