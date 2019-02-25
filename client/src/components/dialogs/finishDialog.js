@@ -22,11 +22,8 @@ class FinishDialog extends React.Component {
   };
 
   handleChangeCounter = e => {
-    let value = e.target.value;
-    value < 0 ? (value = 0) : (value = e.target.value);
-
     this.setState({
-      count: value
+      count: e.target.value
     });
   };
   handleFinish = () => {
@@ -36,7 +33,8 @@ class FinishDialog extends React.Component {
       getSelected,
       items,
       getItems,
-      addCost
+      addCost,
+      getCosts
     } = this.props;
 
     const newSelected = [];
@@ -56,7 +54,7 @@ class FinishDialog extends React.Component {
     const item = this.state;
     item.chosenItems = chosenNames;
 
-    addCosts(addCost, item);
+    addCosts(getCosts, item);
     changeSelected(getSelected, newSelected);
     changeItems(getItems, newItems);
     handleOpenFinish();
@@ -118,7 +116,8 @@ const mapDispatchToProps = dispatch => {
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected }),
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    addCost: cost => dispatch({ type: "ADD_COSTS", cost: cost })
+    addCost: cost => dispatch({ type: "ADD_COSTS", cost: cost }),
+    getCosts: costs => dispatch({ type: "GET_COSTS", costs: costs })
   };
 };
 

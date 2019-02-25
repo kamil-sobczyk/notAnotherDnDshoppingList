@@ -46,7 +46,8 @@ const reducer = (state, action) => {
     case "GET_COSTS":
     return { ...state, costs: action.costs}
     case "ADD_COST":
-      const newCosts = state.costs.push(action.cost);
+      const newCosts = state.costs;
+      newCosts.push(action.cost);
       return { ...state, costs: newCosts };
     default:
       return state;

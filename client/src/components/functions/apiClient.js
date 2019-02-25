@@ -141,7 +141,7 @@ const addCosts = (dispatch, costs) => {
       return response.json();
     })
     .then(state => {
-      return state;
+      return dispatch(state);
     })
     .catch(error => console.log("Ooops", error));
 };

@@ -13,27 +13,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 
 import Pagination from "./tablePaginationActions";
+import CostsCard from "./costsCard";
 
 import { getCosts } from "../functions/apiClient";
-
-const countMothOutgoings = costs => {
-  let sumOfCost;
-  const date = new Date().toLocaleDateString();
-
-  if (costs[0]) {
-    sumOfCost = costs.reduce((a, b) => {
-      // if (a.date[4] === date[4] && b.date[4] === date[4]) {
-        return parseInt(a.count) + parseInt(b.count);
-      // }
-    });
-  } console.log(sumOfCost)
-  return sumOfCost;
- 
-};
 
 const styles = theme => ({
   root: {
@@ -63,12 +47,6 @@ class CustomPaginationActionsTable extends React.Component {
     getCosts(this.props.getCosts);
   };
 
-  componentWillReceiveProps = newProps => {
-    if (newProps.costs !== this.props.costs) {
-      this.setState({ costs: newProps.costs });
-    }
-  };
-
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
@@ -78,12 +56,22 @@ class CustomPaginationActionsTable extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { rowsPerPage, page, costs } = this.state;
+    const { classes, costs } = this.props;
+    const { rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
 
-    const sortedCosts = costs.sort((a, b) => a.date > b.date);
+    let sortedCosts;
+    if (costs.length > 0) {
+      sortedCosts = costs.sort((a, b) => a.date > b.date);
+    } else
+      sortedCosts = [
+        {
+          count: 0,
+          chosenItems: ["No shopping yet"],
+          date: new Date().toLocaleDateString()
+        }
+      ];
 
     return (
       <Paper className={classes.root}>
@@ -135,20 +123,7 @@ class CustomPaginationActionsTable extends React.Component {
             </TableFooter>
           </Table>
         </div>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              This month you spent:
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {countMothOutgoings(sortedCosts) + "zł"}
-            </Typography>
-          </CardContent>
-        </Card>
+        <CostsCard sortedCosts={sortedCosts} />
       </Paper>
     );
   }
