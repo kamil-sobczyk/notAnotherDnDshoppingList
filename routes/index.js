@@ -49,10 +49,6 @@ const store = {
     }
   ],
   costs: [],
-  activeItem: {
-    list: "items",
-    index: 0
-  }
 };
 
 const appRouter = app => {

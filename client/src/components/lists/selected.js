@@ -48,6 +48,12 @@ class Selected extends Component {
     getSelected(this.props.getSelected);
   };
 
+  componentWillReceiveProps = newProps => {
+    if (newProps.selected !== this.props.selected) {
+      this.setState({ selected: newProps.selected });
+    }
+  };
+
   handleToggle = index => () => {
     const { selected } = this.props;
 
@@ -64,8 +70,8 @@ class Selected extends Component {
     });
   };
   render() {
-    const { classes, selected, handleOpenEdit } = this.props;
-    const { openFinish, openCounter } = this.state;
+    const { classes, handleOpenEdit } = this.props;
+    const { openFinish, selected } = this.state;
 
     return (
       <>
@@ -92,9 +98,7 @@ class Selected extends Component {
                       >
                         <Checkbox
                           checked={
-                            this.props.selected[index]
-                              ? this.props.selected[index].checked
-                              : false
+                            selected[index] ? selected[index].checked : false
                           }
                           tabIndex={-1}
                           disableRipple
@@ -131,9 +135,8 @@ class Selected extends Component {
         </Droppable>
         <FinishDialog
           openFinish={openFinish}
-          openCounter={openCounter}
           handleOpenFinish={this.handleFinishShopping.bind(this)}
-          selected={this.state.selected}
+          selected={selected}
         />
       </>
     );
