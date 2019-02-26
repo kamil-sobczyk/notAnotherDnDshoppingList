@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import ViewButton from "./viewButton";
+import ViewButton from "./listsViewButton";
 import ListsContainer from "./listsContainer";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
@@ -13,7 +13,7 @@ class ListBox extends Component {
         <ViewButton />
         <ListsContainer />
         <AddDialog />
-        <EditDialog />
+        {/* <EditDialog /> */}
         <DeleteDialog />
       </>
     );

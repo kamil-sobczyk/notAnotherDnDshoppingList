@@ -8,7 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 
-import Table from "../table/table";
+import Table from "../table/tableContainer";
 
 class ShoppingDialog extends React.Component {
   state = {
@@ -25,7 +25,7 @@ class ShoppingDialog extends React.Component {
     return (
       <>
         <Button variant="outlined" color="primary" onClick={this.handleClick}>
-          Show previous shopping
+          Show previous shoppings
         </Button>
         <Dialog
           fullScreen={fullScreen}

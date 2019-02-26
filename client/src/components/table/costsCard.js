@@ -19,6 +19,9 @@ const countMothOutgoings = costs => {
 const styles = theme => ({
   title: {
     fontSize: 14
+  },
+  card: {
+      margin: "0 auto"
   }
 });
 
@@ -26,7 +29,7 @@ class CostsCard extends Component {
   render() {
     const { classes, sortedCosts } = this.props;
     return (
-      <Card>
+      <Card >
         <CardContent>
           <Typography
             className={classes.title}
@@ -36,7 +39,7 @@ class CostsCard extends Component {
             This month you spent:
           </Typography>
           <Typography variant="h5" component="h2">
-            {countMothOutgoings(sortedCosts) + "zł"}
+            {countMothOutgoings(sortedCosts) + " zł"}
           </Typography>
         </CardContent>
       </Card>

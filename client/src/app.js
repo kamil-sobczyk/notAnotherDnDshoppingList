@@ -6,7 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
 import ListBox from "./components/listBox";
-import Table from './components/table/table';
 
 import ShoppingDialog from './components/dialogs/shoppingDialog';
 

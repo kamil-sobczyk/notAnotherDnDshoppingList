@@ -13,7 +13,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import Pagination from "./tablePaginationActions";
+import Pagination from "./tablePagination";
 import CostsCard from "./costsCard";
 
 import { getCosts } from "../functions/apiClient";
@@ -61,7 +61,7 @@ class CustomPaginationActionsTable extends React.Component {
 
     let sortedCosts;
     if (costs.length > 0) {
-      sortedCosts = costs.sort((a, b) => a.date > b.date);
+      sortedCosts = costs.sort((b, a) => a.date > b.date);
     } else
       sortedCosts = [
         {
