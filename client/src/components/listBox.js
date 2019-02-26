@@ -5,6 +5,7 @@ import ListsContainer from "./listsContainer";
 import AddDialog from "./dialogs/addDialog";
 import EditDialog from "./dialogs/editDialog";
 import DeleteDialog from "./dialogs/deleteDialog";
+import ShoppingDialog from './dialogs/shoppingDialog';
 
 class ListBox extends Component {
   render() {
@@ -13,8 +14,9 @@ class ListBox extends Component {
         <ViewButton />
         <ListsContainer />
         <AddDialog />
-        {/* <EditDialog /> */}
+        <EditDialog />
         <DeleteDialog />
+        <ShoppingDialog/>
       </>
     );
   }
