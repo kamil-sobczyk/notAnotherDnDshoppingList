@@ -16,7 +16,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Pagination from "./tablePagination";
 import CostsCard from "./costsCard";
 
-import { getCosts } from "../functions/apiClient";
+import { getCosts } from "../../functions/apiClient";
 
 const styles = theme => ({
   root: {

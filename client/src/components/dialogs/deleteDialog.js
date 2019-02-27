@@ -10,7 +10,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { deleteItems } from "../functions/apiClient";
+import { deleteItems } from "../../functions/apiClient";
 
 class FinishDialog extends React.Component {
   handleDeleteItem = activeItem => {
@@ -91,7 +91,7 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "DELETE_ITEM",
         list: activeItem.list,
-        index: activeItem.index
+        id: activeItem.id
       })
   };
 };

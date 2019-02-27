@@ -12,7 +12,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-import { changeSelected, changeItems, addCosts } from "../functions/apiClient";
+import { changeSelected, changeItems, addCosts } from "../../functions/apiClient";
 
 class FinishDialog extends React.Component {
   state = {

@@ -10,7 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 
-import { getItems } from "../functions/apiClient";
+import { getItems } from "../../functions/apiClient";
 import Menu from "./menu";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -30,6 +30,7 @@ class Items extends Component {
 
   render() {
     const { classes, items } = this.props;
+    const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name))
 
     return (
       <Droppable droppableId="droppable">
@@ -38,7 +39,7 @@ class Items extends Component {
             <Typography variant="h6" gutterBottom>
               Items to choose
             </Typography>
-            {items.map((item, index) => (
+            {sortedItems.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {provided => (
                   <div
@@ -48,7 +49,7 @@ class Items extends Component {
                   >
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
-                        <Menu index={index} />
+                        <Menu index={index} id={item.id} />
                     </ListItem>
                     <Divider />
                   </div>

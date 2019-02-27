@@ -86,10 +86,11 @@ const appRouter = app => {
     res.status(200).send(store);
   });
   app.delete("/store", (req, res) => {
-    store[req.body.list] = [
-      ...store[req.body.list].slice(0, req.body.index),
-      ...store[req.body.list].slice(req.body.index + 1)
-    ];
+    store.items.forEach((item, index) => {
+      if (item.id === req.body.id) {
+        store.items.splice(index, 1);
+      }
+    })
     res.status(200).send(store);
   });
   app.get("/store/costs", (req, res) => {
