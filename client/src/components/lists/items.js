@@ -24,13 +24,25 @@ const styles = theme => ({
 });
 
 class Items extends Component {
+  state = {
+    items: this.props.items
+  };
   componentWillMount = () => {
     getItems(this.props.getItems);
   };
 
+  componentWillReceiveProps = newProps => {
+    if (newProps.items !== this.props.items) {
+      this.setState({ items: newProps.items });
+    }
+  };
+
+
   render() {
-    const { classes, items } = this.props;
-    const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
+    const { classes } = this.props;
+    const sortedItems = this.state.items.sort((a, b) => a.name.localeCompare(b.name));
+
+    console.log("items render")
 
     return (
       <Droppable droppableId="droppable">

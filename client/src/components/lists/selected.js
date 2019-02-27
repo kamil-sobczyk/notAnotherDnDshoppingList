@@ -73,6 +73,8 @@ class Selected extends Component {
     const { classes, handleOpenEdit } = this.props;
     const { openFinish, selected } = this.state;
 
+    console.log("selected render")
+
     return (
       <>
         <Droppable droppableId="droppable2">

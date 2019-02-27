@@ -12,8 +12,6 @@ import { changeSelected, changeItems } from "../functions/apiClient";
 
 import { DragDropContext } from "react-beautiful-dnd";
 
-
-
 const styles = theme => ({
   lists: {
     listStyleType: "none",
