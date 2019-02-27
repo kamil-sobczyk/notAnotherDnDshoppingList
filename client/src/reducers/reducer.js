@@ -24,7 +24,7 @@ const reducer = (state, action) => {
         if (item.id === action.id) {
           state.items.splice(index, 1);
         }
-      })
+      });
       return {
         ...state
       };

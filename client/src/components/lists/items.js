@@ -30,7 +30,7 @@ class Items extends Component {
 
   render() {
     const { classes, items } = this.props;
-    const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name))
+    const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
 
     return (
       <Droppable droppableId="droppable">
@@ -49,7 +49,7 @@ class Items extends Component {
                   >
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
-                        <Menu index={index} id={item.id} />
+                      <Menu index={index} id={item.id} />
                     </ListItem>
                     <Divider />
                   </div>

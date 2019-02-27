@@ -48,7 +48,7 @@ const store = {
       id: "8"
     }
   ],
-  costs: [],
+  costs: []
 };
 
 const appRouter = app => {
@@ -90,7 +90,7 @@ const appRouter = app => {
       if (item.id === req.body.id) {
         store.items.splice(index, 1);
       }
-    })
+    });
     res.status(200).send(store);
   });
   app.get("/store/costs", (req, res) => {

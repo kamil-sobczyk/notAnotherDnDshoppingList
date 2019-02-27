@@ -104,7 +104,7 @@ const editItem = (newItem, activeItem) => {
       "Content-type": "application/json"
     },
     mode: "cors",
-    body: JSON.stringify({activeItem: activeItem, newItem: newItem})
+    body: JSON.stringify({ activeItem: activeItem, newItem: newItem })
   })
     .then(response => {
       return response.json();

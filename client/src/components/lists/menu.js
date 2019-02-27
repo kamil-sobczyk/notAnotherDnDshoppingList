@@ -56,14 +56,14 @@ class MoreMenu extends Component {
 
     return (
       <>
-      <Tooltip title="More" placement="left" >
-        <IconButton
-          aria-owns={open ? "fade-menu" : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          <MoreIcon />
-        </IconButton>
+        <Tooltip title="More" placement="left">
+          <IconButton
+            aria-owns={open ? "fade-menu" : undefined}
+            aria-haspopup="true"
+            onClick={this.handleClick}
+          >
+            <MoreIcon />
+          </IconButton>
         </Tooltip>
         <Menu
           id="fade-menu"
@@ -78,7 +78,7 @@ class MoreMenu extends Component {
               aria-label="Edit item"
               onClick={handleOpenEdit.bind(this, {
                 list: "items",
-                index: index,
+                index: index
               })}
             >
               <EditIcon />
@@ -103,11 +103,11 @@ class MoreMenu extends Component {
 }
 
 MoreMenu.propTypes = {
-    classes: PropTypes.object.isRequired,
-    openDelete: PropTypes.bool,
-    handleOpenDelete: PropTypes.func,
-    handleOpenEdit: PropTypes.func,
-  };
+  classes: PropTypes.object.isRequired,
+  openDelete: PropTypes.bool,
+  handleOpenDelete: PropTypes.func,
+  handleOpenEdit: PropTypes.func
+};
 
 const mapStateToProps = state => {
   return { items: state.items, store: state, selected: state.selected };
