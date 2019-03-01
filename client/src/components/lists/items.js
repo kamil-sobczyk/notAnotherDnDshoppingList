@@ -42,8 +42,6 @@ class Items extends Component {
     const { classes } = this.props;
     const sortedItems = this.state.items.sort((a, b) => a.name.localeCompare(b.name));
 
-    console.log("items render")
-
     return (
       <Droppable droppableId="droppable">
         {provided => (
