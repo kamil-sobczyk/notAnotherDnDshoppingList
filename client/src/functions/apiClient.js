@@ -21,8 +21,8 @@ const getSelected = dispatch => {
     .then(response => {
       return response.json();
     })
-    .then(checked => {
-      return dispatch(checked);
+    .then(selected => {
+      return dispatch(selected);
     });
 };
 

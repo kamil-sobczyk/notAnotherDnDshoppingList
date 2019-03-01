@@ -70,10 +70,8 @@ class Selected extends Component {
     });
   };
   render() {
-    const { classes, handleOpenEdit } = this.props;
+    const { classes, handleOpenEdit} = this.props;
     const { openFinish, selected } = this.state;
-
-    console.log("selected rendfdfdder")
 
     return (
       <>
@@ -165,8 +163,7 @@ const mapDispatchToProps = dispatch => {
         index: activeItem.index,
         list: activeItem.list
       }),
-    getSelected: selected =>
-      dispatch({ type: "GET_SELECTED", selected: selected })
+    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 

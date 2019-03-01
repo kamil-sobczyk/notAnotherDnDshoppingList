@@ -37,10 +37,11 @@ class Items extends Component {
     }
   };
 
-
   render() {
     const { classes } = this.props;
-    const sortedItems = this.state.items.sort((a, b) => a.name.localeCompare(b.name));
+    const sortedItems = this.state.items.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
 
     return (
       <Droppable droppableId="droppable">

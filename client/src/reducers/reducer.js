@@ -1,4 +1,18 @@
-const reducer = (state, action) => {
+const initialState = {
+  items: [],
+  selected: [],
+  activeItem: {
+    list: "items",
+    index: 0
+  },
+  costs: [],
+  openAdd: false,
+  openEdit: false,
+  openDelete: false,
+  showItems: false
+}
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SHOW_ITEMS":
       return { ...state, showItems: state.showItems ? false : true };
