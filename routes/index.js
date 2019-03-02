@@ -53,7 +53,7 @@ const store = {
 
 const appRouter = app => {
   app.get("/", (req, res) => {
-    res.send("Hello world\n");
+    res.send("My App\n");
   });
   let newID = "9999";
   app.get("/store", (req, res) => {
@@ -86,13 +86,9 @@ const appRouter = app => {
     res.status(200).send(store);
   });
   app.delete("/store", (req, res) => {
-    store.items.forEach((item, index) => {
-      if (item.id === req.body.id) {
-        store.items.splice(index, 1);
-      }
-    });
+    store.items.filter(item => item.id !== req.body.id);
     res.status(200).send(store);
-  });
+    });
   app.get("/store/costs", (req, res) => {
     res.status(200).send(store.costs);
   });

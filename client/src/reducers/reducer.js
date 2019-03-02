@@ -31,21 +31,20 @@ const reducer = (state = initialState, action) => {
         activeItem: { list: action.list, index: action.index }
       };
     case "ADD_ITEM":
-      state.items.push(action.newItem);
-      return { ...state, items: state.items };
+    let newItems = state.items;
+      newItems.push(action.newItem);
+      return { ...state, items: newItems };
     case "DELETE_ITEM":
-      state.items.forEach((item, index) => {
-        if (item.id === action.id) {
-          state.items.splice(index, 1);
-        }
-      });
+    newItems = state.items.filter(item => item.id !== action.id);
       return {
-        ...state
+
+        ...state, items: newItems
       };
     case "EDIT_ITEM":
-      state[action.list][action.index].name = action.newItem.name;
-      state[action.list][action.index].info = action.newItem.info;
-      return { ...state };
+    const list = state[action.list];
+    list[action.index].name = action.newItem.name;
+    list[action.index].info = action.newItem.info;
+      return { ...state, [action.list]: list };
     case "GET_ITEMS":
       return {
         ...state,
@@ -56,8 +55,9 @@ const reducer = (state = initialState, action) => {
     case "GET_COSTS":
       return { ...state, costs: action.costs };
     case "ADD_COST":
-      state.costs.push(action.cost);
-      return { ...state, costs: state.costs };
+    const newCosts = state.costs;
+      newCosts.push(action.cost);
+      return { ...state, costs: newCosts };
     default:
       return state;
   }
