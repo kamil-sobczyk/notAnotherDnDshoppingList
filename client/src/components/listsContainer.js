@@ -47,6 +47,7 @@ class ListsContainer extends Component {
 
   onDragEnd = result => {
     const { source, destination } = result;
+    const { getItems, getSelected } = this.props;
 
     if (!destination) {
       return;
@@ -58,11 +59,12 @@ class ListsContainer extends Component {
         source.index,
         destination.index
       );
-
       if (
         JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) < 0
-      )
-        changeSelected(this.props.getSelected, items);
+      ) {
+        getSelected(items);
+        changeSelected(getSelected, items);
+      }
     } else {
       const result = move(
         this.getList(source.droppableId),
@@ -70,15 +72,19 @@ class ListsContainer extends Component {
         source,
         destination
       );
-      result.droppable2.forEach(item => item.checked = false);
-      
-      changeItems(this.props.getItems, result.droppable);
-      changeSelected(this.props.getSelected, result.droppable2);
+      result.droppable2.forEach(item => (item.checked = false));
+
+      getItems(result.droppable);
+      getSelected(result.droppable2);
+
+      changeItems(getItems, result.droppable);
+      changeSelected(getSelected, result.droppable2);
     }
   };
 
   render() {
     const { classes, display } = this.props;
+
     return (
       <div className={classes.lists}>
         <DragDropContext onDragEnd={this.onDragEnd}>
@@ -89,6 +95,7 @@ class ListsContainer extends Component {
     );
   }
 }
+
 ListsContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   getItems: PropTypes.func,

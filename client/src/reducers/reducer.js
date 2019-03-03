@@ -10,7 +10,7 @@ const initialState = {
   openEdit: false,
   openDelete: false,
   showItems: false
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,19 +31,19 @@ const reducer = (state = initialState, action) => {
         activeItem: { list: action.list, index: action.index }
       };
     case "ADD_ITEM":
-    let newItems = state.items;
+      let newItems = state.items;
       newItems.push(action.newItem);
       return { ...state, items: newItems };
     case "DELETE_ITEM":
-    newItems = state.items.filter(item => item.id !== action.id);
+      newItems = state.items.filter(item => item.id !== action.id);
       return {
-
-        ...state, items: newItems
+        ...state,
+        items: newItems
       };
     case "EDIT_ITEM":
-    const list = state[action.list];
-    list[action.index].name = action.newItem.name;
-    list[action.index].info = action.newItem.info;
+      const list = state[action.list];
+      list[action.index].name = action.newItem.name;
+      list[action.index].info = action.newItem.info;
       return { ...state, [action.list]: list };
     case "GET_ITEMS":
       return {
@@ -55,7 +55,7 @@ const reducer = (state = initialState, action) => {
     case "GET_COSTS":
       return { ...state, costs: action.costs };
     case "ADD_COST":
-    const newCosts = state.costs;
+      const newCosts = state.costs;
       newCosts.push(action.cost);
       return { ...state, costs: newCosts };
     default:
