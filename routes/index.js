@@ -62,6 +62,9 @@ const appRouter = app => {
   app.get("/store/selected", (req, res) => {
     res.status(200).send(store.selected);
   });
+  app.get("/store/items", (req, res) => {
+    res.status(200).send(store.items);
+  });
   app.put("/store/selected", (req, res) => {
     store.selected = req.body;
     res.status(200).json(store.selected);

@@ -54,9 +54,9 @@ class FinishDialog extends React.Component {
     const item = this.state;
     item.chosenItems = chosenNames;
 
-    addCosts(getCosts, item);
     changeSelected(getSelected, newSelected);
     changeItems(getItems, newItems);
+    addCosts(getCosts, item);
     handleOpenFinish();
   };
 

@@ -1,16 +1,16 @@
-const server = "http://10.59.247.236";
+const server = "http://35.188.95.65";
 // const server = "http://0.0.0.0:8080";
 
 const getItems = dispatch => {
-  fetch(server + "/store/", {
+  fetch(server + "/store/items", {
     mode: "cors",
     method: "GET"
   })
     .then(response => {
       return response.json();
     })
-    .then(store => {
-      return dispatch(store.items);
+    .then(items => {
+      return dispatch(items);
     });
 };
 
