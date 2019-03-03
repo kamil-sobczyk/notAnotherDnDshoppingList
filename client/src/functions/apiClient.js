@@ -1,5 +1,5 @@
-// const server = "http://35.202.93.206";
-const server = "http://0.0.0.0:8080";
+const server = "http://10.59.247.236";
+// const server = "http://0.0.0.0:8080";
 
 const getItems = dispatch => {
   fetch(server + "/store/", {

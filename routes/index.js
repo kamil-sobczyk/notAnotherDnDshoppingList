@@ -53,7 +53,7 @@ const store = {
 
 const appRouter = app => {
   app.get("/", (req, res) => {
-    res.send("ShoppingList API\n");
+    res.send("ShoppingList API!\n");
   });
   let newID = "9999";
   app.get("/store", (req, res) => {
