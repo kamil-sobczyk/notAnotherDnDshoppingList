@@ -53,6 +53,7 @@ class Selected extends Component {
     selected[index].checked
       ? (selected[index].checked = false)
       : (selected[index].checked = true);
+    getSelected(selected);
     changeSelected(getSelected, selected);
   };
 
