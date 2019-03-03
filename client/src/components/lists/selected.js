@@ -16,7 +16,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getSelected } from "../../functions/apiClient";
+import { getSelected, changeSelected } from "../../functions/apiClient";
 import FinishDialog from "../dialogs/finishDialog";
 
 const styles = theme => ({
@@ -40,28 +40,20 @@ const styles = theme => ({
 
 class Selected extends Component {
   state = {
-    openFinish: false,
-    selected: this.props.selected
+    openFinish: false
   };
 
   componentWillMount = () => {
     getSelected(this.props.getSelected);
   };
 
-  componentWillReceiveProps = newProps => {
-    if (newProps.selected !== this.props.selected) {
-      this.setState({ selected: newProps.selected });
-    }
-  };
-
   handleToggle = index => () => {
-    const { selected } = this.props;
+    const { selected, getSelected } = this.props;
 
     selected[index].checked
       ? (selected[index].checked = false)
       : (selected[index].checked = true);
-
-    this.setState({ selected });
+    changeSelected(getSelected, selected);
   };
 
   handleFinishShopping = () => {
@@ -70,8 +62,8 @@ class Selected extends Component {
     });
   };
   render() {
-    const { classes, handleOpenEdit} = this.props;
-    const { openFinish, selected } = this.state;
+    const { classes, handleOpenEdit, selected } = this.props;
+    const { openFinish } = this.state;
 
     return (
       <>
@@ -163,7 +155,8 @@ const mapDispatchToProps = dispatch => {
         index: activeItem.index,
         list: activeItem.list
       }),
-    getSelected: selected => dispatch({ type: "GET_SELECTED", selected: selected })
+    getSelected: selected =>
+      dispatch({ type: "GET_SELECTED", selected: selected })
   };
 };
 

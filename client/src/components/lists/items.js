@@ -24,22 +24,14 @@ const styles = theme => ({
 });
 
 class Items extends Component {
-  state = {
-    items: this.props.items
-  };
+
   componentWillMount = () => {
     getItems(this.props.getItems);
   };
 
-  componentWillReceiveProps = newProps => {
-    if (newProps.items !== this.props.items) {
-      this.setState({ items: newProps.items });
-    }
-  };
-
   render() {
-    const { classes } = this.props;
-    const sortedItems = this.state.items.sort((a, b) =>
+    const { classes, items, handleOpenAdd } = this.props;
+    const sortedItems = items.sort((a, b) =>
       a.name.localeCompare(b.name)
     );
 
@@ -68,7 +60,7 @@ class Items extends Component {
               </Draggable>
             ))}
             {provided.placeholder}
-            <Button color="primary" onClick={this.props.handleOpenAdd}>
+            <Button color="primary" onClick={handleOpenAdd}>
               Add new item
             </Button>
           </div>
@@ -85,7 +77,7 @@ Items.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { items: state.items, store: state, selected: state.selected };
+  return { items: state.items };
 };
 
 const mapDispatchToProps = dispatch => {
