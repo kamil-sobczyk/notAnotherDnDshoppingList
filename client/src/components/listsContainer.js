@@ -62,9 +62,7 @@ class ListsContainer extends Component {
       if (
         JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) < 0
       ) {
-        console.log(items)
         getSelected(items);
-        console.log(items)
         changeSelected(getSelected, items);
       }
     } else {

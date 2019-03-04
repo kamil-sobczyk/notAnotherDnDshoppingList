@@ -65,14 +65,20 @@ const appRouter = app => {
     res.status(200).json(store.items);
   });
   app.put("/store/items", (req, res) => {
-    const active = store.items.filter(
-      item => item.id == req.body.activeItem.id
-    )[0];
-    let newItem = req.body.newItem;
-    newItem.id = active.id;
-    store.items.forEach((item, index) =>
-      item.id == active.id ? (store.items[index] = newItem) : false
-    );
+    switch (req.body.newItem) {
+      case undefined: {
+        store.items = req.body;
+      }
+      default:
+        const active = store.items.filter(
+          item => item.id == req.body.activeItem.id
+        )[0];
+        let newItem = req.body.newItem;
+        newItem.id = active.id;
+        store.items.forEach((item, index) =>
+          item.id == active.id ? (store.items[index] = newItem) : false
+        );
+    }
     res.status(200).json(store.items);
   });
   app.delete("/store/items", (req, res) => {

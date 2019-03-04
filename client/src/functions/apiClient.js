@@ -36,15 +36,14 @@ const changeItems = (dispatch, body) => {
     body: JSON.stringify(body)
   })
     .then(response => {
-      return response.json();
+      return response;
     })
     .then(items => {
-      return dispatch(items);
+      return items.json();
     })
     .catch(error => console.log("Ooops", error));
 };
 const changeSelected = (dispatch, body) => {
-  console.log("b", body);
   fetch(server + "/store/selected", {
     method: "PUT",
     headers: {
