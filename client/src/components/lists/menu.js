@@ -78,7 +78,8 @@ class MoreMenu extends Component {
               aria-label="Edit item"
               onClick={handleOpenEdit.bind(this, {
                 list: "items",
-                index: index
+                index: index,
+                id: id
               })}
             >
               <EditIcon />
@@ -119,7 +120,8 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "SHOW_EDIT_DIALOG",
         index: activeItem.index,
-        list: activeItem.list
+        list: activeItem.list,
+        id: activeItem.id
       }),
     handleOpenDelete: activeItem =>
       dispatch({

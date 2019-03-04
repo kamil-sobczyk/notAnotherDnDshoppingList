@@ -1,3 +1,5 @@
+import { generateNewId } from "../functions/moveFunctions";
+
 const initialState = {
   items: [],
   selected: [],
@@ -28,7 +30,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         openEdit: state.openEdit ? false : true,
-        activeItem: { list: action.list, index: action.index }
+        activeItem: { list: action.list, index: action.index, id: action.id }
       };
     case "ADD_ITEM":
       let newItems = state.items;
@@ -46,12 +48,16 @@ const reducer = (state = initialState, action) => {
       list[action.index].info = action.newItem.info;
       return { ...state, [action.list]: list };
     case "GET_ITEMS":
+      newItems = action.items;
+      newItems.forEach(item => (item.id = generateNewId()));
       return {
         ...state,
-        items: action.items
+        items: newItems
       };
     case "GET_SELECTED":
-      return { ...state, selected: action.selected };
+      const newSelected = action.selected;
+      newSelected.forEach(item => (item.id = generateNewId()));
+      return { ...state, selected: newSelected };
     case "GET_COSTS":
       return { ...state, costs: action.costs };
     case "ADD_COST":

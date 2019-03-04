@@ -55,50 +55,55 @@ const appRouter = app => {
   app.get("/", (req, res) => {
     res.send("ShoppingList API!\n");
   });
-  let newID = "9999";
-  app.get("/store", (req, res) => {
-    res.status(200).send(store);
-  });
-  app.get("/store/selected", (req, res) => {
-    res.status(200).send(store.selected);
-  });
+
   app.get("/store/items", (req, res) => {
-    res.status(200).send(store.items);
-  });
-  app.put("/store/selected", (req, res) => {
-    store.selected = req.body;
-    res.status(200).json(store.selected);
+    res.status(200).json(store.items);
   });
   app.post("/store/items", (req, res) => {
     let newItem = req.body;
-    newItem.id = newID;
-    newID = String(parseInt(newID) - 1);
     store.items.push(newItem);
-    res.status(200).json(newItem);
+    res.status(200).json(store.items);
   });
   app.put("/store/items", (req, res) => {
-    store.items = req.body;
-    res.status(200).send(store.items);
-  });
-  app.put("/store", (req, res) => {
+    const active = store.items.filter(item => item.id == req.body.activeItem.id)[0];
     let newItem = req.body.newItem;
-    let activeItem = req.body.activeItem;
-    newItem.id = newID;
-    newID = String(parseInt(newID) - 1);
-    store[activeItem.list][activeItem.index] = newItem;
-    res.status(200).send(store);
+    newItem.id = active.id;
+    store.items.forEach((item, index) => item.id == active.id ? store.items[index] = newItem : false);
+    res.status(200).json(store.items);
   });
-  app.delete("/store", (req, res) => {
-    store.items.filter(item => item.id !== req.body.id);
-    res.status(200).send(store);
+  app.delete("/store/items", (req, res) => {
+    const newItems = store.items.filter(item => item.id !== req.body.id);
+    res.status(200).json(newItems);
     });
+
+  app.get("/store/selected", (req, res) => {
+    res.status(200).json(store.selected);
+  });
+  app.put("/store/selected", (req, res) => {
+    let newItem = req.body.newItem;
+    console.log(newItem);
+    // let activeItem = req.body.activeItem;
+    // store.selected[activeItem.index] = newItem;
+    res.status(200).json(newItem);
+  });
+
   app.get("/store/costs", (req, res) => {
-    res.status(200).send(store.costs);
+    res.status(200).json(store.costs);
   });
   app.post("/store/costs", (req, res) => {
     store.costs.push(req.body);
     res.status(200).json(store.costs);
   });
+
+  app.put("/store", (req, res) => {
+    let newItem = req.body.newItem;
+    let activeItem = req.body.activeItem;
+    newItem.id = newID;
+    newID = String(parseInt(newID) + 1);
+    store[activeItem.list][activeItem.index] = newItem;
+    res.status(200).json(store);
+  });
+
 };
 
 module.exports = appRouter;
