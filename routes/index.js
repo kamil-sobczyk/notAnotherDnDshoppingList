@@ -65,26 +65,27 @@ const appRouter = app => {
     res.status(200).json(store.items);
   });
   app.put("/store/items", (req, res) => {
-    const active = store.items.filter(item => item.id == req.body.activeItem.id)[0];
+    const active = store.items.filter(
+      item => item.id == req.body.activeItem.id
+    )[0];
     let newItem = req.body.newItem;
     newItem.id = active.id;
-    store.items.forEach((item, index) => item.id == active.id ? store.items[index] = newItem : false);
+    store.items.forEach((item, index) =>
+      item.id == active.id ? (store.items[index] = newItem) : false
+    );
     res.status(200).json(store.items);
   });
   app.delete("/store/items", (req, res) => {
     const newItems = store.items.filter(item => item.id !== req.body.id);
     res.status(200).json(newItems);
-    });
+  });
 
   app.get("/store/selected", (req, res) => {
     res.status(200).json(store.selected);
   });
   app.put("/store/selected", (req, res) => {
-    let newItem = req.body.newItem;
-    console.log(newItem);
-    // let activeItem = req.body.activeItem;
-    // store.selected[activeItem.index] = newItem;
-    res.status(200).json(newItem);
+    store.selected = req.body;
+    res.status(200).json(store.selected);
   });
 
   app.get("/store/costs", (req, res) => {
@@ -103,7 +104,6 @@ const appRouter = app => {
     store[activeItem.list][activeItem.index] = newItem;
     res.status(200).json(store);
   });
-
 };
 
 module.exports = appRouter;

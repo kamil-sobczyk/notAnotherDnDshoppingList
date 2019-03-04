@@ -54,15 +54,10 @@ const changeSelected = (dispatch, body) => {
     body: JSON.stringify(body)
   })
     .then(response => {
-      console.log(response.json());
-      return response.json();
+      return response;
     })
-    // .then(res => res.text())
-    // .then(text => console.log(text))
     .then(selected => {
-      console.log("dsdd", selected);
-
-      return dispatch(selected);
+      return selected.json();
     })
     .catch(error => console.log("Ooops", error));
 };
