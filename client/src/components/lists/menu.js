@@ -45,12 +45,23 @@ class MoreMenu extends Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+  handleClickMore = action => {
+    const { handleOpenEdit, handleOpenDelete, index } = this.props;
+    const activeItem = {
+      list: "items",
+      index: index
+    };
+
+    action === "edit" ? handleOpenEdit(activeItem) : handleOpenDelete(activeItem);
+    this.handleClose();
+  };
+
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
 
   render() {
-    const { classes, handleOpenDelete, handleOpenEdit, index } = this.props;
+    const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -76,22 +87,13 @@ class MoreMenu extends Component {
             <IconButton
               className={classes.edit}
               aria-label="Edit item"
-              onClick={handleOpenEdit.bind(this, {
-                list: "items",
-                index: index
-              })}
+              onClick={this.handleClickMore.bind(this, "edit")}
             >
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton
-              aria-label="Delete item"
-              onClick={handleOpenDelete.bind(this, {
-                list: "items",
-                index: index
-              })}
-            >
+            <IconButton aria-label="Delete item" onClick={this.handleClickMore.bind(this)}>
               <DeleteIcon className={classes.delete} />
             </IconButton>
           </Tooltip>
