@@ -36,16 +36,16 @@ class FinishDialog extends React.Component {
       getItems,
       getCosts
     } = this.props;
-
     const newSelected = [];
     let newItems = [];
     const chosenNames = [];
 
     if (items) {
       newItems = items;
-      selected.forEach(item => {
+      selected.forEach((item, index) => {
         if (item.checked) {
           newItems.push(item);
+          selected.splice(index, 1);
           chosenNames.push(item.name);
         } else newSelected.push(item);
       });
