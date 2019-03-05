@@ -50,7 +50,7 @@ class MoreMenu extends Component {
   };
 
   render() {
-    const { classes, handleOpenDelete, handleOpenEdit, index, id } = this.props;
+    const { classes, handleOpenDelete, handleOpenEdit, index } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -78,8 +78,7 @@ class MoreMenu extends Component {
               aria-label="Edit item"
               onClick={handleOpenEdit.bind(this, {
                 list: "items",
-                index: index,
-                id: id
+                index: index
               })}
             >
               <EditIcon />
@@ -90,8 +89,7 @@ class MoreMenu extends Component {
               aria-label="Delete item"
               onClick={handleOpenDelete.bind(this, {
                 list: "items",
-                index: index,
-                id: id
+                index: index
               })}
             >
               <DeleteIcon className={classes.delete} />
@@ -120,15 +118,13 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "SHOW_EDIT_DIALOG",
         index: activeItem.index,
-        list: activeItem.list,
-        id: activeItem.id
+        list: activeItem.list
       }),
     handleOpenDelete: activeItem =>
       dispatch({
         type: "SHOW_DELETE_DIALOG",
         index: activeItem.index,
-        list: activeItem.list,
-        id: activeItem.id
+        list: activeItem.list
       })
   };
 };

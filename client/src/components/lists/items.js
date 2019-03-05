@@ -52,7 +52,7 @@ class Items extends Component {
                   >
                     <ListItem key={index} role={undefined} dense button>
                       <ListItemText primary={item.name} secondary={item.info} />
-                      <Menu index={index} id={item.id} />
+                      <Menu index={index} />
                     </ListItem>
                     <Divider />
                   </div>

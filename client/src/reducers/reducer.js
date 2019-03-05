@@ -11,10 +11,11 @@ const initialState = {
   openAdd: false,
   openEdit: false,
   openDelete: false,
-  showItems: false
+  showItems: true
 };
 
 const reducer = (state = initialState, action) => {
+  const { list, index, newItem, items, selected, cost, costs } = action;
   switch (action.type) {
     case "SHOW_ITEMS":
       return { ...state, showItems: state.showItems ? false : true };
@@ -24,45 +25,45 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         openDelete: state.openDelete ? false : true,
-        activeItem: { list: action.list, index: action.index, id: action.id }
+        activeItem: { list: list, index: index }
       };
     case "SHOW_EDIT_DIALOG":
       return {
         ...state,
         openEdit: state.openEdit ? false : true,
-        activeItem: { list: action.list, index: action.index, id: action.id }
+        activeItem: { list: list, index: index }
       };
     case "ADD_ITEM":
       let newItems = state.items;
-      newItems.push(action.newItem);
+      newItems.push(newItem);
       return { ...state, items: newItems };
     case "DELETE_ITEM":
-      newItems = state.items.filter(item => item.id !== action.id);
+      newItems = state.items.filter((item, itemIndex) => itemIndex !== index);
       return {
         ...state,
         items: newItems
       };
     case "EDIT_ITEM":
-      const list = state[action.list];
-      list[action.index].name = action.newItem.name;
-      list[action.index].info = action.newItem.info;
-      return { ...state, [action.list]: list };
+      const newList = state[list];
+      newList[index].name = newItem.name;
+      newList[index].info = newItem.info;
+      return { ...state, [list]: newList };
     case "GET_ITEMS":
-      newItems = action.items;
+      newItems = items;
       newItems.forEach(item => (item.id = generateNewId()));
       return {
         ...state,
         items: newItems
       };
     case "GET_SELECTED":
-      const newSelected = action.selected;
+      const newSelected = selected;
       newSelected.forEach(item => (item.id = generateNewId()));
       return { ...state, selected: newSelected };
     case "GET_COSTS":
-      return { ...state, costs: action.costs };
+      return { ...state, costs: costs };
     case "ADD_COST":
       const newCosts = state.costs;
-      newCosts.push(action.cost);
+      newCosts.push(cost);
       return { ...state, costs: newCosts };
     default:
       return state;

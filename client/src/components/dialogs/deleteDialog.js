@@ -90,8 +90,7 @@ const mapDispatchToProps = dispatch => {
     handleDeleteItem: activeItem =>
       dispatch({
         type: "DELETE_ITEM",
-        list: activeItem.list,
-        id: activeItem.id
+        index: activeItem.index
       })
   };
 };

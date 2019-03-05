@@ -107,7 +107,8 @@ class Selected extends Component {
                             aria-label="Edit item"
                             onClick={handleOpenEdit.bind(this, {
                               list: "selected",
-                              index: index
+                              index: index,
+                              id: item.id
                             })}
                           >
                             <EditIcon />
@@ -154,7 +155,8 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "SHOW_EDIT_DIALOG",
         index: activeItem.index,
-        list: activeItem.list
+        list: activeItem.list,
+        id: activeItem.id
       }),
     getSelected: selected =>
       dispatch({ type: "GET_SELECTED", selected: selected })

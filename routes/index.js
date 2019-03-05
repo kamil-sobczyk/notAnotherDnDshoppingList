@@ -57,33 +57,22 @@ const appRouter = app => {
   });
 
   app.get("/store/items", (req, res) => {
-    res.status(200).json(store.items);
+    const sortedItems = store.items.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    res.status(200).json(sortedItems);
   });
   app.post("/store/items", (req, res) => {
-    let newItem = req.body;
-    store.items.push(newItem);
+    store.items.push(req.body);
     res.status(200).json(store.items);
   });
   app.put("/store/items", (req, res) => {
-    switch (req.body.newItem) {
-      case undefined: {
-        store.items = req.body;
-      }
-      default:
-        const active = store.items.filter(
-          item => item.id == req.body.activeItem.id
-        )[0];
-        let newItem = req.body.newItem;
-        newItem.id = active.id;
-        store.items.forEach((item, index) =>
-          item.id == active.id ? (store.items[index] = newItem) : false
-        );
-    }
+    store.items = req.body;
     res.status(200).json(store.items);
   });
   app.delete("/store/items", (req, res) => {
-    const newItems = store.items.filter(item => item.id !== req.body.id);
-    res.status(200).json(newItems);
+    store.items.splice(req.body.index, 1);
+    res.status(200).json(store.items);
   });
 
   app.get("/store/selected", (req, res) => {
@@ -103,11 +92,8 @@ const appRouter = app => {
   });
 
   app.put("/store", (req, res) => {
-    let newItem = req.body.newItem;
-    let activeItem = req.body.activeItem;
-    newItem.id = newID;
-    newID = String(parseInt(newID) + 1);
-    store[activeItem.list][activeItem.index] = newItem;
+    const { list, index } = req.body.activeItem;
+    store[list][index] = req.body.newItem;
     res.status(200).json(store);
   });
 };

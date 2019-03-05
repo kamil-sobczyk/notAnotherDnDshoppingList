@@ -98,7 +98,7 @@ const deleteItems = (dispatch, activeItem) => {
 };
 
 const editItem = (newItem, activeItem) => {
-  fetch(server + "/store/" + activeItem.list, {
+  fetch(server + "/store/", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
