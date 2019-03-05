@@ -110,10 +110,6 @@ MoreMenu.propTypes = {
   handleOpenEdit: PropTypes.func
 };
 
-const mapStateToProps = state => {
-  return { items: state.items, store: state, selected: state.selected };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     handleOpenEdit: activeItem =>
@@ -132,6 +128,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(withStyles(styles)(MoreMenu));
