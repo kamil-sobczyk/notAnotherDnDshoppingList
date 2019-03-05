@@ -12,7 +12,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-import { changeSelected, changeItems, addCosts } from "../../functions/apiClient";
+import {
+  changeSelected,
+  changeItems,
+  addCosts
+} from "../../functions/apiClient";
 
 class FinishDialog extends React.Component {
   state = {
@@ -40,16 +44,14 @@ class FinishDialog extends React.Component {
     let newItems = [];
     const chosenNames = [];
 
-    if (items) {
-      newItems = items;
-      selected.forEach((item, index) => {
-        if (item.checked) {
-          newItems.push(item);
-          selected.splice(index, 1);
-          chosenNames.push(item.name);
-        } else newSelected.push(item);
-      });
-    }
+    newItems = items;
+    selected.forEach((item, index) => {
+      if (item.checked) {
+        newItems.push(item);
+        selected.splice(index, 1);
+        chosenNames.push(item.name);
+      } else newSelected.push(item);
+    });
 
     const item = this.state;
     item.chosenItems = chosenNames;
