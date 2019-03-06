@@ -20,14 +20,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-let id = 0;
-
-const generateNewId = () => {
-  id++;
-  return String(id);
-};
-
 const sortItemsByName = items =>
   items.sort((a, b) => a.name.localeCompare(b.name));
 
-export { reorder, move, generateNewId, sortItemsByName };
+export { reorder, move, sortItemsByName };
