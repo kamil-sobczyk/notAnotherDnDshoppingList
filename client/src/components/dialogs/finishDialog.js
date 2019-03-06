@@ -12,6 +12,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
+import sortItemsByName from '../../functions/moveFunctions';
 import {
   changeSelected,
   changeItems,
@@ -54,6 +55,7 @@ class FinishDialog extends React.Component {
 
     const item = this.state;
     item.chosenItems = chosenNames;
+    sortItemsByName(newItems);
 
     getSelected(newSelected);
     changeSelected(getSelected, newSelected);
