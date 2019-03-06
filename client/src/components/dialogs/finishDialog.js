@@ -48,7 +48,6 @@ class FinishDialog extends React.Component {
     selected.forEach((item, index) => {
       if (item.checked) {
         newItems.push(item);
-        selected.splice(index, 1);
         chosenNames.push(item.name);
       } else newSelected.push(item);
     });
@@ -56,7 +55,9 @@ class FinishDialog extends React.Component {
     const item = this.state;
     item.chosenItems = chosenNames;
 
+    getSelected(newSelected);
     changeSelected(getSelected, newSelected);
+    getItems(newItems);
     changeItems(getItems, newItems);
     addCosts(getCosts, item);
     handleOpenFinish();
