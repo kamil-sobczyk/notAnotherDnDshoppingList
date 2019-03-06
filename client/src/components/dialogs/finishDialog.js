@@ -21,7 +21,7 @@ import {
 class FinishDialog extends React.Component {
   state = {
     count: 0,
-    date: new Date().toLocaleDateString("pl-PL", { hour: "numeric" }),
+    date: new Date().toLocaleDateString("pl-PL", { hour: "2-digit", minute: "2-digit" }),
     chosenItems: []
   };
 
@@ -64,8 +64,6 @@ class FinishDialog extends React.Component {
 
   render() {
     const { openFinish, handleOpenFinish } = this.props;
-
-    console.log(this.state.date);
 
     return (
       <Dialog
