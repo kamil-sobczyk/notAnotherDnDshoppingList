@@ -51,13 +51,13 @@ const appRouter = app => {
   });
 
   app.get("/store/items", (req, res) => {
-    const sortedItems = [...store.items].sortItemsByName();
-    res.status(200).json(sortedItems);
+    sortItemsByName();
+    res.status(200).send(store.items);
   });
   app.post("/store/items", (req, res) => {
     store.items.push(req.body);
-    const sortedItems = [...store.items].sortItemsByName();
-    res.status(200).json(sortedItems);
+    sortItemsByName();
+    res.status(200).send(store.items);
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;
