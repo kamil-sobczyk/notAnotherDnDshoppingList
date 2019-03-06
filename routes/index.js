@@ -51,20 +51,20 @@ const store = {
   costs: []
 };
 
+const sortItemsByName = () =>
+  store.items.sort((a, b) => a.name.localeCompare(b.name));
+
 const appRouter = app => {
   app.get("/", (req, res) => {
     res.send("ShoppingList API!\n");
   });
 
   app.get("/store/items", (req, res) => {
-    const sortedItems = store.items.sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
-    res.status(200).json(sortedItems);
+    res.status(200).json(sortItemsByName());
   });
   app.post("/store/items", (req, res) => {
     store.items.push(req.body);
-    res.status(200).json(store.items);
+    res.status(200).json(sortItemsByName());
   });
   app.put("/store/items", (req, res) => {
     store.items = req.body;

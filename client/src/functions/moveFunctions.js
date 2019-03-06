@@ -27,4 +27,7 @@ const generateNewId = () => {
   return String(id);
 };
 
-export { reorder, move, generateNewId };
+const sortItemsByName = items =>
+  items.sort((a, b) => a.name.localeCompare(b.name));
+
+export { reorder, move, generateNewId, sortItemsByName };

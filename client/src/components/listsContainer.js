@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Items from "./lists/items";
 import Selected from "./lists/selected";
-import { reorder, move } from "../functions/moveFunctions";
+import { reorder, move, sortItemsByName } from "../functions/moveFunctions";
 import { changeSelected, changeItems } from "../functions/apiClient";
 
 import { DragDropContext } from "react-beautiful-dnd";
@@ -74,7 +74,7 @@ class ListsContainer extends Component {
       );
       result.droppable2.forEach(item => (item.checked = false));
 
-      getItems(result.droppable);
+      getItems(sortItemsByName(result.droppable));
       getSelected(result.droppable2);
 
       changeItems(getItems, result.droppable);

@@ -11,7 +11,7 @@ const initialState = {
   openAdd: false,
   openEdit: false,
   openDelete: false,
-  showItems: true
+  showItems: false
 };
 
 const reducer = (state = initialState, action) => {

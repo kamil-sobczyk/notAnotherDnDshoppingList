@@ -31,9 +31,6 @@ class Items extends Component {
 
   render() {
     const { classes, items, handleOpenAdd } = this.props;
-    const sortedItems = items.sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
 
     return (
       <Droppable droppableId="droppable">
@@ -42,7 +39,7 @@ class Items extends Component {
             <Typography variant="h6" gutterBottom>
               Items to choose
             </Typography>
-            {sortedItems.map((item, index) => (
+            {items.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {provided => (
                   <div
