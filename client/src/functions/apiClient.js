@@ -1,8 +1,8 @@
-const server = "http://35.188.95.65";
+const server = "http://35.202.252.166/";
 // const server = "http://0.0.0.0:8080";
 
 const getItems = dispatch => {
-  fetch(server + "/store/items", {
+  fetch(server + "store/items", {
     mode: "cors",
     method: "GET"
   })
@@ -15,7 +15,7 @@ const getItems = dispatch => {
 };
 
 const getSelected = dispatch => {
-  fetch(server + "/store/selected", {
+  fetch(server + "store/selected", {
     method: "GET"
   })
     .then(response => {
@@ -27,7 +27,7 @@ const getSelected = dispatch => {
 };
 
 const changeItems = (dispatch, body) => {
-  fetch(server + "/store/items", {
+  fetch(server + "store/items", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
@@ -44,7 +44,7 @@ const changeItems = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 };
 const changeSelected = (dispatch, body) => {
-  fetch(server + "/store/selected", {
+  fetch(server + "store/selected", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
@@ -62,7 +62,7 @@ const changeSelected = (dispatch, body) => {
 };
 
 const addNewItem = (dispatch, body) => {
-  fetch(server + "/store/items", {
+  fetch(server + "store/items", {
     method: "POST",
     headers: {
       "Content-type": "application/json"
@@ -80,7 +80,7 @@ const addNewItem = (dispatch, body) => {
 };
 
 const deleteItems = (dispatch, activeItem) => {
-  fetch(server + "/store/items", {
+  fetch(server + "store/items", {
     method: "DELETE",
     headers: {
       "Content-type": "application/json"
@@ -98,7 +98,7 @@ const deleteItems = (dispatch, activeItem) => {
 };
 
 const editItem = (newItem, activeItem) => {
-  fetch(server + "/store/", {
+  fetch(server + "store", {
     method: "PUT",
     headers: {
       "Content-type": "application/json"
@@ -116,7 +116,7 @@ const editItem = (newItem, activeItem) => {
 };
 
 const getCosts = dispatch => {
-  fetch(server + "/store/costs", {
+  fetch(server + "store/costs", {
     mode: "cors",
     method: "GET"
   })
@@ -129,7 +129,7 @@ const getCosts = dispatch => {
 };
 
 const addCosts = (dispatch, costs) => {
-  fetch(server + "/store/costs", {
+  fetch(server + "store/costs", {
     method: "POST",
     headers: {
       "Content-type": "application/json"
