@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 
-import { addNewItem } from '../../functions/apiClient';
+import { addNewItem } from "../../functions/apiClient";
 
 const styles = theme => ({
   textField: {
@@ -22,16 +22,20 @@ const styles = theme => ({
 class AddDialog extends Component {
   state = {
     name: "",
-    info: ""
+    info: "",
+    id: Date.now()
   };
   handleAddItem = () => {
     const { handleAddNewItem, handleOpenAdd } = this.props;
 
+    handleAddNewItem(this.state);
     addNewItem(handleAddNewItem, this.state);
-   
-    // handleAddNewItem( this.state);
     handleOpenAdd();
-    this.setState({ name: "", info: "" });
+    this.setState({
+      name: "",
+      info: "",
+      id: Date.now()
+    });
   };
 
   changeNewItem = e => {
@@ -65,7 +69,7 @@ class AddDialog extends Component {
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
-        <Button color="primary" onClick={handleOpenAdd}>
+          <Button color="primary" onClick={handleOpenAdd}>
             Cancel
           </Button>
           <Button color="primary" onClick={this.handleAddItem}>
@@ -85,13 +89,17 @@ AddDialog.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { openAdd: state.openAdd };
+  return {
+    openAdd: state.openAdd,
+    items: state.items,
+    selected: state.selected
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" }),
-    handleAddNewItem: item => dispatch({ type: "ADD_ITEM", newItem: item }),
+    handleAddNewItem: item => dispatch({ type: "ADD_ITEM", newItem: item })
   };
 };
 
