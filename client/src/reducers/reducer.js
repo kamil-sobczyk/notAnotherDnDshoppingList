@@ -1,5 +1,3 @@
-import { generateNewId } from "../functions/moveFunctions";
-
 const initialState = {
   items: [],
   selected: [],
@@ -36,6 +34,7 @@ const reducer = (state = initialState, action) => {
     case "ADD_ITEM":
       let newItems = state.items;
       newItems.push(newItem);
+      console.log("newItems reduces", newItems);
       return { ...state, items: newItems };
     case "DELETE_ITEM":
       newItems = state.items.filter((item, itemIndex) => itemIndex !== index);
@@ -49,16 +48,12 @@ const reducer = (state = initialState, action) => {
       newList[index].info = newItem.info;
       return { ...state, [list]: newList };
     case "GET_ITEMS":
-      newItems = items;
-      newItems.forEach(item => (item.id = generateNewId()));
       return {
         ...state,
-        items: newItems
+        items: items
       };
     case "GET_SELECTED":
-      const newSelected = selected;
-      newSelected.forEach(item => (item.id = generateNewId()));
-      return { ...state, selected: newSelected };
+      return { ...state, selected: selected };
     case "GET_COSTS":
       return { ...state, costs: costs };
     case "ADD_COST":
