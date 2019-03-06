@@ -34,7 +34,6 @@ const reducer = (state = initialState, action) => {
     case "ADD_ITEM":
       let newItems = state.items;
       newItems.push(newItem);
-      console.log("newItems reduces", newItems);
       return { ...state, items: newItems };
     case "DELETE_ITEM":
       newItems = state.items.filter((item, itemIndex) => itemIndex !== index);
