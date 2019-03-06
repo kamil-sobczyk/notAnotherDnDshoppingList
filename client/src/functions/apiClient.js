@@ -1,4 +1,4 @@
-const server = "http://35.202.252.166/";
+const server = "http://35.224.13.129/";
 // const server = "http://0.0.0.0:8080";
 
 const getItems = dispatch => {
@@ -74,7 +74,7 @@ const addNewItem = (dispatch, body) => {
       return response.json();
     })
     .then(item => {
-      return dispatch(item);
+      return item;
     })
     .catch(error => console.log("Ooops", error));
 };
