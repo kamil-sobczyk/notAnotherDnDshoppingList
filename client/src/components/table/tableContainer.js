@@ -66,8 +66,8 @@ class CustomPaginationActionsTable extends React.Component {
       sortedCosts = [
         {
           count: 0,
-          chosenItems: ["No shopping yet"],
-          date: new Date().toLocaleDateString()
+          chosenItems: [null],
+          date: "No shopping yet"
         }
       ];
 
