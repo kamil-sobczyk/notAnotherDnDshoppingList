@@ -7,7 +7,8 @@ node_modules
 /coverage
 
 # production
-/build
+/client/build
+/.vscode
 
 # misc
 .DS_Store
