@@ -1,6 +1,44 @@
 const store = {
-  items: [],
-  selected: [],
+  items: [
+    {
+      name: "Bread",
+      info: "Buy in Lidl"
+    },
+    {
+      name: "Cola",
+      info: ""
+    },
+    {
+      name: "Milk",
+      info: "Buy in Tesco"
+    },
+    {
+      name: "Beer",
+      info: ""
+    },
+    {
+      name: "Beef",
+      info: "1kg"
+    }
+  ],
+  selected: [
+    {
+      name: "Ham",
+      info: "In slices"
+    },
+    {
+      name: "Rice",
+      info: ""
+    },
+    {
+      name: "Potatoes",
+      info: "Buy in Tesco"
+    },
+    {
+      name: "Aples",
+      info: "3kg"
+    }
+  ],
   costs: []
 };
 
