@@ -54,6 +54,7 @@ class FinishDialog extends React.Component {
     });
 
     const item = this.state;
+    item.count = parseInt(this.state.count, 10);
     item.chosenItems = chosenNames;
     sortItemsByName(newItems);
 
