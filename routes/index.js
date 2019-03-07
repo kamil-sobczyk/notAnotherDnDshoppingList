@@ -2,41 +2,50 @@ const store = {
   items: [
     {
       name: "Bread",
-      info: "Buy in Lidl"
+      info: "Buy in Lidl",
+      id: '1'
     },
     {
       name: "Cola",
-      info: ""
+      info: "",
+      id: '2'
     },
     {
       name: "Milk",
-      info: "Buy in Tesco"
+      info: "Buy in Tesco",
+      id: '3'
     },
     {
       name: "Beer",
-      info: ""
+      info: "",
+      id: '4'
     },
     {
       name: "Beef",
-      info: "1kg"
+      info: "1kg",
+      id: '5'
     }
   ],
   selected: [
     {
       name: "Ham",
-      info: "In slices"
+      info: "In slices",
+      id: '6'
     },
     {
       name: "Rice",
-      info: ""
+      info: "",
+      id: '7'
     },
     {
       name: "Potatoes",
-      info: "Buy in Tesco"
+      info: "Buy in Tesco",
+      id: '8'
     },
     {
       name: "Aples",
-      info: "3kg"
+      info: "3kg",
+      id: '9'
     }
   ],
   costs: []
