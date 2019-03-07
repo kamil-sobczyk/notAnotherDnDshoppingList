@@ -1,3 +1,5 @@
+import { sortItemsByName } from '../functions/moveFunctions';
+
 const initialState = {
   items: [],
   selected: [],
@@ -34,6 +36,7 @@ const reducer = (state = initialState, action) => {
     case "ADD_ITEM":
       let newItems = state.items;
       newItems.push(newItem);
+      sortItemsByName(newItems);
       return { ...state, items: newItems };
     case "DELETE_ITEM":
       newItems = state.items.filter((item, itemIndex) => itemIndex !== index);
