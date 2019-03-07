@@ -14,16 +14,16 @@ import { deleteItems } from "../../functions/apiClient";
 
 class FinishDialog extends React.Component {
   handleDeleteItem = activeItem => {
-    const { handleDeleteItem, handleOpenDelete } = this.props;
+    const { handleDeleteItem, handleToggleOpenDeleteDialog } = this.props;
 
     handleDeleteItem(activeItem);
     deleteItems(null, activeItem);
 
-    handleOpenDelete({ list: "items", index: 0 });
+    handleToggleOpenDeleteDialog({ list: "items", index: 0 });
   };
 
   render() {
-    const { openDelete, handleOpenDelete, store, activeItem } = this.props;
+    const { openDelete, handleToggleOpenDeleteDialog, store, activeItem } = this.props;
 
     const active = store[activeItem.list][activeItem.index]
       ? store[activeItem.list][activeItem.index].name
@@ -45,7 +45,7 @@ class FinishDialog extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={handleOpenDelete.bind(this, { list: "items", index: 0 })}
+            onClick={handleToggleOpenDeleteDialog.bind(this, { list: "items", index: 0 })}
             color="primary"
           >
             No
@@ -65,7 +65,7 @@ class FinishDialog extends React.Component {
 
 FinishDialog.propTypes = {
   openDelete: PropTypes.bool,
-  handleOpenDelete: PropTypes.func,
+  handleToggleOpenDeleteDialog: PropTypes.func,
   handleDeleteItem: PropTypes.func,
   list: PropTypes.array,
   activeItem: PropTypes.object
@@ -81,9 +81,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenDelete: activeItem =>
+    handleToggleOpenDeleteDialog: activeItem =>
       dispatch({
-        type: "SHOW_DELETE_DIALOG",
+        type: "TOGGLE_SHOW_DELETE_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),

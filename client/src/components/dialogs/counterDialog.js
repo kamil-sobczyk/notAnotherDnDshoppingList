@@ -66,7 +66,7 @@ class CounterDialog extends React.Component {
 
 CounterDialog.propTypes = {
   openDelete: PropTypes.bool,
-  handleOpenDelete: PropTypes.func,
+  handleToggleOpenDeleteDialog: PropTypes.func,
   handleDeleteItem: PropTypes.func,
   list: PropTypes.array,
   activeItem: PropTypes.object
@@ -82,9 +82,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenDelete: activeItem =>
+    handleToggleOpenDeleteDialog: activeItem =>
       dispatch({
-        type: "SHOW_DELETE_DIALOG",
+        type: "TOGGLE_SHOW_DELETE_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),

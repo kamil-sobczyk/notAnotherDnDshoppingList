@@ -26,14 +26,14 @@ class EditDialog extends Component {
   };
   
   handleCloseEdit = activeItem => {
-    const { handleEditItem, handleOpenEdit, store } = this.props;
+    const { handleEditItem, handleToggleOpenEditDialog, store } = this.props;
 
     const newState = this.state;
     newState.name === "" ? newState.name = store[activeItem.list][activeItem.index].name : newState.name = this.state.name;
 
     editItem(newState, activeItem)
     handleEditItem(newState, activeItem);
-    handleOpenEdit(activeItem);
+    handleToggleOpenEditDialog(activeItem);
     
     this.setState({ name: "", info: "" });
   };
@@ -50,7 +50,7 @@ class EditDialog extends Component {
   };
 
   render() {
-    const { classes, openEdit, activeItem, handleOpenEdit, store } = this.props;
+    const { classes, openEdit, activeItem, handleToggleOpenEditDialog, store } = this.props;
 
     return (
       <Dialog open={openEdit} >
@@ -77,7 +77,7 @@ class EditDialog extends Component {
         <DialogActions>
           <Button
             color="primary"
-            onClick={handleOpenEdit.bind(this, {
+            onClick={handleToggleOpenEditDialog.bind(this, {
               list: "items",
               index: 0
             })}
@@ -98,7 +98,7 @@ class EditDialog extends Component {
 
 EditDialog.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleOpenEdit: PropTypes.func,
+  handleToggleOpenEditDialog: PropTypes.func,
   openEdit: PropTypes.bool,
   handleEditItem: PropTypes.func,
   activeItem: PropTypes.object,
@@ -115,9 +115,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenEdit: activeItem =>
+    handleToggleOpenEditDialog: activeItem =>
       dispatch({
-        type: "SHOW_EDIT_DIALOG",
+        type: "TOGGLE_SHOW_EDIT_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),

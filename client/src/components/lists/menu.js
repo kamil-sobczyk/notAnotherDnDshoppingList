@@ -46,13 +46,13 @@ class MoreMenu extends Component {
   };
 
   handleClickMore = action => {
-    const { handleOpenEdit, handleOpenDelete, index } = this.props;
+    const { handleToggleOpenEditDialog, handleToggleOpenDeleteDialog, index } = this.props;
     const activeItem = {
       list: "items",
       index: index
     };
 
-    action === "edit" ? handleOpenEdit(activeItem) : handleOpenDelete(activeItem);
+    action === "edit" ? handleToggleOpenEditDialog(activeItem) : handleToggleOpenDeleteDialog(activeItem);
     this.handleClose();
   };
 
@@ -106,21 +106,21 @@ class MoreMenu extends Component {
 MoreMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   openDelete: PropTypes.bool,
-  handleOpenDelete: PropTypes.func,
-  handleOpenEdit: PropTypes.func
+  handleToggleOpenDeleteDialog: PropTypes.func,
+  handleToggleOpenEditDialog: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenEdit: activeItem =>
+    handleToggleOpenEditDialog: activeItem =>
       dispatch({
-        type: "SHOW_EDIT_DIALOG",
+        type: "TOGGLE_SHOW_EDIT_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       }),
-    handleOpenDelete: activeItem =>
+    handleToggleOpenDeleteDialog: activeItem =>
       dispatch({
-        type: "SHOW_DELETE_DIALOG",
+        type: "TOGGLE_SHOW_DELETE_DIALOG",
         index: activeItem.index,
         list: activeItem.list
       })

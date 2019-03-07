@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Items from "./lists/items";
 import Selected from "./lists/selected";
-import { reorder, move, sortItemsByName } from "../functions/moveFunctions";
+import { reorder, move, sortItemsByName } from "../functions/reorderFunctions";
 import { changeSelected, changeItems } from "../functions/apiClient";
 
 import { DragDropContext } from "react-beautiful-dnd";

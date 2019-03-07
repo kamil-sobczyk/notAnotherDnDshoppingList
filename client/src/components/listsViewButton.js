@@ -30,7 +30,7 @@ class ViewButton extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    showItems: () => dispatch({ type: "SHOW_ITEMS" })
+    showItems: () => dispatch({ type: "TOGGLE_SHOW_ITEMS" })
   };
 };
 

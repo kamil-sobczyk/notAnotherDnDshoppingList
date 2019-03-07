@@ -26,11 +26,11 @@ class AddDialog extends Component {
     id: Date.now()
   };
   handleAddItem = () => {
-    const { handleAddNewItem, handleOpenAdd } = this.props;
+    const { handleAddNewItem, handleToggleOpenAddDialog } = this.props;
 
     handleAddNewItem(this.state);
     addNewItem(handleAddNewItem, this.state);
-    handleOpenAdd();
+    handleToggleOpenAddDialog();
     this.setState({
       name: "",
       info: "",
@@ -45,7 +45,7 @@ class AddDialog extends Component {
     this.setState({ info: e.target.value });
   };
   render() {
-    const { classes, openAdd, handleOpenAdd } = this.props;
+    const { classes, openAdd, handleToggleOpenAddDialog } = this.props;
     return (
       <Dialog open={openAdd} onClose={this.handleCloseAdd}>
         <DialogTitle>Add a new product</DialogTitle>
@@ -69,7 +69,7 @@ class AddDialog extends Component {
           onChange={this.changeNewItemInfo}
         />
         <DialogActions>
-          <Button color="primary" onClick={handleOpenAdd}>
+          <Button color="primary" onClick={handleToggleOpenAddDialog}>
             Cancel
           </Button>
           <Button color="primary" onClick={this.handleAddItem}>
@@ -84,7 +84,7 @@ class AddDialog extends Component {
 AddDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   openAdd: PropTypes.bool,
-  handleOpenAdd: PropTypes.func,
+  handleToggleOpenAddDialog: PropTypes.func,
   handleAddItem: PropTypes.func
 };
 
@@ -98,7 +98,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleOpenAdd: () => dispatch({ type: "SHOW_ADD_DIALOG" }),
+    handleToggleOpenAddDialog: () => dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" }),
     handleAddNewItem: item => dispatch({ type: "ADD_ITEM", newItem: item })
   };
 };

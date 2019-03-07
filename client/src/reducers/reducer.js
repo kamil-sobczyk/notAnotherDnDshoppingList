@@ -1,4 +1,4 @@
-import { sortItemsByName } from '../functions/moveFunctions';
+import { sortItemsByName } from '../functions/reorderFunctions';
 
 const initialState = {
   items: [],
@@ -17,17 +17,17 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const { list, index, newItem, items, selected, cost, costs } = action;
   switch (action.type) {
-    case "SHOW_ITEMS":
+    case "TOGGLE_SHOW_ITEMS":
       return { ...state, showItems: state.showItems ? false : true };
-    case "SHOW_ADD_DIALOG":
+    case "TOGGLE_SHOW_ADD_DIALOG":
       return { ...state, openAdd: state.openAdd ? false : true };
-    case "SHOW_DELETE_DIALOG":
+    case "TOGGLE_SHOW_DELETE_DIALOG":
       return {
         ...state,
         openDelete: state.openDelete ? false : true,
         activeItem: { list: list, index: index }
       };
-    case "SHOW_EDIT_DIALOG":
+    case "TOGGLE_SHOW_EDIT_DIALOG":
       return {
         ...state,
         openEdit: state.openEdit ? false : true,
