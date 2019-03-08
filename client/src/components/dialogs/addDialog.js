@@ -9,6 +9,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
+import FailDialog from "./failDialog";
 
 import { addNewItem } from "../../functions/apiClient";
 
@@ -21,29 +22,53 @@ const styles = theme => ({
 
 class AddDialog extends Component {
   state = {
-    name: "",
-    info: "",
-    id: Date.now()
-  };
-  handleAddItem = () => {
-    const { handleAddNewItem, handleToggleOpenAddDialog } = this.props;
-
-    handleAddNewItem(this.state);
-    addNewItem(handleAddNewItem, this.state);
-    handleToggleOpenAddDialog();
-    this.setState({
+    item: {
       name: "",
       info: "",
       id: Date.now()
-    });
+    },
+    openFail: false
+  };
+  handleAddItem = () => {
+    const {
+      handleAddNewItem,
+      handleToggleOpenAddDialog,
+      items,
+      selected
+    } = this.props;
+
+    const allNames = [...selected, ...items].map(({ name }) => name);
+
+    const finishAdding = () => {
+      handleAddNewItem(this.state.item);
+      addNewItem(handleAddNewItem, this.state.item);
+      handleToggleOpenAddDialog();
+      this.setState({
+        item: {
+          name: "",
+          info: "",
+          id: Date.now()
+        }
+      });
+    };
+
+    allNames.indexOf(this.state.item.name) < 0
+      ? finishAdding()
+      : this.setState({ openFail: true });
+  };
+
+  toggleOpenFailDialog = () => {
+    this.setState({ openFail: !this.state.openFail });
   };
 
   changeNewItem = e => {
-    this.setState({ name: e.target.value });
+    this.setState({ item: { name: e.target.value, id: Date.now() } });
   };
+
   changeNewItemInfo = e => {
-    this.setState({ info: e.target.value });
+    this.setState({ item: { info: e.target.value, id: Date.now() } });
   };
+
   render() {
     const { classes, openAdd, handleToggleOpenAddDialog } = this.props;
     return (
@@ -76,6 +101,10 @@ class AddDialog extends Component {
             Add
           </Button>
         </DialogActions>
+        <FailDialog
+          open={this.state.openFail}
+          onClose={this.toggleOpenFailDialog.bind(this)}
+        />
       </Dialog>
     );
   }
@@ -98,7 +127,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleToggleOpenAddDialog: () => dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" }),
+    handleToggleOpenAddDialog: () =>
+      dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" }),
     handleAddNewItem: item => dispatch({ type: "ADD_ITEM", newItem: item })
   };
 };
