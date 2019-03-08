@@ -1,13 +1,17 @@
 import { sortItemsByName } from '../functions/reorderFunctions';
 
 const initialState = {
-  items: [],
-  selected: [],
+  items: [
+  
+  ],
+  selected: [
+   
+  ],
+  costs: [],
   activeItem: {
     list: "items",
     index: 0
   },
-  costs: [],
   openAdd: false,
   openEdit: false,
   openDelete: false,
