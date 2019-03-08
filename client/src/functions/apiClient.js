@@ -1,5 +1,9 @@
-// const server = "http://35.224.13.129/";
+//localhost
 const server = "http://0.0.0.0:8080/";
+//private list
+// const server = "http://35.224.13.129/";
+// public demo
+// const server = "http://35.184.211.161/";
 
 const getItems = dispatch => {
   fetch(server + "store/items", {
