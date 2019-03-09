@@ -21,6 +21,7 @@ class ShoppingDialog extends React.Component {
 
   render() {
     const { fullScreen } = this.props;
+    const { open } = this.state;
 
     return (
       <>
@@ -29,7 +30,7 @@ class ShoppingDialog extends React.Component {
         </Button>
         <Dialog
           fullScreen={fullScreen}
-          open={this.state.open}
+          open={open}
           onClose={this.handleClick}
           aria-labelledby="shopping-you-made"
         >
