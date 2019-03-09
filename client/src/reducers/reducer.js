@@ -1,12 +1,8 @@
-import { sortItemsByName } from '../functions/reorderFunctions';
+import { sortItemsByName } from "../functions/reorderFunctions";
 
 const initialState = {
-  items: [
-  
-  ],
-  selected: [
-   
-  ],
+  items: [],
+  selected: [],
   costs: [],
   activeItem: {
     list: "items",
