@@ -9,8 +9,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
 import { deleteItems } from "../../functions/apiClient";
+
+const Transition = props => {
+  return <Slide direction="up" {...props} />;
+};
 
 class FinishDialog extends React.Component {
   handleDeleteItem = activeItem => {
@@ -39,6 +44,7 @@ class FinishDialog extends React.Component {
         onClose={this.handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        TransitionComponent={Transition} keepMounted
       >
         <DialogTitle id="alert-dialog-title">
           {"You are trying to delete item"}
