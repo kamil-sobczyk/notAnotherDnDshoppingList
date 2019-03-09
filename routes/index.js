@@ -45,7 +45,7 @@ const store = {
     {
       name: "Aples",
       info: "3kg",
-      id: ';ekflkdsdsa;ljd'
+      id: 'ekflkdsdsaljd'
     }
   ],
   costs: []
