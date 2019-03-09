@@ -30,9 +30,10 @@ class ListsContainer extends Component {
   };
 
   componentWillReceiveProps = newProps => {
+    const { items, selected } = this.props;
     if (
-      newProps.items !== this.props.items ||
-      newProps.selected !== this.props.selected
+      newProps.items !== items ||
+      newProps.selected !== selected
     ) {
       this.setState({ items: newProps.items, selected: newProps.selected });
     }
