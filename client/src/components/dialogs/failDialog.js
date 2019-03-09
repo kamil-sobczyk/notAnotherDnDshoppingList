@@ -9,9 +9,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 class FailDialog extends Component {
   render() {
+    const { open, onClose } = this.props;
     return (
       <Dialog
-        open={this.props.open}
+        open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -24,7 +25,7 @@ class FailDialog extends Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.onClose} color="primary" autoFocus>
+          <Button onClick={onClose} color="primary" autoFocus>
             OK
           </Button>
         </DialogActions>
