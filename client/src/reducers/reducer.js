@@ -25,13 +25,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         openDelete: state.openDelete ? false : true,
-        activeItem: { list: list, index: index }
+        activeItem: { list, index }
       };
     case "TOGGLE_SHOW_EDIT_DIALOG":
       return {
         ...state,
         openEdit: state.openEdit ? false : true,
-        activeItem: { list: list, index: index }
+        activeItem: { list, index }
       };
     case "ADD_ITEM":
       let newItems = state.items;
@@ -55,9 +55,9 @@ const reducer = (state = initialState, action) => {
         items: items
       };
     case "GET_SELECTED":
-      return { ...state, selected: selected };
+      return { ...state, selected };
     case "GET_COSTS":
-      return { ...state, costs: costs };
+      return { ...state, costs };
     case "ADD_COST":
       const newCosts = state.costs;
       newCosts.push(cost);
