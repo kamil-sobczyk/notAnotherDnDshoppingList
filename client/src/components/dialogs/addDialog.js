@@ -10,6 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Slide from "@material-ui/core/Slide";
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 import FailDialog from "./failDialog";
 import { addNewItem } from "../../functions/apiClient";
@@ -67,18 +68,19 @@ class AddDialog extends Component {
   };
 
   changeNewItem = e => {
-    this.setState({ item: { name: e.target.value, id: Date.now() } });
+    this.setState({ item: { name: e.target.value, id: Date.now(), info: this.state.item.info } });
   };
 
   changeNewItemInfo = e => {
-    this.setState({ item: { info: e.target.value, id: Date.now() } });
+    this.setState({ item: { info: e.target.value, id: Date.now(), name: this.state.item.name } });
   };
 
   render() {
-    const { classes, openAdd, handleToggleOpenAddDialog } = this.props;
+    const { classes, openAdd, handleToggleOpenAddDialog, fullScreen } = this.props;
     return (
       <Dialog
         open={openAdd}
+        fullScreen={fullScreen}
         onClose={this.handleCloseAdd}
         TransitionComponent={Transition}
         keepMounted
@@ -122,6 +124,7 @@ class AddDialog extends Component {
 
 AddDialog.propTypes = {
   classes: PropTypes.object.isRequired,
+  fullScreen: PropTypes.bool.isRequired,
   openAdd: PropTypes.bool,
   handleToggleOpenAddDialog: PropTypes.func,
   handleAddItem: PropTypes.func
@@ -146,4 +149,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(AddDialog));
+)(withMobileDialog()(withStyles (styles)(AddDialog)));
