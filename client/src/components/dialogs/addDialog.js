@@ -9,8 +9,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import FailDialog from "./failDialog";
+import Slide from "@material-ui/core/Slide";
 
+import FailDialog from "./failDialog";
 import { addNewItem } from "../../functions/apiClient";
 
 const styles = theme => ({
@@ -19,6 +20,10 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   }
 });
+
+const Transition = props => {
+  return <Slide direction="up" {...props} />;
+};
 
 class AddDialog extends Component {
   state = {
@@ -72,7 +77,12 @@ class AddDialog extends Component {
   render() {
     const { classes, openAdd, handleToggleOpenAddDialog } = this.props;
     return (
-      <Dialog open={openAdd} onClose={this.handleCloseAdd}>
+      <Dialog
+        open={openAdd}
+        onClose={this.handleCloseAdd}
+        TransitionComponent={Transition}
+        keepMounted
+      >
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
           required

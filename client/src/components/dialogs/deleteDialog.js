@@ -23,11 +23,16 @@ class FinishDialog extends React.Component {
   };
 
   render() {
-    const { openDelete, handleToggleOpenDeleteDialog, store, activeItem, list, index } = this.props;
+    const {
+      openDelete,
+      handleToggleOpenDeleteDialog,
+      store,
+      activeItem,
+      list,
+      index
+    } = this.props;
 
-    const active = store[list][index]
-      ? store[list][index].name
-      : "";
+    const active = store[list][index] ? store[list][index].name : "";
     return (
       <Dialog
         open={openDelete}
@@ -45,7 +50,10 @@ class FinishDialog extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={handleToggleOpenDeleteDialog.bind(this, { list: "items", index: 0 })}
+            onClick={handleToggleOpenDeleteDialog.bind(this, {
+              list: "items",
+              index: 0
+            })}
             color="primary"
           >
             No

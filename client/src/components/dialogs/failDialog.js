@@ -6,6 +6,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+
+const Transition = props => {
+  return <Slide direction="up" {...props} />;
+};
 
 class FailDialog extends Component {
   render() {
@@ -15,6 +20,8 @@ class FailDialog extends Component {
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        TransitionComponent={Transition}
+        keepMounted
       >
         <DialogTitle id="alert-dialog-title">
           {"Unable to add new product to the list!"}

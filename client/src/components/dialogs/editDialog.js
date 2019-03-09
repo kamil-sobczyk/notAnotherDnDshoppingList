@@ -9,6 +9,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
+import Slide from "@material-ui/core/Slide";
 
 import { editItem } from "../../functions/apiClient";
 
@@ -19,19 +20,25 @@ const styles = theme => ({
   }
 });
 
+const Transition = props => {
+  return <Slide direction="up" {...props} />;
+};
+
 class EditDialog extends Component {
   state = {
     name: "",
     info: ""
   };
-  
+
   handleCloseEdit = activeItem => {
     const { handleEditItem, handleToggleOpenEditDialog, store } = this.props;
 
     const newState = this.state;
-    newState.name === "" ? newState.name = store[activeItem.list][activeItem.index].name : newState.name = this.state.name;
+    newState.name === ""
+      ? (newState.name = store[activeItem.list][activeItem.index].name)
+      : (newState.name = this.state.name);
 
-    editItem(newState, activeItem)
+    editItem(newState, activeItem);
     handleEditItem(newState, activeItem);
     handleToggleOpenEditDialog(activeItem);
     this.setState({ name: "", info: "" });
@@ -40,19 +47,31 @@ class EditDialog extends Component {
   changeNewItem = e => {
     const { store, activeItem } = this.props;
 
-    this.setState({ name: e ? e.target.value : store[activeItem.list][activeItem.index].name });
+    this.setState({
+      name: e ? e.target.value : store[activeItem.list][activeItem.index].name
+    });
   };
 
   changeNewItemInfo = e => {
     const { store, activeItem } = this.props;
-    this.setState({ info: e ? e.target.value : store[activeItem.list][activeItem.index].info });
+    this.setState({
+      info: e ? e.target.value : store[activeItem.list][activeItem.index].info
+    });
   };
 
   render() {
-    const { classes, openEdit, activeItem, list, index, handleToggleOpenEditDialog, store } = this.props;
+    const {
+      classes,
+      openEdit,
+      activeItem,
+      list,
+      index,
+      handleToggleOpenEditDialog,
+      store
+    } = this.props;
 
     return (
-      <Dialog open={openEdit} >
+      <Dialog open={openEdit} TransitionComponent={Transition} keepMounted>
         <DialogTitle>Edit product</DialogTitle>
         <TextField
           required
@@ -125,7 +144,12 @@ const mapDispatchToProps = dispatch => {
         list: activeItem.list
       }),
     handleEditItem: (newItem, activeItem) =>
-      dispatch({ type: "EDIT_ITEM", newItem: newItem, index: activeItem.index, list: activeItem.list })
+      dispatch({
+        type: "EDIT_ITEM",
+        newItem: newItem,
+        index: activeItem.index,
+        list: activeItem.list
+      })
   };
 };
 

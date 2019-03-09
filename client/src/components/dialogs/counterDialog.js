@@ -9,19 +9,23 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+
+const Transition = props => {
+  return <Slide direction="up" {...props} />;
+};
 
 class CounterDialog extends React.Component {
-    state = {
-        openCounter: false
-    }
-  
-    handleCount = () => {
-        this.props.handleOpenFinish();
-        this.setState({
-            openCounter: true
-        })
-    }
+  state = {
+    openCounter: false
+  };
 
+  handleCount = () => {
+    this.props.handleOpenFinish();
+    this.setState({
+      openCounter: true
+    });
+  };
 
   render() {
     const { openFinish, handleOpenFinish } = this.props;
@@ -32,6 +36,8 @@ class CounterDialog extends React.Component {
         onClose={this.handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        TransitionComponent={Transition}
+        keepMounted
       >
         <DialogTitle id="alert-dialog-title">
           {"Type how much You spent on shopping"}
@@ -42,17 +48,10 @@ class CounterDialog extends React.Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            color="primary"
-            onClick={handleOpenFinish}
-          >
+          <Button color="primary" onClick={handleOpenFinish}>
             No
           </Button>
-          <Button
-            color="primary"
-            autoFocus
-            onClick={this.handleOpenCounter}
-          >
+          <Button color="primary" autoFocus onClick={this.handleOpenCounter}>
             Yes
           </Button>
         </DialogActions>

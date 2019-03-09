@@ -11,18 +11,26 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Slide from "@material-ui/core/Slide";
 
-import { sortItemsByName } from '../../functions/reorderFunctions';
+import { sortItemsByName } from "../../functions/reorderFunctions";
 import {
   changeSelected,
   changeItems,
   addCosts
 } from "../../functions/apiClient";
 
+const Transition = props => {
+  return <Slide direction="up" {...props} />;
+};
+
 class FinishDialog extends React.Component {
   state = {
     count: 0,
-    date: new Date().toLocaleDateString("pl-PL", { hour: "2-digit", minute: "2-digit" }),
+    date: new Date().toLocaleDateString("pl-PL", {
+      hour: "2-digit",
+      minute: "2-digit"
+    }),
     chosenItems: []
   };
 
@@ -75,6 +83,8 @@ class FinishDialog extends React.Component {
         onClose={this.handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        TransitionComponent={Transition}
+        keepMounted
       >
         <DialogTitle id="alert-dialog-title">
           {"Finishing shopping"}
