@@ -47,7 +47,7 @@ class FinishDialog extends React.Component {
         TransitionComponent={Transition} keepMounted
       >
         <DialogTitle id="alert-dialog-title">
-          {"You are trying to delete item"}
+          {"Deleting product"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
