@@ -23,10 +23,10 @@ class FinishDialog extends React.Component {
   };
 
   render() {
-    const { openDelete, handleToggleOpenDeleteDialog, store, activeItem } = this.props;
+    const { openDelete, handleToggleOpenDeleteDialog, store, activeItem, list, index } = this.props;
 
-    const active = store[activeItem.list][activeItem.index]
-      ? store[activeItem.list][activeItem.index].name
+    const active = store[list][index]
+      ? store[list][index].name
       : "";
     return (
       <Dialog
@@ -67,15 +67,18 @@ FinishDialog.propTypes = {
   openDelete: PropTypes.bool,
   handleToggleOpenDeleteDialog: PropTypes.func,
   handleDeleteItem: PropTypes.func,
-  list: PropTypes.array,
-  activeItem: PropTypes.object
+  activeItem: PropTypes.object,
+  list: PropTypes.string,
+  index: PropTypes.number
 };
 
 const mapStateToProps = state => {
   return {
     openDelete: state.openDelete,
     activeItem: state.activeItem,
-    store: state
+    store: state,
+    list: state.activeItem.list,
+    index: state.activeItem.index
   };
 };
 

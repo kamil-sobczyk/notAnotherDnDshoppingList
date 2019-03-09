@@ -34,7 +34,6 @@ class EditDialog extends Component {
     editItem(newState, activeItem)
     handleEditItem(newState, activeItem);
     handleToggleOpenEditDialog(activeItem);
-    
     this.setState({ name: "", info: "" });
   };
 
@@ -50,7 +49,7 @@ class EditDialog extends Component {
   };
 
   render() {
-    const { classes, openEdit, activeItem, handleToggleOpenEditDialog, store } = this.props;
+    const { classes, openEdit, activeItem, list, index, handleToggleOpenEditDialog, store } = this.props;
 
     return (
       <Dialog open={openEdit} >
@@ -59,7 +58,7 @@ class EditDialog extends Component {
           required
           id="outlined-required"
           label="Type new name"
-          defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].name}
+          defaultValue={!store[list][index] ? " " : store[list][index].name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -68,7 +67,7 @@ class EditDialog extends Component {
         <TextField
           id="outlined"
           label="Type new additional info"
-          defaultValue={!store[activeItem.list][activeItem.index] ? " " : store[activeItem.list][activeItem.index].info}
+          defaultValue={!store[list][index] ? " " : store[list][index].info}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -102,14 +101,18 @@ EditDialog.propTypes = {
   openEdit: PropTypes.bool,
   handleEditItem: PropTypes.func,
   activeItem: PropTypes.object,
-  store: PropTypes.object
+  store: PropTypes.object,
+  list: PropTypes.string,
+  index: PropTypes.number
 };
 
 const mapStateToProps = state => {
   return {
     store: state,
     openEdit: state.openEdit,
-    activeItem: state.activeItem
+    activeItem: state.activeItem,
+    list: state.activeItem.list,
+    index: state.activeItem.index
   };
 };
 
