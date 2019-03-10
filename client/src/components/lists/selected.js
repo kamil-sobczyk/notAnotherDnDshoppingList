@@ -43,7 +43,7 @@ class Selected extends Component {
     openFinish: false
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     getSelected(this.props.getSelected);
   };
 

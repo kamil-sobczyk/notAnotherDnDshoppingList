@@ -24,7 +24,7 @@ const styles = theme => ({
 });
 
 class Items extends Component {
-  componentWillMount = () => {
+  componentDidMount = () => {
     getItems(this.props.getItems);
   };
 
