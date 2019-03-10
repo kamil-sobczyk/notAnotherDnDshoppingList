@@ -14,7 +14,7 @@ const Transition = props => {
 
 const FailDialog = props => {
   const { open, onClose } = props;
-  console.log("fail")
+
   return (
     <Dialog
       open={open}
