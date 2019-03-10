@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  const { list, index, newItem, items, selected, cost, costs } = action;
+  const { list, index, newItem, selected, cost, costs } = action;
   switch (action.type) {
     case "TOGGLE_SHOW_ITEMS":
       return { ...state, showItems: state.showItems ? false : true };
@@ -34,32 +34,32 @@ const reducer = (state = initialState, action) => {
         activeItem: { list, index }
       };
     case "ADD_ITEM":
-      let newItems = state.items;
-      newItems.push(newItem);
-      sortItemsByName(newItems);
-      return { ...state, items: newItems };
+      let items = [...state.items];
+      items.push(newItem);
+      sortItemsByName(items);
+      return { ...state, items };
     case "DELETE_ITEM":
-      newItems = state.items.filter((item, itemIndex) => itemIndex !== index);
+      items = [...state.items].filter((item, itemIndex) => itemIndex !== index);
       return {
         ...state,
-        items: newItems
+        items
       };
     case "EDIT_ITEM":
-      const newList = state[list];
+      const newList = [...state[list]];
       newList[index].name = newItem.name;
       newList[index].info = newItem.info;
       return { ...state, [list]: newList };
     case "GET_ITEMS":
       return {
         ...state,
-        items: items
+        items: action.items
       };
     case "GET_SELECTED":
       return { ...state, selected };
     case "GET_COSTS":
       return { ...state, costs };
     case "ADD_COST":
-      const newCosts = state.costs;
+      const newCosts = [...state.costs];
       newCosts.push(cost);
       return { ...state, costs: newCosts };
     default:
