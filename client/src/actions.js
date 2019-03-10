@@ -20,14 +20,18 @@ const toggleShowAddDialog = () => {
     type: TOGGLE_SHOW_ADD_DIALOG
   };
 };
-const toggleShowDeleteDialog = () => {
+const toggleShowDeleteDialog = activeItem => {
   return {
-    type: TOGGLE_SHOW_DELETE_DIALOG
+    type: TOGGLE_SHOW_DELETE_DIALOG,
+    index: activeItem.index,
+    list: activeItem.list
   };
 };
-const toggleShowEditDialog = () => {
+const toggleShowEditDialog = (activeItem) => {
   return {
-    type: TOGGLE_SHOW_EDIT_DIALOG
+    type: TOGGLE_SHOW_EDIT_DIALOG,
+    index: activeItem.index,
+    list: activeItem.list
   };
 };
 const addItem = item => {
@@ -63,16 +67,16 @@ const getSelected = selected => {
   };
 };
 const getCosts = costs => {
-    return {
-        type: GET_COSTS,
-        costs
-    };
+  return {
+    type: GET_COSTS,
+    costs
+  };
 };
 const addCost = costs => {
-    return {
-        type: ADD_COST,
-        costs
-    };
+  return {
+    type: ADD_COST,
+    costs
+  };
 };
 
 export {
@@ -80,5 +84,11 @@ export {
   toggleShowAddDialog,
   toggleShowDeleteDialog,
   toggleShowEditDialog,
-  addItem
+  addItem,
+  deleteItem,
+  editItem,
+  getItems,
+  getSelected,
+  getCosts,
+  addCost
 };
