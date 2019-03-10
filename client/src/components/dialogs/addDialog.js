@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { addItem, toggleShowAddDialog } from "../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -153,9 +154,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleToggleOpenAddDialog: () =>
-      dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" }),
-    handleAddNewItem: item => dispatch({ type: "ADD_ITEM", newItem: item })
+    handleToggleOpenAddDialog: () => dispatch(toggleShowAddDialog()),
+    handleAddNewItem: item => dispatch(addItem(item))
   };
 };
 
