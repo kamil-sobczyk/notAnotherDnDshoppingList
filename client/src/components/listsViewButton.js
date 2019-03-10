@@ -18,7 +18,7 @@ class ViewButton extends Component {
     });
     this.props.showItems();
   };
-  
+
   render() {
     return (
       <Button color="primary" onClick={this.handleClick}>

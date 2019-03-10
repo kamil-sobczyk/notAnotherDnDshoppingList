@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -22,36 +22,34 @@ const styles = {
   }
 };
 
-class Navbar extends Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="People"
-            >
-              <PeopleIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              Shopping List
-            </Typography>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="People"
-            >
-              <FaceIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
-}
+const Navbar = props => {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="People"
+          >
+            <PeopleIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            Shopping List
+          </Typography>
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="People"
+          >
+            <FaceIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
 Navbar.propTypes = {
   classes: PropTypes.object.isRequired

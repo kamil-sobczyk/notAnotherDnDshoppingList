@@ -24,15 +24,14 @@ const theme = createMuiTheme({
 });
 
 const withRoot = Component => {
-  const WithRoot = props => {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...props} />
-      </MuiThemeProvider>
-    );
-  }
+  const WithRoot = props => (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Component {...props} />
+    </MuiThemeProvider>
+  );
+
   return WithRoot;
-}
+};
 
 export default withRoot;

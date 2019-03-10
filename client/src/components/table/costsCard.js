@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -25,26 +25,24 @@ const styles = theme => ({
   }
 });
 
-class CostsCard extends Component {
-  render() {
-    const { classes, sortedCosts } = this.props;
-    return (
-      <Card >
-        <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            This month you spent:
+const CostsCard = props => {
+  const { classes, sortedCosts } = props;
+  return (
+    <Card >
+      <CardContent>
+        <Typography
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom
+        >
+          This month you spent:
           </Typography>
-          <Typography variant="h5" component="h2">
-            {countMothOutgoings(sortedCosts) + " zł"}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
+        <Typography variant="h5" component="h2">
+          {countMothOutgoings(sortedCosts) + " zł"}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
 
 CostsCard.propTypes = {
