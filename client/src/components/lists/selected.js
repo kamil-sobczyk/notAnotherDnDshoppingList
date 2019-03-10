@@ -63,7 +63,7 @@ class Selected extends Component {
     });
   };
   render() {
-    const { classes, handleToggleOpenEditDialog, selected } = this.props;
+    const { classes, handleToggleShowEditDialog, selected } = this.props;
     const { openFinish } = this.state;
 
     return (
@@ -105,7 +105,7 @@ class Selected extends Component {
                           <IconButton
                             className={classes.editHover}
                             aria-label="Edit item"
-                            onClick={handleToggleOpenEditDialog.bind(this, {
+                            onClick={handleToggleShowEditDialog.bind(this, {
                               list: "selected",
                               index: index,
                               id: item.id
@@ -141,8 +141,8 @@ Selected.propTypes = {
   classes: PropTypes.object.isRequired,
   openDelete: PropTypes.bool,
   getSelected: PropTypes.func,
-  handleToggleOpenDeleteDialog: PropTypes.func,
-  handleToggleOpenEditDialog: PropTypes.func
+  handleToggleShowDeleteDialog: PropTypes.func,
+  handleToggleShowEditDialog: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -151,7 +151,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleToggleOpenEditDialog: activeItem =>
+    handleToggleShowEditDialog: activeItem =>
       dispatch({
         type: "TOGGLE_SHOW_EDIT_DIALOG",
         index: activeItem.index,

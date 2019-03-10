@@ -34,7 +34,7 @@ class EditDialog extends Component {
   };
 
   handleCloseEdit = activeItem => {
-    const { handleEditItem, handleToggleOpenEditDialog, store } = this.props;
+    const { handleEditItem, handleToggleShowEditDialog, store } = this.props;
 
     const newState = this.state;
     newState.name === ""
@@ -43,7 +43,7 @@ class EditDialog extends Component {
 
     editItemOnServer(newState, activeItem);
     handleEditItem(newState, activeItem);
-    handleToggleOpenEditDialog(activeItem);
+    handleToggleShowEditDialog(activeItem);
     this.setState({ name: "", info: "", id: new Date() });
   };
 
@@ -68,7 +68,7 @@ class EditDialog extends Component {
       openEdit,
       activeItem,
       activeItem: { list, index },
-      handleToggleOpenEditDialog,
+      handleToggleShowEditDialog,
       store
     } = this.props;
 
@@ -97,7 +97,7 @@ class EditDialog extends Component {
         <DialogActions>
           <Button
             color="primary"
-            onClick={handleToggleOpenEditDialog.bind(this, activeItem)}
+            onClick={handleToggleShowEditDialog.bind(this, activeItem)}
           >
             Cancel
           </Button>
@@ -115,7 +115,7 @@ class EditDialog extends Component {
 
 EditDialog.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleToggleOpenEditDialog: PropTypes.func,
+  handleToggleShowEditDialog: PropTypes.func,
   openEdit: PropTypes.bool,
   handleEditItem: PropTypes.func,
   activeItem: PropTypes.object,
@@ -132,7 +132,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleToggleOpenEditDialog: activeItem =>
+    handleToggleShowEditDialog: activeItem =>
       dispatch(toggleShowEditDialog(activeItem)),
     handleEditItem: (newItem, activeItem) =>
       dispatch(editItem(newItem, activeItem))

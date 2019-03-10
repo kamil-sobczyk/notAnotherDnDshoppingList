@@ -20,18 +20,18 @@ const Transition = props => {
 
 class FinishDialog extends React.Component {
   handleDeleteItem = activeItem => {
-    const { handleDeleteItem, handleToggleOpenDeleteDialog } = this.props;
+    const { handleDeleteItem, handleToggleShowDeleteDialog } = this.props;
 
     handleDeleteItem(activeItem);
     deleteItems(null, activeItem);
 
-    handleToggleOpenDeleteDialog({ list: "items", index: 0 });
+    handleToggleShowDeleteDialog({ list: "items", index: 0 });
   };
 
   render() {
     const {
       openDelete,
-      handleToggleOpenDeleteDialog,
+      handleToggleShowDeleteDialog,
       store,
       activeItem,
       list,
@@ -57,7 +57,7 @@ class FinishDialog extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={handleToggleOpenDeleteDialog.bind(this, {
+            onClick={handleToggleShowDeleteDialog.bind(this, {
               list: "items",
               index: 0
             })}
@@ -80,7 +80,7 @@ class FinishDialog extends React.Component {
 
 FinishDialog.propTypes = {
   openDelete: PropTypes.bool,
-  handleToggleOpenDeleteDialog: PropTypes.func,
+  handleToggleShowDeleteDialog: PropTypes.func,
   handleDeleteItem: PropTypes.func,
   activeItem: PropTypes.object,
   list: PropTypes.string,
@@ -99,7 +99,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleToggleOpenDeleteDialog: activeItem =>
+    handleToggleShowDeleteDialog: activeItem =>
       dispatch(toggleShowDeleteDialog(activeItem)),
     handleDeleteItem: activeItem =>
       dispatch(deleteItem(activeItem))

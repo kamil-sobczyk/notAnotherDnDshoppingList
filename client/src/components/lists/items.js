@@ -29,7 +29,7 @@ class Items extends Component {
   };
 
   render() {
-    const { classes, items, handleToggleOpenAddDialog } = this.props;
+    const { classes, items, handleToggleShowAddDialog } = this.props;
 
     return (
       <Droppable droppableId="droppable">
@@ -56,7 +56,7 @@ class Items extends Component {
               </Draggable>
             ))}
             {provided.placeholder}
-            <Button color="primary" onClick={handleToggleOpenAddDialog}>
+            <Button color="primary" onClick={handleToggleShowAddDialog}>
               Add new item
             </Button>
           </div>
@@ -69,7 +69,7 @@ class Items extends Component {
 Items.propTypes = {
   classes: PropTypes.object.isRequired,
   getItems: PropTypes.func,
-  handleToggleOpenAddDialog: PropTypes.func
+  handleToggleShowAddDialog: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -79,7 +79,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    handleToggleOpenAddDialog: () => dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" })
+    handleToggleShowAddDialog: () => dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" })
   };
 };
 

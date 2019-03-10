@@ -39,7 +39,7 @@ class AddDialog extends Component {
   handleAddItem = () => {
     const {
       handleAddNewItem,
-      handleToggleOpenAddDialog,
+      handleToggleShowAddDialog,
       items,
       selected
     } = this.props;
@@ -49,7 +49,7 @@ class AddDialog extends Component {
     const finishAdding = () => {
       handleAddNewItem(this.state.item);
       addNewItem(handleAddNewItem, this.state.item);
-      handleToggleOpenAddDialog();
+      handleToggleShowAddDialog();
       this.setState({
         item: {
           name: "",
@@ -86,7 +86,7 @@ class AddDialog extends Component {
     const {
       classes,
       openAdd,
-      handleToggleOpenAddDialog,
+      handleToggleShowAddDialog,
       fullScreen
     } = this.props;
     return (
@@ -120,7 +120,7 @@ class AddDialog extends Component {
           onChange={this.changeNewItem}
         />
         <DialogActions>
-          <Button color="primary" onClick={handleToggleOpenAddDialog}>
+          <Button color="primary" onClick={handleToggleShowAddDialog}>
             Cancel
           </Button>
           <Button color="primary" onClick={this.handleAddItem}>
@@ -140,7 +140,7 @@ AddDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   fullScreen: PropTypes.bool.isRequired,
   openAdd: PropTypes.bool,
-  handleToggleOpenAddDialog: PropTypes.func,
+  handleToggleShowAddDialog: PropTypes.func,
   handleAddItem: PropTypes.func
 };
 
@@ -154,7 +154,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleToggleOpenAddDialog: () => dispatch(toggleShowAddDialog()),
+    handleToggleShowAddDialog: () => dispatch(toggleShowAddDialog()),
     handleAddNewItem: item => dispatch(addItem(item))
   };
 };
