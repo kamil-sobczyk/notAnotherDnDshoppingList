@@ -47,9 +47,10 @@ class AddDialog extends Component {
     const allNames = [...selected, ...items].map(({ name }) => name);
 
     const finishAdding = () => {
-      handleAddNewItem(this.state.item);
-      addNewItemOnServer(handleAddNewItem, this.state.item);
-      handleToggleShowAddDialog();
+      const { item } = this.state;
+
+      handleAddNewItem(item);
+      addNewItemOnServer(handleAddNewItem, item);
       this.setState({
         item: {
           name: "",
@@ -57,9 +58,11 @@ class AddDialog extends Component {
           id: Date.now()
         }
       });
+      handleToggleShowAddDialog();
     };
+    const { name } = this.state.item;
 
-    allNames.indexOf(this.state.item.name) < 0
+    allNames.indexOf(name) < 0 && name !== ""
       ? finishAdding()
       : this.setState({ openFail: true });
   };
@@ -101,7 +104,7 @@ class AddDialog extends Component {
           id="outlined-required"
           label="New item"
           name="name"
-          defaultValue=""
+          defaultValue={this.state.item.name}
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -111,7 +114,7 @@ class AddDialog extends Component {
           id="outlined"
           label="Additional info"
           name="info"
-          defaultValue=""
+          defaultValue={this.state.item.info}
           className={classes.textField}
           margin="normal"
           variant="outlined"
