@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { deleteItem, toggleShowDeleteDialog } from "../../actions";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -99,16 +100,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleToggleOpenDeleteDialog: activeItem =>
-      dispatch({
-        type: "TOGGLE_SHOW_DELETE_DIALOG",
-        index: activeItem.index,
-        list: activeItem.list
-      }),
+      dispatch(toggleShowDeleteDialog(activeItem)),
     handleDeleteItem: activeItem =>
-      dispatch({
-        type: "DELETE_ITEM",
-        index: activeItem.index
-      })
+      dispatch(deleteItem(activeItem))
   };
 };
 

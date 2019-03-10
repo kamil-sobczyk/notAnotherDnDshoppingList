@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { getItems, getCosts, getSelected } from "../../actions";
 
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -130,16 +131,16 @@ FinishDialog.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    items: state.items
+    items: state.items,
+    selected: state.selected
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSelected: selected =>
-      dispatch({ type: "GET_SELECTED", selected: selected }),
-    getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    getCosts: costs => dispatch({ type: "GET_COSTS", costs: costs })
+    getSelected: selected => dispatch(getSelected(selected)),
+    getItems: items => dispatch(getItems(items)),
+    getCosts: costs => dispatch(getCosts(costs))
   };
 };
 

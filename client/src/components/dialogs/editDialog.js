@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { editItem, toggleShowEditDialog } from "../../actions";
+
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -11,7 +13,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Slide from "@material-ui/core/Slide";
 
-import { editItem } from "../../functions/apiClient";
+import { editItemOnServer } from "../../functions/apiClient";
 
 const styles = theme => ({
   textField: {
@@ -39,10 +41,10 @@ class EditDialog extends Component {
       ? (newState.name = store[activeItem.list][activeItem.index].name)
       : (newState.name = this.state.name);
 
-    editItem(newState, activeItem);
+    editItemOnServer(newState, activeItem);
     handleEditItem(newState, activeItem);
     handleToggleOpenEditDialog(activeItem);
-    this.setState({ name: "", info: "" });
+    this.setState({ name: "", info: "", id: new Date() });
   };
 
   changeNewItem = e => {
@@ -131,18 +133,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleToggleOpenEditDialog: activeItem =>
-      dispatch({
-        type: "TOGGLE_SHOW_EDIT_DIALOG",
-        index: activeItem.index,
-        list: activeItem.list
-      }),
+      dispatch(toggleShowEditDialog(activeItem)),
     handleEditItem: (newItem, activeItem) =>
-      dispatch({
-        type: "EDIT_ITEM",
-        newItem: newItem,
-        index: activeItem.index,
-        list: activeItem.list
-      })
+      dispatch(editItem(newItem, activeItem))
   };
 };
 
