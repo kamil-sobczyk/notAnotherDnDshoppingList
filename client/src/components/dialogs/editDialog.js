@@ -27,7 +27,8 @@ const Transition = props => {
 class EditDialog extends Component {
   state = {
     name: "",
-    info: ""
+    info: "",
+    id: new Date()
   };
 
   handleCloseEdit = activeItem => {
@@ -64,14 +65,13 @@ class EditDialog extends Component {
       classes,
       openEdit,
       activeItem,
-      list,
-      index,
+      activeItem: { list, index },
       handleToggleOpenEditDialog,
       store
     } = this.props;
 
     return (
-      <Dialog open={openEdit} TransitionComponent={Transition} keepMounted>
+      <Dialog open={openEdit} TransitionComponent={Transition}>
         <DialogTitle>Edit product</DialogTitle>
         <TextField
           required
@@ -95,10 +95,7 @@ class EditDialog extends Component {
         <DialogActions>
           <Button
             color="primary"
-            onClick={handleToggleOpenEditDialog.bind(this, {
-              list: "items",
-              index: 0
-            })}
+            onClick={handleToggleOpenEditDialog.bind(this, activeItem)}
           >
             Cancel
           </Button>
@@ -120,18 +117,14 @@ EditDialog.propTypes = {
   openEdit: PropTypes.bool,
   handleEditItem: PropTypes.func,
   activeItem: PropTypes.object,
-  store: PropTypes.object,
-  list: PropTypes.string,
-  index: PropTypes.number
+  store: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
     store: state,
     openEdit: state.openEdit,
-    activeItem: state.activeItem,
-    list: state.activeItem.list,
-    index: state.activeItem.index
+    activeItem: state.activeItem
   };
 };
 
