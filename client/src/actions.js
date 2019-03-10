@@ -27,7 +27,7 @@ const toggleShowDeleteDialog = activeItem => {
     list: activeItem.list
   };
 };
-const toggleShowEditDialog = (activeItem) => {
+const toggleShowEditDialog = activeItem => {
   return {
     type: TOGGLE_SHOW_EDIT_DIALOG,
     index: activeItem.index,
@@ -49,7 +49,7 @@ const deleteItem = activeItem => {
 const editItem = (newItem, activeItem) => {
   return {
     type: EDIT_ITEM,
-    newItem: newItem,
+    newItem,
     index: activeItem.index,
     list: activeItem.list
   };
