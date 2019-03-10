@@ -17,7 +17,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getSelectedFromServer, changeSelected } from "../../functions/apiClient";
+import { getSelectedFromServer, changeSelectedOnServer } from "../../functions/apiClient";
 import FinishDialog from "../dialogs/finishDialog";
 
 const styles = theme => ({
@@ -55,7 +55,7 @@ class Selected extends Component {
       ? (selected[index].checked = false)
       : (selected[index].checked = true);
     getSelected(selected);
-    changeSelected(getSelected, selected);
+    changeSelectedOnServer(getSelected, selected);
   };
 
   handleFinishShopping = () => {

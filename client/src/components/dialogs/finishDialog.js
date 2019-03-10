@@ -16,9 +16,9 @@ import Slide from "@material-ui/core/Slide";
 
 import { sortItemsByName } from "../../functions/reorderFunctions";
 import {
-  changeSelected,
-  changeItems,
-  addCosts
+  changeSelectedOnServer,
+  changeItemsOnServer,
+  addCostsOnServer
 } from "../../functions/apiClient";
 
 const Transition = props => {
@@ -68,10 +68,10 @@ class FinishDialog extends React.Component {
     sortItemsByName(newItems);
 
     getSelected(newSelected);
-    changeSelected(getSelected, newSelected);
+    changeSelectedOnServer(getSelected, newSelected);
     getItems(newItems);
-    changeItems(getItems, newItems);
-    addCosts(getCosts, item);
+    changeItemsOnServer(getItems, newItems);
+    addCostsOnServer(getCosts, item);
     handleOpenFinish();
   };
 

@@ -14,7 +14,7 @@ import Slide from "@material-ui/core/Slide";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 
 import FailDialog from "./failDialog";
-import { addNewItem } from "../../functions/apiClient";
+import { addNewItemOnServer } from "../../functions/apiClient";
 
 const styles = theme => ({
   textField: {
@@ -48,7 +48,7 @@ class AddDialog extends Component {
 
     const finishAdding = () => {
       handleAddNewItem(this.state.item);
-      addNewItem(handleAddNewItem, this.state.item);
+      addNewItemOnServer(handleAddNewItem, this.state.item);
       handleToggleShowAddDialog();
       this.setState({
         item: {

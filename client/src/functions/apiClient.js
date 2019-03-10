@@ -5,7 +5,7 @@ const server = "http://0.0.0.0:8080/";
 // public demo
 // const server = "http://35.184.211.161/";
 
-const getItems = dispatch => {
+const getItemsFromServer = dispatch => {
   fetch(server + "store/items", {
     mode: "cors",
     method: "GET"
@@ -18,7 +18,7 @@ const getItems = dispatch => {
     });
 };
 
-const getSelected = dispatch => {
+const getSelectedFromServer = dispatch => {
   fetch(server + "store/selected", {
     method: "GET"
   })
@@ -30,7 +30,7 @@ const getSelected = dispatch => {
     });
 };
 
-const changeItems = (dispatch, body) => {
+const changeItemsOnServer = (dispatch, body) => {
   fetch(server + "store/items", {
     method: "PUT",
     headers: {
@@ -47,7 +47,7 @@ const changeItems = (dispatch, body) => {
     })
     .catch(error => console.log("Ooops", error));
 };
-const changeSelected = (dispatch, body) => {
+const changeSelectedOnServer = (dispatch, body) => {
   fetch(server + "store/selected", {
     method: "PUT",
     headers: {
@@ -65,7 +65,7 @@ const changeSelected = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 };
 
-const addNewItem = (dispatch, body) => {
+const addNewItemOnServer = (dispatch, body) => {
   fetch(server + "store/items", {
     method: "POST",
     headers: {
@@ -83,7 +83,7 @@ const addNewItem = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 };
 
-const deleteItems = (dispatch, activeItem) => {
+const deleteItemsOnServer = (dispatch, activeItem) => {
   fetch(server + "store/items", {
     method: "DELETE",
     headers: {
@@ -101,7 +101,7 @@ const deleteItems = (dispatch, activeItem) => {
     .catch(error => console.log("Ooops", error));
 };
 
-const editItem = (newItem, activeItem) => {
+const editItemOnServer = (newItem, activeItem) => {
   fetch(server + "store", {
     method: "PUT",
     headers: {
@@ -119,7 +119,7 @@ const editItem = (newItem, activeItem) => {
     .catch(error => console.log("Ooops", error));
 };
 
-const getCosts = dispatch => {
+const getCostsFromServer = dispatch => {
   fetch(server + "store/costs", {
     mode: "cors",
     method: "GET"
@@ -132,7 +132,7 @@ const getCosts = dispatch => {
     });
 };
 
-const addCosts = (dispatch, costs) => {
+const addCostsOnServer = (dispatch, costs) => {
   fetch(server + "store/costs", {
     method: "POST",
     headers: {
@@ -151,13 +151,13 @@ const addCosts = (dispatch, costs) => {
 };
 
 export {
-  getItems,
-  getSelected,
-  changeSelected,
-  changeItems,
-  addNewItem,
-  deleteItems,
-  editItem,
-  getCosts,
-  addCosts
+  getItemsFromServer,
+  getSelectedFromServer,
+  changeSelectedOnServer,
+  changeItemsOnServer,
+  addNewItemOnServer,
+  deleteItemsOnServer,
+  editItemOnServer,
+  getCostsFromServer,
+  addCostsOnServer
 };

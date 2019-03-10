@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Items from "./lists/items";
 import Selected from "./lists/selected";
 import { reorder, move, sortItemsByName } from "../functions/reorderFunctions";
-import { changeSelected, changeItems } from "../functions/apiClient";
+import { changeSelectedOnServer, changeItemsOnServer } from "../functions/apiClient";
 
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -49,7 +49,7 @@ class ListsContainer extends Component {
         JSON.stringify(this.props.items).indexOf(JSON.stringify(items[0])) < 0
       ) {
         getSelected(items);
-        changeSelected(getSelected, items);
+        changeSelectedOnServer(getSelected, items);
       }
     } else {
       const result = move(
@@ -63,8 +63,8 @@ class ListsContainer extends Component {
       getItems(sortItemsByName(result.droppable));
       getSelected(result.droppable2);
 
-      changeItems(getItems, result.droppable);
-      changeSelected(getSelected, result.droppable2);
+      changeItemsOnServer(getItems, result.droppable);
+      changeSelectedOnServer(getSelected, result.droppable2);
     }
   };
 

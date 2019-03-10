@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { getCosts } from "../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -16,12 +17,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Pagination from "./tablePagination";
 import CostsCard from "./costsCard";
 
-import { getCosts } from "../../functions/apiClient";
+import { getCostsFromServer } from "../../functions/apiClient";
 
 const styles = theme => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 3
   },
   table: {
     margin: "0 auto"
@@ -42,7 +43,7 @@ class CustomPaginationActionsTable extends React.Component {
   };
 
   componentWillMount = () => {
-    getCosts(this.props.getCosts);
+    getCostsFromServer(this.props.getCosts);
   };
 
   handleChangePage = (event, page) => {
@@ -138,7 +139,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCosts: costs => dispatch({ type: "GET_COSTS", costs: costs })
+    getCosts: costs => dispatch(getCosts(costs))
   };
 };
 

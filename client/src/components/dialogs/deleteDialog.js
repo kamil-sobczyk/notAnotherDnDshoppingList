@@ -12,7 +12,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 
-import { deleteItems } from "../../functions/apiClient";
+import { deleteItemsOnServer } from "../../functions/apiClient";
 
 const Transition = props => {
   return <Slide direction="up" {...props} />;
@@ -23,7 +23,7 @@ class FinishDialog extends React.Component {
     const { handleDeleteItem, handleToggleShowDeleteDialog } = this.props;
 
     handleDeleteItem(activeItem);
-    deleteItems(null, activeItem);
+    deleteItemsOnServer(null, activeItem);
 
     handleToggleShowDeleteDialog({ list: "items", index: 0 });
   };
