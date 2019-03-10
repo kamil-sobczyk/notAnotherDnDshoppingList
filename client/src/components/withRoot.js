@@ -30,7 +30,6 @@ const withRoot = Component => {
       <Component {...props} />
     </MuiThemeProvider>
   );
-
   return WithRoot;
 };
 
