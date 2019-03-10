@@ -24,27 +24,12 @@ const styles = theme => ({
 });
 
 class ListsContainer extends Component {
-  state = {
-    items: this.props.items,
-    selected: this.props.selected
-  };
-
-  componentWillReceiveProps = newProps => {
-    const { items, selected } = this.props;
-    if (
-      newProps.items !== items ||
-      newProps.selected !== selected
-    ) {
-      this.setState({ items: newProps.items, selected: newProps.selected });
-    }
-  };
-
   id2List = {
     droppable: "items",
     droppable2: "selected"
   };
 
-  getList = id => this.state[this.id2List[id]];
+  getList = id => this.props[this.id2List[id]];
 
   onDragEnd = result => {
     const { source, destination } = result;
@@ -61,7 +46,7 @@ class ListsContainer extends Component {
         destination.index
       );
       if (
-        JSON.stringify(this.state.items).indexOf(JSON.stringify(items[0])) < 0
+        JSON.stringify(this.props.items).indexOf(JSON.stringify(items[0])) < 0
       ) {
         getSelected(items);
         changeSelected(getSelected, items);
@@ -106,7 +91,6 @@ ListsContainer.propTypes = {
 const mapStateToProps = state => {
   return {
     items: state.items,
-    store: state,
     selected: state.selected,
     display: state.showItems
   };
