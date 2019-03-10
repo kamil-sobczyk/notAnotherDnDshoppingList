@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { getSelected, toggleShowEditDialog } from "../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -16,7 +17,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getSelected, changeSelected } from "../../functions/apiClient";
+import { getSelectedFromServer, changeSelected } from "../../functions/apiClient";
 import FinishDialog from "../dialogs/finishDialog";
 
 const styles = theme => ({
@@ -44,7 +45,7 @@ class Selected extends Component {
   };
 
   componentDidMount = () => {
-    getSelected(this.props.getSelected);
+    getSelectedFromServer(this.props.getSelected);
   };
 
   handleToggle = index => () => {
@@ -152,14 +153,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleToggleShowEditDialog: activeItem =>
-      dispatch({
-        type: "TOGGLE_SHOW_EDIT_DIALOG",
-        index: activeItem.index,
-        list: activeItem.list,
-        id: activeItem.id
-      }),
+      dispatch(toggleShowEditDialog(activeItem)),
     getSelected: selected =>
-      dispatch({ type: "GET_SELECTED", selected: selected })
+      dispatch(getSelected(selected))
   };
 };
 

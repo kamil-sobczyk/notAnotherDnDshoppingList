@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { getItems, toggleShowAddDialog } from "../../actions";
+
 
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -10,7 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 
-import { getItems } from "../../functions/apiClient";
+import { getItemsFromServer } from "../../functions/apiClient";
 import Menu from "./menu";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -25,7 +27,7 @@ const styles = theme => ({
 
 class Items extends Component {
   componentDidMount = () => {
-    getItems(this.props.getItems);
+    getItemsFromServer(this.props.getItems);
   };
 
   render() {
@@ -78,8 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getItems: items => dispatch({ type: "GET_ITEMS", items: items }),
-    handleToggleShowAddDialog: () => dispatch({ type: "TOGGLE_SHOW_ADD_DIALOG" })
+    getItems: items => dispatch(getItems(items)),
+    handleToggleShowAddDialog: () => dispatch(toggleShowAddDialog())
   };
 };
 
