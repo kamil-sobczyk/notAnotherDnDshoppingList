@@ -59,8 +59,6 @@ class AddDialog extends Component {
       });
     };
 
-    console.log("newItem", this.state.item);
-
     allNames.indexOf(this.state.item.name) < 0
       ? finishAdding()
       : this.setState({ openFail: true });
