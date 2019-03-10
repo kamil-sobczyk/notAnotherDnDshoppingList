@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Slide from "@material-ui/core/Slide";
-import withMobileDialog from '@material-ui/core/withMobileDialog';
+import withMobileDialog from "@material-ui/core/withMobileDialog";
 
 import FailDialog from "./failDialog";
 import { addNewItem } from "../../functions/apiClient";
@@ -58,6 +58,8 @@ class AddDialog extends Component {
       });
     };
 
+    console.log("newItem", this.state.item);
+
     allNames.indexOf(this.state.item.name) < 0
       ? finishAdding()
       : this.setState({ openFail: true });
@@ -68,15 +70,24 @@ class AddDialog extends Component {
   };
 
   changeNewItem = e => {
-    this.setState({ item: { name: e.target.value, id: Date.now(), info: this.state.item.info } });
-  };
-
-  changeNewItemInfo = e => {
-    this.setState({ item: { info: e.target.value, id: Date.now(), name: this.state.item.name } });
+    e.target.name === "info"
+      ? this.setState({
+          item: {
+            info: e.target.value,
+            id: Date.now(),
+            name: this.state.item.name
+          }
+        })
+      : this.setState({ item: { name: e.target.value, id: Date.now() } });
   };
 
   render() {
-    const { classes, openAdd, handleToggleOpenAddDialog, fullScreen } = this.props;
+    const {
+      classes,
+      openAdd,
+      handleToggleOpenAddDialog,
+      fullScreen
+    } = this.props;
     return (
       <Dialog
         open={openAdd}
@@ -90,6 +101,7 @@ class AddDialog extends Component {
           required
           id="outlined-required"
           label="New item"
+          name="name"
           defaultValue=""
           className={classes.textField}
           margin="normal"
@@ -99,11 +111,12 @@ class AddDialog extends Component {
         <TextField
           id="outlined"
           label="Additional info"
+          name="info"
           defaultValue=""
           className={classes.textField}
           margin="normal"
           variant="outlined"
-          onChange={this.changeNewItemInfo}
+          onChange={this.changeNewItem}
         />
         <DialogActions>
           <Button color="primary" onClick={handleToggleOpenAddDialog}>
@@ -149,4 +162,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withMobileDialog()(withStyles (styles)(AddDialog)));
+)(withMobileDialog()(withStyles(styles)(AddDialog)));
