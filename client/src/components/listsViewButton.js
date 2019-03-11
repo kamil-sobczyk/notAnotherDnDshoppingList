@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
+import { toggleShowItems } from "../actions";
 
 import Button from "@material-ui/core/Button";
 
@@ -30,7 +31,7 @@ class ViewButton extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    showItems: () => dispatch({ type: "TOGGLE_SHOW_ITEMS" })
+    showItems: () => dispatch(toggleShowItems())
   };
 };
 
