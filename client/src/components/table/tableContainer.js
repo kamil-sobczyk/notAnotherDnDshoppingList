@@ -12,7 +12,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Tooltip from "@material-ui/core/Tooltip";
+import TableToolTip from "./toolTip";
 
 import Pagination from "./tablePagination";
 import CostsCard from "./costsCard";
@@ -80,19 +80,7 @@ class CustomPaginationActionsTable extends React.Component {
               {sortedCosts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <Tooltip
-                    disableFocusListener
-                    title={row.chosenItems.join(", ")}
-                    placement="right"
-                    key={index}
-                  >
-                    <TableRow key={index}>
-                      <TableCell component="th" scope="row">
-                        {row.date}
-                      </TableCell>
-                      <TableCell align="right">{row.count + "zł"}</TableCell>
-                    </TableRow>
-                  </Tooltip>
+                  TableToolTip(row, index)
                 ))}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 48 * emptyRows }}>
@@ -147,3 +135,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(CustomPaginationActionsTable));
+
+
