@@ -4,18 +4,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getItems, toggleShowAddDialog } from "../../actions";
 
-
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 
-import { getItemsFromServer } from "../../functions/apiClient";
-import Menu from "./menu";
+import { Droppable } from "react-beautiful-dnd";
 
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import DraggableItems from './draggableItems';
+import { getItemsFromServer } from "../../functions/apiClient";
+
+
 
 const styles = theme => ({
   list: {
@@ -41,21 +39,7 @@ class Items extends Component {
               Items to choose
             </Typography>
             {items.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {provided => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <ListItem key={index} role={undefined} dense button>
-                      <ListItemText primary={item.name} secondary={item.info} />
-                      <Menu index={index} />
-                    </ListItem>
-                    <Divider />
-                  </div>
-                )}
-              </Draggable>
+              DraggableItems(item, index)
             ))}
             {provided.placeholder}
             <Button color="primary" onClick={handleToggleShowAddDialog}>
@@ -89,3 +73,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(Items));
+
+
