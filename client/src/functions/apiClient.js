@@ -1,9 +1,8 @@
-//localhost
-const server = "http://0.0.0.0:8080/";
-//private list
-// const server = "http://35.224.13.129/";
-// public demo
-// const server = "http://35.184.211.161/";
+const localhost = "http://0.0.0.0:8080/";
+const privateList = "http://35.224.13.129/";
+const publicDemo = "http://35.184.211.161/";
+const server = localhost;
+
 
 const getItemsFromServer = dispatch => {
   fetch(server + "store/items", {
@@ -30,7 +29,7 @@ const getSelectedFromServer = dispatch => {
     });
 };
 
-const changeItemsOnServer = (dispatch, body) => {
+const changeItemsOnServer = body => {
   fetch(server + "store/items", {
     method: "PUT",
     headers: {
@@ -47,7 +46,7 @@ const changeItemsOnServer = (dispatch, body) => {
     })
     .catch(error => console.log("Ooops", error));
 };
-const changeSelectedOnServer = (dispatch, body) => {
+const changeSelectedOnServer = body => {
   fetch(server + "store/selected", {
     method: "PUT",
     headers: {
@@ -65,7 +64,7 @@ const changeSelectedOnServer = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 };
 
-const addNewItemOnServer = (dispatch, body) => {
+const addNewItemOnServer = body => {
   fetch(server + "store/items", {
     method: "POST",
     headers: {
@@ -83,7 +82,7 @@ const addNewItemOnServer = (dispatch, body) => {
     .catch(error => console.log("Ooops", error));
 };
 
-const deleteItemsOnServer = (dispatch, activeItem) => {
+const deleteItemsOnServer = activeItem => {
   fetch(server + "store/items", {
     method: "DELETE",
     headers: {
