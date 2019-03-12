@@ -17,10 +17,11 @@ import { sortItemsByName } from "../../functions/reorderFunctions";
 import {
   changeSelectedOnServer,
   changeItemsOnServer,
-  addCostsOnServer
+  addCostsOnServer,
+  getItemsFromServer
 } from "../../functions/apiClient";
 
-import Transition from './dialogsTransition';
+import Transition from './slideUpTransitionComponent';
 
 class FinishDialog extends Component {
   state = {
@@ -30,6 +31,10 @@ class FinishDialog extends Component {
       minute: "2-digit"
     }),
     chosenItems: []
+  };
+
+  componentDidMount = () => {
+    getItemsFromServer(this.props.getItems);
   };
 
   handleChangeCounter = e => {
@@ -42,8 +47,8 @@ class FinishDialog extends Component {
     const {
       handleOpenFinish,
       selected,
-      getSelected,
       items,
+      getSelected,
       getItems,
       getCosts
     } = this.props;
