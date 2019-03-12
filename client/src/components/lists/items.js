@@ -13,8 +13,6 @@ import { Droppable } from "react-beautiful-dnd";
 import DraggableItems from './draggableItems';
 import { getItemsFromServer } from "../../functions/apiClient";
 
-
-
 const styles = theme => ({
   list: {
     width: "50%",
