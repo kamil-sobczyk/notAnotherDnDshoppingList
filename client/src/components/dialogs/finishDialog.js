@@ -12,7 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Slide from "@material-ui/core/Slide";
 
 import { sortItemsByName } from "../../functions/reorderFunctions";
 import {
@@ -21,9 +20,7 @@ import {
   addCostsOnServer
 } from "../../functions/apiClient";
 
-const Transition = props => {
-  return <Slide direction="up" {...props} />;
-};
+import Transition from './dialogsTransition';
 
 class FinishDialog extends React.Component {
   state = {

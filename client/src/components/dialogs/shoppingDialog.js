@@ -7,13 +7,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
-import Slide from "@material-ui/core/Slide";
 
 import Table from "../table/tableContainer";
-
-const Transition = props => {
-  return <Slide direction="up" {...props} />;
-};
+import Transition from './dialogsTransition';
 
 class ShoppingDialog extends React.Component {
   state = {

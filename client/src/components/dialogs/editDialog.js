@@ -4,16 +4,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { editItem, toggleShowEditDialog } from "../../actions";
 
-
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import Slide from "@material-ui/core/Slide";
 
 import { editItemOnServer } from "../../functions/apiClient";
+
+import Transition from './dialogsTransition';
 
 const styles = theme => ({
   textField: {
@@ -21,10 +21,6 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   }
 });
-
-const Transition = props => {
-  return <Slide direction="up" {...props} />;
-};
 
 class EditDialog extends Component {
   state = {
