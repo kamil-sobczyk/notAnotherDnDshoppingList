@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 
 import Table from "../table/tableContainer";
-import Transition from './dialogsTransition';
+import Transition from './slideUpTransitionComponent';
 
 class ShoppingDialog extends Component {
   state = {

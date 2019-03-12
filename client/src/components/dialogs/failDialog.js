@@ -7,7 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import Transition from './dialogsTransition';
+import Transition from './slideUpTransitionComponent';
 
 const FailDialog = props => {
   const { open, onClose } = props;

@@ -14,7 +14,7 @@ import withMobileDialog from "@material-ui/core/withMobileDialog";
 
 import FailDialog from "./failDialog";
 import { addNewItemOnServer } from "../../functions/apiClient";
-import Transition from './dialogsTransition';
+import Transition from './slideUpTransitionComponent';
 
 const styles = theme => ({
   textField: {

@@ -13,7 +13,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { deleteItemsOnServer } from "../../functions/apiClient";
 
-import Transition from './dialogsTransition';
+import Transition from './slideUpTransitionComponent';
 
 class FinishDialog extends Component {
   handleDeleteItem = activeItem => {

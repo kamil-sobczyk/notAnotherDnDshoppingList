@@ -13,7 +13,7 @@ import TextField from "@material-ui/core/TextField";
 
 import { editItemOnServer } from "../../functions/apiClient";
 
-import Transition from './dialogsTransition';
+import Transition from './slideUpTransitionComponent';
 
 const styles = theme => ({
   textField: {
