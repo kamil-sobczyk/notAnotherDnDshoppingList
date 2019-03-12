@@ -52,7 +52,7 @@ class Selected extends Component {
       ? (selected[index].checked = false)
       : (selected[index].checked = true);
     getSelected(selected);
-    changeSelectedOnServer(getSelected, selected);
+    changeSelectedOnServer(selected);
   };
 
   handleFinishShopping = () => {

@@ -49,7 +49,7 @@ class ListsContainer extends Component {
         JSON.stringify(this.props.items).indexOf(JSON.stringify(items[0])) < 0
       ) {
         getSelected(items);
-        changeSelectedOnServer(getSelected, items);
+        changeSelectedOnServer(items);
       }
     } else {
       const result = move(
@@ -63,8 +63,8 @@ class ListsContainer extends Component {
       getItems(sortItemsByName(result.droppable));
       getSelected(result.droppable2);
 
-      changeItemsOnServer(getItems, result.droppable);
-      changeSelectedOnServer(getSelected, result.droppable2);
+      changeItemsOnServer(result.droppable);
+      changeSelectedOnServer(result.droppable2);
     }
   };
 

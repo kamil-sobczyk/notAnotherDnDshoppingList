@@ -20,7 +20,7 @@ class FinishDialog extends Component {
     const { handleDeleteItem, handleToggleShowDeleteDialog } = this.props;
 
     handleDeleteItem(activeItem);
-    deleteItemsOnServer(null, activeItem);
+    deleteItemsOnServer(activeItem);
 
     handleToggleShowDeleteDialog({ list: "items", index: 0 });
   };

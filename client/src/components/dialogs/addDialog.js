@@ -46,7 +46,7 @@ class AddDialog extends Component {
       const { item } = this.state;
 
       handleAddNewItem(item);
-      addNewItemOnServer(handleAddNewItem, item);
+      addNewItemOnServer(item);
       this.setState({
         item: {
           name: "",

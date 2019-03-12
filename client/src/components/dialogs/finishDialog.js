@@ -70,9 +70,9 @@ class FinishDialog extends Component {
     sortItemsByName(newItems);
 
     getSelected(newSelected);
-    changeSelectedOnServer(getSelected, newSelected);
+    changeSelectedOnServer(newSelected);
     getItems(newItems);
-    changeItemsOnServer(getItems, newItems);
+    changeItemsOnServer(newItems);
     addCostsOnServer(getCosts, item);
     handleOpenFinish();
   };
