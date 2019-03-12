@@ -35,6 +35,7 @@ const DraggableSelected = (
           <Checkbox
             checked={selected[index] ? selected[index].checked : false}
             tabIndex={-1}
+            value={"checked"}
             disableRipple
           />
           <ListItemText primary={item.name} secondary={item.info} />
