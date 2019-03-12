@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
@@ -17,7 +18,7 @@ const actionsStyles = theme => ({
   }
 });
 
-class TablePagination extends React.Component {
+class TablePagination extends Component {
   handleFirstPageButtonClick = event => {
     this.props.onChangePage(event, 0);
   };

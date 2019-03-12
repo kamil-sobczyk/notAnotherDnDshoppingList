@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -22,7 +22,7 @@ import {
 
 import Transition from './dialogsTransition';
 
-class FinishDialog extends React.Component {
+class FinishDialog extends Component {
   state = {
     count: 0,
     date: new Date().toLocaleDateString("pl-PL", {

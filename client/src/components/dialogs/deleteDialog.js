@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -15,7 +15,7 @@ import { deleteItemsOnServer } from "../../functions/apiClient";
 
 import Transition from './dialogsTransition';
 
-class FinishDialog extends React.Component {
+class FinishDialog extends Component {
   handleDeleteItem = activeItem => {
     const { handleDeleteItem, handleToggleShowDeleteDialog } = this.props;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -35,7 +35,7 @@ const styles = theme => ({
   }
 });
 
-class CustomPaginationActionsTable extends React.Component {
+class PaginationActionsTable extends Component {
   state = {
     page: 0,
     rowsPerPage: 5,
@@ -125,7 +125,7 @@ class CustomPaginationActionsTable extends React.Component {
   }
 }
 
-CustomPaginationActionsTable.propTypes = {
+PaginationActionsTable.propTypes = {
   classes: PropTypes.object.isRequired,
   costs: PropTypes.array,
   getCosts: PropTypes.func
@@ -146,4 +146,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(CustomPaginationActionsTable));
+)(withStyles(styles)(PaginationActionsTable));

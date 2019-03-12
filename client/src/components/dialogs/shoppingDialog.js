@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Button from "@material-ui/core/Button";
@@ -11,7 +11,7 @@ import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Table from "../table/tableContainer";
 import Transition from './dialogsTransition';
 
-class ShoppingDialog extends React.Component {
+class ShoppingDialog extends Component {
   state = {
     open: false
   };

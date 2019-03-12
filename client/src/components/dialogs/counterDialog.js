@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -13,7 +13,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import Transition from './dialogsTransition';
 
-class CounterDialog extends React.Component {
+class CounterDialog extends Component {
   state = {
     openCounter: false
   };
