@@ -58,6 +58,7 @@ class ListsContainer extends Component {
         source,
         destination
       );
+      result.droppable.forEach(item => (item.checked = false));
 
       getItems(sortItemsByName(result.droppable));
       getSelected(result.droppable2);
