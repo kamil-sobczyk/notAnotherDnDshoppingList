@@ -63,6 +63,15 @@ const store = {
 const sortItemsByName = () =>
   store.items.sort((a, b) => a.name.localeCompare(b.name));
 
+const sortSelectedByCheckedValue = () => {
+  let checkedItems = [];
+  let uncheckedItems = [];
+  store.selected.forEach(item =>
+    item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
+  );
+  store.selected = [...checkedItems, ...uncheckedItems];
+};
+
 const appRouter = app => {
   app.get("/", (req, res) => {
     res.send("ShoppingList API!\n");
@@ -87,6 +96,7 @@ const appRouter = app => {
   });
 
   app.get("/store/selected", (req, res) => {
+    sortSelectedByCheckedValue();
     res.status(200).json(store.selected);
   });
   app.put("/store/selected", (req, res) => {
