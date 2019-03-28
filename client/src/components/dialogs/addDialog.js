@@ -16,6 +16,19 @@ import FailDialog from "./failDialog";
 import { addNewItemOnServer } from "../../functions/apiClient";
 import Transition from './slideUpTransitionComponent';
 
+const resetAddFields = () => {
+  const nameInput = document.getElementById("outlined-required");
+  const infoInput = document.getElementById("outlined");
+
+    if (nameInput !== null) {
+      nameInput.value = "";
+    } else nameInput.value = null;
+
+    if (infoInput !== null) {
+      infoInput.value = "";
+    } else infoInput.value = null;
+}
+
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
@@ -55,6 +68,7 @@ class AddDialog extends Component {
         }
       });
       handleToggleShowAddDialog();
+      resetAddFields();
     };
     const { name } = this.state.item;
 
