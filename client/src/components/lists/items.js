@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 
 import { Droppable } from "react-beautiful-dnd";
 
-import DraggableItems from './draggableItems';
+import DraggableItems from "./draggableItems";
 import { getItemsFromServer } from "../../functions/apiClient";
 
 const styles = theme => ({
@@ -36,13 +36,11 @@ class Items extends Component {
             <Typography variant="h6" gutterBottom>
               Items to choose
             </Typography>
-            {items.map((item, index) => (
-              DraggableItems(item, index)
-            ))}
-            {provided.placeholder}
             <Button color="primary" onClick={handleToggleShowAddDialog}>
               Add new item
             </Button>
+            {items.map((item, index) => DraggableItems(item, index))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
@@ -71,5 +69,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(Items));
-
-
