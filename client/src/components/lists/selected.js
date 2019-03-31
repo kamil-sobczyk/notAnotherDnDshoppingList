@@ -19,7 +19,7 @@ import DraggableSelected from "./draggableSelected";
 
 const styles = theme => ({
   listBig: {
-    width: "50%",
+    width: "100%",
     maxWidth: 1000,
     margin: "5px"
   },
