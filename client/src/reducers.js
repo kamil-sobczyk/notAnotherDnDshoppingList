@@ -34,8 +34,7 @@ const reducer = (state = initialState, action) => {
         activeItem: { list, index }
       };
     case "ADD_ITEM":
-      let items = [...state.items];
-      items.push(newItem);
+      let items = [...state.items, newItem];
       sortItemsByName(items);
       return { ...state, items };
     case "DELETE_ITEM":
@@ -45,9 +44,13 @@ const reducer = (state = initialState, action) => {
         items
       };
     case "EDIT_ITEM":
-      const newList = [...state[list]];
-      newList[index].name = newItem.name;
-      newList[index].info = newItem.info;
+      const newList = [...state[list]].map((item, itemIndex) => {
+        if (itemIndex === index) {
+          item.name = newItem.name;
+          item.info = newItem.info;
+          return item;
+        } else return item;
+      });
       return { ...state, [list]: newList };
     case "GET_ITEMS":
       return {
