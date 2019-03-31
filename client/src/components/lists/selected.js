@@ -82,7 +82,10 @@ class Selected extends Component {
       <>
         <Droppable droppableId="droppable2">
           {provided => (
-            <div ref={provided.innerRef} className={display ? classes.listSmall : classes.listBig}>
+            <div
+              ref={provided.innerRef}
+              className={display ? classes.listSmall : classes.listBig}
+            >
               <Typography variant="h6" gutterBottom>
                 Items to buy
               </Typography>
