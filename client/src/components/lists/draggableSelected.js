@@ -33,8 +33,8 @@ const DraggableSelected = (
           button
           onClick={handleToggle(index)}
         >
-          <Checkbox 
-          className={checkbox}
+          <Checkbox
+            className={checkbox}
             checked={selected[index] ? selected[index].checked : false}
             tabIndex={-1}
             value={"checked"}
