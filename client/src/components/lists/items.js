@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { getItems, toggleShowAddDialog } from "../../actions";
+import { getItems } from "../../actions/gettingItemsActions";
+import { toggleShowAddDialog } from "../../actions/togglingViewsActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";

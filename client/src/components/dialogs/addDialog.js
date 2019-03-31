@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { addItem, toggleShowAddDialog } from "../../actions";
+import { addItem } from "../../actions/itemsModificationsActions";
+import { toggleShowAddDialog } from "../../actions/togglingViewsActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -14,20 +15,20 @@ import withMobileDialog from "@material-ui/core/withMobileDialog";
 
 import FailDialog from "./failDialog";
 import { addNewItemOnServer } from "../../functions/apiClient";
-import Transition from './slideUpTransitionComponent';
+import Transition from "./slideUpTransitionComponent";
 
 const resetAddFields = () => {
   const nameInput = document.getElementById("outlined-required");
   const infoInput = document.getElementById("outlined");
 
-    if (nameInput !== null) {
-      nameInput.value = "";
-    } else nameInput.value = null;
+  if (nameInput !== null) {
+    nameInput.value = "";
+  } else nameInput.value = null;
 
-    if (infoInput !== null) {
-      infoInput.value = "";
-    } else infoInput.value = null;
-}
+  if (infoInput !== null) {
+    infoInput.value = "";
+  } else infoInput.value = null;
+};
 
 const styles = theme => ({
   textField: {

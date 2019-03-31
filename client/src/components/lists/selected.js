@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { getSelected, toggleShowEditDialog } from "../../actions";
+import { getSelected } from "../../actions/gettingItemsActions";
+import { toggleShowEditDialog } from "../../actions/togglingViewsActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";

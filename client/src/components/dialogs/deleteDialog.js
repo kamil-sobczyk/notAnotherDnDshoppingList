@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { deleteItem, toggleShowDeleteDialog } from "../../actions";
+import { deleteItem } from "../../actions/itemsModificationsActions";
+import { toggleShowDeleteDialog } from "../../actions/togglingViewsActions";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";

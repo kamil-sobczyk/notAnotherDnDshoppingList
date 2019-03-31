@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { toggleShowItems } from "../actions";
+import { toggleShowItems } from "../actions/togglingViewsActions";
 
 import Button from "@material-ui/core/Button";
 

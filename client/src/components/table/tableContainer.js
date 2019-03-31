@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { getCosts } from "../../actions";
+import { getCosts } from "../../actions/costsActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
