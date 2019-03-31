@@ -16,7 +16,7 @@ import { getItemsFromServer } from "../../functions/apiClient";
 const styles = theme => ({
   list: {
     width: "50%",
-    maxWidth: 400,
+    maxWidth: 500,
     margin: "5px"
   }
 });
