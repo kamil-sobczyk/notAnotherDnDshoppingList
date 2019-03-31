@@ -16,7 +16,8 @@ const DraggableSelected = (
   selected,
   classes,
   handleToggleShowEditDialog,
-  handleToggle
+  handleToggle,
+  checkbox
 ) => (
   <Draggable key={item.id} draggableId={item.id} index={index}>
     {provided => (
@@ -32,7 +33,8 @@ const DraggableSelected = (
           button
           onClick={handleToggle(index)}
         >
-          <Checkbox
+          <Checkbox 
+          className={checkbox}
             checked={selected[index] ? selected[index].checked : false}
             tabIndex={-1}
             value={"checked"}

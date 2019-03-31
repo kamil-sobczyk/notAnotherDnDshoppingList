@@ -28,6 +28,10 @@ const styles = theme => ({
     maxWidth: 500,
     margin: "5px"
   },
+  checkbox: {
+    margin: 0,
+    padding: 0
+  },
   deleteHover: {
     color: theme.palette.primary.main,
     "&:hover": {
@@ -89,7 +93,8 @@ class Selected extends Component {
                   selected,
                   classes,
                   handleToggleShowEditDialog,
-                  this.handleToggle
+                  this.handleToggle,
+                  classes.checkbox
                 )
               )}
               {provided.placeholder}
