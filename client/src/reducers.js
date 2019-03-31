@@ -18,19 +18,19 @@ const reducer = (state = initialState, action) => {
   const { list, index, newItem, selected, cost, costs } = action;
   switch (action.type) {
     case "TOGGLE_SHOW_ITEMS":
-      return { ...state, showItems: state.showItems ? false : true };
+      return { ...state, showItems: !state.showItems };
     case "TOGGLE_SHOW_ADD_DIALOG":
-      return { ...state, openAdd: state.openAdd ? false : true };
+      return { ...state, openAdd: !state.openAdd };
     case "TOGGLE_SHOW_DELETE_DIALOG":
       return {
         ...state,
-        openDelete: state.openDelete ? false : true,
+        openDelete: !state.openDelete,
         activeItem: { list, index }
       };
     case "TOGGLE_SHOW_EDIT_DIALOG":
       return {
         ...state,
-        openEdit: state.openEdit ? false : true,
+        openEdit: !state.openEdit,
         activeItem: { list, index }
       };
     case "ADD_ITEM":
