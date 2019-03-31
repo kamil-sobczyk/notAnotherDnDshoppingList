@@ -18,9 +18,14 @@ import FinishDialog from "../dialogs/finishDialog";
 import DraggableSelected from "./draggableSelected";
 
 const styles = theme => ({
-  list: {
+  listBig: {
     width: "50%",
-    maxWidth: 400,
+    maxWidth: 1000,
+    margin: "5px"
+  },
+  listSmall: {
+    width: "50%",
+    maxWidth: 500,
     margin: "5px"
   },
   deleteHover: {
@@ -61,14 +66,19 @@ class Selected extends Component {
     });
   };
   render() {
-    const { classes, handleToggleShowEditDialog, selected } = this.props;
+    const {
+      classes,
+      handleToggleShowEditDialog,
+      selected,
+      display
+    } = this.props;
     const { openFinish } = this.state;
 
     return (
       <>
         <Droppable droppableId="droppable2">
           {provided => (
-            <div ref={provided.innerRef} className={classes.list}>
+            <div ref={provided.innerRef} className={display ? classes.listSmall : classes.listBig}>
               <Typography variant="h6" gutterBottom>
                 Items to buy
               </Typography>
@@ -104,11 +114,17 @@ Selected.propTypes = {
   openDelete: PropTypes.bool,
   getSelected: PropTypes.func,
   handleToggleShowDeleteDialog: PropTypes.func,
-  handleToggleShowEditDialog: PropTypes.func
+  handleToggleShowEditDialog: PropTypes.func,
+  display: PropTypes.bool
 };
 
 const mapStateToProps = state => {
-  return { items: state.items, store: state, selected: state.selected };
+  return {
+    items: state.items,
+    store: state,
+    selected: state.selected,
+    display: state.showItems
+  };
 };
 
 const mapDispatchToProps = dispatch => {
