@@ -85,7 +85,8 @@ class ListsContainer extends Component {
 ListsContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   getItems: PropTypes.func,
-  getSelected: PropTypes.func
+  getSelected: PropTypes.func,
+  display: PropTypes.bool
 };
 
 const mapStateToProps = state => {
