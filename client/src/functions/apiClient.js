@@ -1,5 +1,5 @@
 const localhost = "http://0.0.0.0:8080/";
-const privateList = "http://35.224.13.129/";
+const privateList = "https://server616.herokuapp.com/";
 const publicDemo = "http://35.184.211.161/";
 const server = localhost;
 

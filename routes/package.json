@@ -11,8 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ogar616",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "boom": "^7.3.0",
@@ -21,5 +21,8 @@
     "express": "^4.16.4",
     "hoek": "^6.1.2"
   },
-  "proxy": "http://localhost:3000/"
+  "engines": {
+    "node": "10.x"
+  },
+  "proxy": "http://http://www.srv28283.microhost.com.pl/"
 }
